@@ -18,4 +18,5 @@ namespace package
         'namespace' => PackageNamespace,
         'packageDirectory' => DirectoryPath
     );
+    type PackageFileVector = ImmVector<PackageFile>;
 };

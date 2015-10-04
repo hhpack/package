@@ -3,7 +3,7 @@
 namespace package\spec;
 
 use package\PackageSpecification;
-use package\spec\fixtures\Example;
+use package\spec\fixtures\Example1;
 
 describe(PackageSpecification::class, function () {
   beforeEach(function () {
@@ -24,8 +24,8 @@ describe(PackageSpecification::class, function () {
   });
   describe('resolve()', function () {
     it('returns new resolve class instance', function () {
-      $instance = $this->package->resolve(__DIR__ . '/fixtures/Example.hh');
-      expect($instance)->toBeAnInstanceOf(Example::class);
+      $instance = $this->package->resolve(__DIR__ . '/fixtures/Example1.hh');
+      expect($instance)->toBeAnInstanceOf(Example1::class);
     });
   });
 });

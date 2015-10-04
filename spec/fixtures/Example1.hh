@@ -2,6 +2,6 @@
 
 namespace package\spec\fixtures;
 
-class Example
+class Example1
 {
 }

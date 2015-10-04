@@ -28,4 +28,11 @@ describe(PackageSpecification::class, function () {
       expect($instance)->toBeAnInstanceOf(Example1::class);
     });
   });
+  describe('resolveWith()', function () {
+    it('returns new resolve class instance with parameters', function () {
+      $instance = $this->package->resolveWith(__DIR__ . '/fixtures/Example1.hh', [ 'foo' ]);
+      expect($instance)->toBeAnInstanceOf(Example1::class);
+      expect($instance->getName())->toBe('foo');
+    });
+  });
 });

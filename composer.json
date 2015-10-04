@@ -1,0 +1,35 @@
+{
+  "name": "holyshared/package",
+  "type": "library",
+  "keywords": [ "hack", "hhvm", "package", "file collector" ],
+  "description": "Collect hack source file from package",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Noritaka Horio",
+      "email": "holy.shared.design@gmail.com"
+    }
+  ],
+  "require": {
+    "hhvm": ">=3.6.0"
+  },
+  "require-dev": {
+    "expect/peridot-expect-plugin": "~3.0",
+    "peridot-php/peridot": "~1.15",
+    "peridot-php/peridot-dot-reporter": "~1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "package\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "example\\": "example",
+      "attribute\\fixtures\\": "spec/fixtures"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/peridot -c peridot.hh --grep *Spec.hh spec -r dot"
+  }
+}

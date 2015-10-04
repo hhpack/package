@@ -45,16 +45,28 @@ final class PackageSpecification
 
     public function resolve<T>(PackageFile $file) : T
     {
+        $reflection = $this->reflectionFrom($file);
+        return $reflection->newInstance();
+    }
+
+    public function resolveWith<T>(PackageFile $file, array<mixed> $parameters) : T
+    {
+        $reflection = $this->reflectionFrom($file);
+        return $reflection->newInstanceArgs($parameters);
+    }
+
+    private function reflectionFrom<T>(PackageFile $file) : ReflectionClass
+    {
         $relativeClass = $this->relativeClassFrom($file);
-        $fullName = $this->namespace . $relativeClass;
+        $fullClassName = $this->namespace . $relativeClass;
 
         try {
-            $reflection = new ReflectionClass($fullName);
+            $reflection = new ReflectionClass($fullClassName);
         } catch (ReflectionException $exception) {
             throw new NotPackageFileException();
         }
 
-        return $reflection->newInstance();
+        return $reflection;
     }
 
     private function relativeClassFrom(PackageFile $file) : string

@@ -2,7 +2,7 @@
   "name": "holyshared/package",
   "type": "library",
   "keywords": [ "hack", "hhvm", "package", "file collector" ],
-  "description": "Collect hack source file from package",
+  "description": "Source file collector for vendor package",
   "license": "MIT",
   "authors": [
     {

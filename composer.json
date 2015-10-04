@@ -23,12 +23,6 @@
       "package\\": "src"
     }
   },
-  "autoload-dev": {
-    "psr-4": {
-      "example\\": "example",
-      "attribute\\fixtures\\": "spec/fixtures"
-    }
-  },
   "scripts": {
     "test": "vendor/bin/peridot -c peridot.hh --grep *Spec.hh spec -r dot"
   }

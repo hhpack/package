@@ -3,6 +3,7 @@
 namespace package\spec;
 
 use package\PackageSpecification;
+use package\spec\fixtures\Example;
 
 describe(PackageSpecification::class, function () {
   beforeEach(function () {
@@ -19,6 +20,12 @@ describe(PackageSpecification::class, function () {
   describe('getPackageDirectory()', function () {
     it('returns package directory', function () {
       expect($this->package->getPackageDirectory())->toBe(realpath(__DIR__ . '/fixtures'));
+    });
+  });
+  describe('resolve()', function () {
+    it('returns new resolve class instance', function () {
+      $instance = $this->package->resolve(__DIR__ . '/fixtures/Example.hh');
+      expect($instance)->toBeAnInstanceOf(Example::class);
     });
   });
 });

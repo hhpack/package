@@ -2,11 +2,11 @@
 
 namespace package\spec;
 
-use package\PackageFileCollector;
+use package\FileCollector;
 
-describe(PackageFileCollector::class, function () {
+describe(FileCollector::class, function () {
   beforeEach(function () {
-    $this->collector = new PackageFileCollector();
+    $this->collector = new FileCollector();
   });
   describe('collectFrom()', function () {
     it('returns files', function () {

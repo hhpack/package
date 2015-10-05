@@ -13,10 +13,10 @@ namespace package
 {
     type DirectoryPath = string;
     type PackageNamespace = string;
-    type PackageFile = string;
+    type SourceFile = string;
     type Package = shape(
         'namespace' => PackageNamespace,
         'packageDirectory' => DirectoryPath
     );
-    type PackageFileVector = ImmVector<PackageFile>;
+    type SourceFileVector = ImmVector<SourceFile>;
 };

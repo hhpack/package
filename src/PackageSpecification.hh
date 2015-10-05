@@ -43,19 +43,19 @@ final class PackageSpecification
         return $this->packageDirectory;
     }
 
-    public function resolve<T>(PackageFile $file) : T
+    public function resolve<T>(SourceFile $file) : T
     {
         $reflection = $this->reflectionFrom($file);
         return $reflection->newInstance();
     }
 
-    public function resolveWith<T>(PackageFile $file, array<mixed> $parameters) : T
+    public function resolveWith<T>(SourceFile $file, array<mixed> $parameters) : T
     {
         $reflection = $this->reflectionFrom($file);
         return $reflection->newInstanceArgs($parameters);
     }
 
-    private function reflectionFrom<T>(PackageFile $file) : ReflectionClass
+    private function reflectionFrom<T>(SourceFile $file) : ReflectionClass
     {
         $relativeClass = $this->relativeClassFrom($file);
         $fullClassName = $this->namespace . $relativeClass;
@@ -69,7 +69,7 @@ final class PackageSpecification
         return $reflection;
     }
 
-    private function relativeClassFrom(PackageFile $file) : string
+    private function relativeClassFrom(SourceFile $file) : string
     {
         $replaceTargets = [
             $this->packageDirectory . '/',

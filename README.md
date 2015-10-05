@@ -14,8 +14,6 @@ Basic usage
 Find the source from the package.
 
 ```hack
-<?hh
-
 use package\PackageSpecification;
 
 $package = new PackageSpecification(shape(
@@ -29,6 +27,25 @@ foreach ($files->items() as $file) {
     var_dump($file); // /path/to/example.hh
 }
 ```
+
+Instantiation
+------------------------------
+
+Get an instance from the source
+
+```hack
+use package\PackageSpecification;
+
+$params = shape(
+    'namespace' => 'package\\examples\\classes\\',
+    'packageDirectory' => realpath(__DIR__ . '/src')
+);
+$package = new PackageSpecification($params);
+
+foreach ($package->getSourceFiles() as $source) {
+    $instance = $package->resolve($source);  // return instance
+    var_dump($instance);
+}
 
 Run the test
 ------------------------------

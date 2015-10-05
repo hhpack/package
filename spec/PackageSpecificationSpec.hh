@@ -22,6 +22,16 @@ describe(PackageSpecification::class, function () {
       expect($this->package->getPackageDirectory())->toBe(realpath(__DIR__ . '/fixtures'));
     });
   });
+  describe('getSourceFiles()', function () {
+    it('returns source files for vendor package', function () {
+      $items = Vector {};
+      $sources = $this->package->getSourceFiles();
+      foreach ($sources as $source) {
+        $items->add($source);
+      }
+      expect($items->count())->toBe(1);
+    });
+  });
   describe('resolve()', function () {
     it('returns new resolve class instance', function () {
       $instance = $this->package->resolve(__DIR__ . '/fixtures/Example1.hh');

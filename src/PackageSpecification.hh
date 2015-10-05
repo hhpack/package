@@ -43,6 +43,12 @@ final class PackageSpecification
         return $this->packageDirectory;
     }
 
+    public function getSourceFiles() : SourceFileVector
+    {
+        $collector = new FileCollector();
+        return $collector->collectFrom($this->getPackageDirectory());
+    }
+
     public function resolve<T>(SourceFile $file) : T
     {
         $reflection = $this->reflectionFrom($file);

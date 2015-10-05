@@ -46,6 +46,7 @@ foreach ($package->getSourceFiles() as $source) {
     $instance = $package->resolve($source);  // return instance
     var_dump($instance);
 }
+```
 
 Run the test
 ------------------------------

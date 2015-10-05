@@ -14,9 +14,9 @@ Basic usage
 ```hack
 <?hh
 
-use package\PackageFileCollector;
+use package\FileCollector;
 
-$collector = new PackageFileCollector();
+$collector = new FileCollector();
 $files = $collector->collectFrom('/path/to/src');
 
 foreach ($files->items() as $file) {

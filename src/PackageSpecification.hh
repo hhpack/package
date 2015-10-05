@@ -69,7 +69,7 @@ final class PackageSpecification
         try {
             $reflection = new ReflectionClass($fullClassName);
         } catch (ReflectionException $exception) {
-            throw new NotPackageFileException();
+            throw new NotPackageFileException("Could not instantiate the $fullClassName\nPlease be $fullClassName is sure possible autoload");
         }
 
         return $reflection;

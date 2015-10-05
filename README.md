@@ -11,13 +11,19 @@ Source file collector for vendor package
 Basic usage
 ------------------------------
 
+Find the source from the package.
+
 ```hack
 <?hh
 
-use package\FileCollector;
+use package\PackageSpecification;
 
-$collector = new FileCollector();
-$files = $collector->collectFrom('/path/to/src');
+$package = new PackageSpecification(shape(
+    'namespace' => 'package\\spec\\fixtures\\',
+    'packageDirectory' => __DIR__ . '/fixtures'
+));
+
+$files = $package->getSourceFiles();
 
 foreach ($files->items() as $file) {
     var_dump($file); // /path/to/example.hh

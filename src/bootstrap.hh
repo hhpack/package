@@ -14,6 +14,7 @@ namespace package
     type DirectoryPath = string;
     type PackageNamespace = string;
     type SourceFile = string;
+    type ClassName = string;
     type Package = shape(
         'namespace' => PackageNamespace,
         'packageDirectory' => DirectoryPath

@@ -23,4 +23,5 @@ namespace package
     );
     type SourceFileNameVector = ImmVector<SourceFileName>;
     type ClassFileStream = Generator<int, ClassFile, void>;
+    type SourceFileStream = Generator<int, SourceFileName, void>;
 };

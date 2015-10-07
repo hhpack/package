@@ -11,6 +11,8 @@
 
 namespace package
 {
+    use Generator;
+
     type DirectoryPath = string;
     type PackageNamespace = string;
     type SourceFile = string;
@@ -20,4 +22,5 @@ namespace package
         'packageDirectory' => DirectoryPath
     );
     type SourceFileVector = ImmVector<SourceFile>;
+    type ClassFileStream = Generator<int, ClassFile, void>;
 };

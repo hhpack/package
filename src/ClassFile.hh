@@ -11,7 +11,7 @@
 
 namespace package;
 
-class ClassFile
+final class ClassFile
 {
 
     public function __construct(

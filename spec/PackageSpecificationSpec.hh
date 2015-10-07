@@ -32,6 +32,16 @@ describe(PackageSpecification::class, function () {
       expect($items->count())->toBe(1);
     });
   });
+  describe('getClassFiles()', function () {
+    it('returns class files for vendor package', function () {
+      $items = Vector {};
+      $classes = $this->package->getClassFiles();
+      foreach ($classes as $class) {
+        $items->add($class);
+      }
+      expect($items->count())->toBe(1);
+    });
+  });
   describe('resolve()', function () {
     it('returns new resolve class instance', function () {
       $instance = $this->package->resolve(__DIR__ . '/fixtures/Example1.hh');

@@ -43,18 +43,35 @@ final class PackageSpecification
         return $this->packageDirectory;
     }
 
+    <<Deprecated>>
     public function getSourceFiles() : SourceFileVector
     {
         $collector = new FileCollector();
         return $collector->collectFrom($this->getPackageDirectory());
     }
 
+    public function getClassFiles() : ClassFileStream
+    {
+        $collector = new FileCollector();
+        $sourceFiles = $collector->collectFrom($this->getPackageDirectory());
+
+        foreach ($sourceFiles->items() as $sourceFile) {
+            yield new ClassFile(
+                $sourceFile,
+                $this->getNamespace(),
+                $this->getPackageDirectory()
+            );
+        }
+    }
+
+    <<Deprecated>>
     public function resolve<T>(SourceFile $file) : T
     {
         $reflection = $this->reflectionFrom($file);
         return $reflection->newInstance();
     }
 
+    <<Deprecated>>
     public function resolveWith<T>(SourceFile $file, array<mixed> $parameters) : T
     {
         $reflection = $this->reflectionFrom($file);

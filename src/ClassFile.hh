@@ -87,6 +87,16 @@ final class ClassFile
         return $reflection;
     }
 
+    public function implementsInterface(string $interfaceName) : bool
+    {
+        return $this->reflect()->implementsInterface($interfaceName);
+    }
+
+    public function isSubclassOf(string $className) : bool
+    {
+        return $this->reflect()->isSubclassOf($className);
+    }
+
     private function relativeClassNameFrom(SourceFileName $file) : string
     {
         $replaceTargets = [

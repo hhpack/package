@@ -11,6 +11,9 @@
 
 namespace package;
 
+use ReflectionClass;
+use ReflectionException;
+
 final class ClassFile
 {
 
@@ -55,6 +58,22 @@ final class ClassFile
         $fullClassName = $this->getNamespace() . $relativeClassName;
 
         return $fullClassName;
+    }
+
+    /**
+     * Get new instance
+     */
+    public function instantiate<T>(array<mixed> $parameters = []) : T
+    {
+        $className = $this->getClassName();
+
+        try {
+            $reflection = new ReflectionClass($className);
+        } catch (ReflectionException $exception) {
+            throw new NotPackageFileException("Could not instantiate the $className\nPlease be $className is sure possible autoload");
+        }
+
+        return $reflection->newInstanceArgs($parameters);
     }
 
     private function relativeClassNameFrom(SourceFile $file) : string

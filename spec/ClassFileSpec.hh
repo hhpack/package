@@ -17,4 +17,18 @@ describe(ClassFile::class, function () {
       expect($this->classFile->getClassName())->toBe('package\\spec\\fixtures\\Example1');
     });
   });
+  describe('instantiate()', function () {
+    context('when specify the parameters', function() {
+      it('create an instance with the parameter', function() {
+        $instance = $this->classFile->instantiate([ 'foo' ]);
+        expect($instance)->toBeAnInstanceOf('package\\spec\\fixtures\\Example1');
+        expect($instance->getName())->toBe('foo');
+      });
+    });
+    context('when not specify the parameters', function() {
+      it('create an instance', function() {
+        expect($this->classFile->instantiate())->toBeAnInstanceOf('package\\spec\\fixtures\\Example1');
+      });
+    });
+  });
 });

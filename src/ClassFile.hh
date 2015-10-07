@@ -70,7 +70,7 @@ final class ClassFile
         try {
             $reflection = new ReflectionClass($className);
         } catch (ReflectionException $exception) {
-            throw new NotPackageFileException("Could not instantiate the $className\nPlease be $className is sure possible autoload");
+            throw new InstantiationException("Could not instantiate the $className\nPlease be $className is sure possible autoload");
         }
 
         return $reflection->newInstanceArgs($parameters);

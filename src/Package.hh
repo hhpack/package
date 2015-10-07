@@ -14,7 +14,7 @@ namespace package;
 use \ReflectionClass;
 use \ReflectionException;
 
-final class PackageSpecification
+final class Package
 {
 
     private PackageNamespace $namespace;

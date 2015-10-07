@@ -22,10 +22,10 @@ describe(Package::class, function () {
       expect($this->package->getPackageDirectory())->toBe(realpath(__DIR__ . '/fixtures'));
     });
   });
-  describe('getClassFiles()', function () {
+  describe('classes()', function () {
     it('returns class files for vendor package', function () {
       $items = Vector {};
-      $classes = $this->package->getClassFiles();
+      $classes = $this->package->classes();
       foreach ($classes as $class) {
         $items->add($class);
       }

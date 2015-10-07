@@ -11,7 +11,7 @@ $package = Package::fromOptions(shape(
     'packageDirectory' => realpath(__DIR__ . '/src')
 ));
 
-foreach ($package->getClassFiles() as $class) {
+foreach ($package->classes() as $class) {
     $instance = $class->instantiate();
     var_dump($instance);
 }

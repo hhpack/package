@@ -13,10 +13,10 @@ namespace package;
 
 use \Generator;
 
-final class FileCollector implements Collector<DirectoryPath, SourceFileVector>
+final class FileCollector implements Collector<DirectoryPath, SourceFileNameVector>
 {
 
-    public function collectFrom(DirectoryPath $target) : SourceFileVector
+    public function collectFrom(DirectoryPath $target) : SourceFileNameVector
     {
         $packageFiles = Vector {};
         $collectedFiles = $this->findFiles($target);
@@ -46,7 +46,7 @@ final class FileCollector implements Collector<DirectoryPath, SourceFileVector>
         return true;
     }
 
-    private function findFiles(string $target) : Generator<int, SourceFile, void>
+    private function findFiles(string $target) : Generator<int, SourceFileName, void>
     {
         $targetDirectory = dir($target);
         $currentDirectory = $target;

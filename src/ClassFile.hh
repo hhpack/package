@@ -18,7 +18,7 @@ final class ClassFile
 {
 
     public function __construct(
-        private SourceFile $name,
+        private SourceFileName $name,
         private PackageNamespace $namespace,
         private DirectoryPath $packageDirectory
     )
@@ -36,7 +36,7 @@ final class ClassFile
     /**
      * Get source file name
      */
-    public function getFileName() : SourceFile
+    public function getFileName() : SourceFileName
     {
         return $this->name;
     }
@@ -76,7 +76,7 @@ final class ClassFile
         return $reflection->newInstanceArgs($parameters);
     }
 
-    private function relativeClassNameFrom(SourceFile $file) : string
+    private function relativeClassNameFrom(SourceFileName $file) : string
     {
         $replaceTargets = [
             $this->getPackageDirectory() . '/',

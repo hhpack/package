@@ -13,5 +13,5 @@ namespace package;
 
 interface FileMatcher
 {
-    public function match(SourceFile $file) : bool;
+    public function match(SourceFileName $file) : bool;
 }

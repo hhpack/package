@@ -15,12 +15,12 @@ namespace package
 
     type DirectoryPath = string;
     type PackageNamespace = string;
-    type SourceFile = string;
+    type SourceFileName = string;
     type ClassName = string;
     type Package = shape(
         'namespace' => PackageNamespace,
         'packageDirectory' => DirectoryPath
     );
-    type SourceFileVector = ImmVector<SourceFile>;
+    type SourceFileNameVector = ImmVector<SourceFileName>;
     type ClassFileStream = Generator<int, ClassFile, void>;
 };

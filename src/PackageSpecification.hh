@@ -44,7 +44,7 @@ final class PackageSpecification
     }
 
     <<Deprecated>>
-    public function getSourceFiles() : SourceFileVector
+    public function getSourceFiles() : SourceFileNameVector
     {
         $collector = new FileCollector();
         return $collector->collectFrom($this->getPackageDirectory());
@@ -65,20 +65,20 @@ final class PackageSpecification
     }
 
     <<Deprecated>>
-    public function resolve<T>(SourceFile $file) : T
+    public function resolve<T>(SourceFileName $file) : T
     {
         $reflection = $this->reflectionFrom($file);
         return $reflection->newInstance();
     }
 
     <<Deprecated>>
-    public function resolveWith<T>(SourceFile $file, array<mixed> $parameters) : T
+    public function resolveWith<T>(SourceFileName $file, array<mixed> $parameters) : T
     {
         $reflection = $this->reflectionFrom($file);
         return $reflection->newInstanceArgs($parameters);
     }
 
-    private function reflectionFrom<T>(SourceFile $file) : ReflectionClass
+    private function reflectionFrom<T>(SourceFileName $file) : ReflectionClass
     {
         $relativeClass = $this->relativeClassFrom($file);
         $fullClassName = $this->namespace . $relativeClass;
@@ -92,7 +92,7 @@ final class PackageSpecification
         return $reflection;
     }
 
-    private function relativeClassFrom(SourceFile $file) : string
+    private function relativeClassFrom(SourceFileName $file) : string
     {
         $replaceTargets = [
             $this->packageDirectory . '/',

@@ -43,13 +43,6 @@ final class PackageSpecification
         return $this->packageDirectory;
     }
 
-    <<Deprecated>>
-    public function getSourceFiles() : SourceFileNameVector
-    {
-        $collector = new FileCollector();
-        return $collector->collectFrom($this->getPackageDirectory());
-    }
-
     public function getClassFiles() : ClassFileStream
     {
         $collector = new FileCollector();
@@ -62,51 +55,6 @@ final class PackageSpecification
                 $this->getPackageDirectory()
             );
         }
-    }
-
-    <<Deprecated>>
-    public function resolve<T>(SourceFileName $file) : T
-    {
-        $reflection = $this->reflectionFrom($file);
-        return $reflection->newInstance();
-    }
-
-    <<Deprecated>>
-    public function resolveWith<T>(SourceFileName $file, array<mixed> $parameters) : T
-    {
-        $reflection = $this->reflectionFrom($file);
-        return $reflection->newInstanceArgs($parameters);
-    }
-
-    private function reflectionFrom<T>(SourceFileName $file) : ReflectionClass
-    {
-        $relativeClass = $this->relativeClassFrom($file);
-        $fullClassName = $this->namespace . $relativeClass;
-
-        try {
-            $reflection = new ReflectionClass($fullClassName);
-        } catch (ReflectionException $exception) {
-            throw new NotPackageFileException("Could not instantiate the $fullClassName\nPlease be $fullClassName is sure possible autoload");
-        }
-
-        return $reflection;
-    }
-
-    private function relativeClassFrom(SourceFileName $file) : string
-    {
-        $replaceTargets = [
-            $this->packageDirectory . '/',
-            '/',
-            '.hh'
-        ];
-        $replaceValues = [
-            '',
-            '\\',
-            ''
-        ];
-        $relativeClass = str_replace($replaceTargets, $replaceValues, $file);
-
-        return $relativeClass;
     }
 
 }

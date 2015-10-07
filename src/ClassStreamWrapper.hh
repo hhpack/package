@@ -46,6 +46,22 @@ final class ClassStreamWrapper
         return static::fromStream( $factory() );
     }
 
+    public function toImmVector() : ImmVector<ClassFile>
+    {
+        return $this->toVector()->toImmVector();
+    }
+
+    public function toVector() : Vector<ClassFile>
+    {
+        $classes = Vector {};
+
+        foreach ($classes as $class) {
+            $classes->add($class);
+        }
+
+        return $classes;
+    }
+
     public static function fromStream(ClassFileStream $classes) : ClassStreamWrapper
     {
         return new static($classes);

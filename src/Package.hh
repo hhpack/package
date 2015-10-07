@@ -57,4 +57,9 @@ final class Package
         }
     }
 
+    public static function fromOptions(PackageOptions $package) : this
+    {
+        return new static($package);
+    }
+
 }

@@ -7,7 +7,7 @@ use package\spec\fixtures\Example1;
 
 describe(Package::class, function () {
   beforeEach(function () {
-    $this->package = new Package(shape(
+    $this->package = Package::fromOptions(shape(
       'namespace' => 'package\\spec\\fixtures\\',
       'packageDirectory' => __DIR__ . '/fixtures'
     ));

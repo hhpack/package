@@ -11,6 +11,7 @@
 
 namespace package;
 
+use Exception;
 use ReflectionClass;
 use ReflectionException;
 
@@ -65,15 +66,25 @@ final class ClassFile
      */
     public function instantiate<T>(array<mixed> $parameters = []) : T
     {
-        $className = $this->getClassName();
-
         try {
-            $reflection = new ReflectionClass($className);
-        } catch (ReflectionException $exception) {
-            throw new InstantiationException("Could not instantiate the $className\nPlease be $className is sure possible autoload");
+            $instance = $this->reflection()->newInstanceArgs($parameters);
+        } catch (Exception $exception) {
+            throw new InstantiationException($this->getClassName());
         }
 
-        return $reflection->newInstanceArgs($parameters);
+        return $instance;
+    }
+
+    <<__Memoize>>
+    private function reflection() : ReflectionClass
+    {
+        try {
+            $reflection = new ReflectionClass($this->getClassName());
+        } catch (ReflectionException $exception) {
+            throw new AutoloadException($this->getClassName());
+        }
+
+        return $reflection;
     }
 
     private function relativeClassNameFrom(SourceFileName $file) : string

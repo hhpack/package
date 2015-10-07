@@ -13,7 +13,7 @@ namespace package;
 
 use \Exception;
 
-class InstantiationException extends Exception
+class AutoloadException extends Exception
 {
 
     public function __construct(
@@ -22,7 +22,7 @@ class InstantiationException extends Exception
         protected ?Exception $previous = null
     )
     {
-        parent::__construct("Could not instantiate the $className", $code, $previous);
+        parent::__construct("Please be $className is sure possible autoload", $code, $previous);
     }
 
 }

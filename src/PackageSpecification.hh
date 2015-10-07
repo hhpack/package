@@ -21,7 +21,7 @@ final class PackageSpecification
     private DirectoryPath $packageDirectory;
 
     public function __construct(
-        Package $package
+        PackageOptions $package
     )
     {
         $this->namespace = (string) $package['namespace'];

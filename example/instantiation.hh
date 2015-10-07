@@ -12,7 +12,7 @@ $params = shape(
 );
 $package = new PackageSpecification($params);
 
-foreach ($package->getSourceFiles() as $source) {
-    $instance = $package->resolve($source);
+foreach ($package->getClassFiles() as $class) {
+    $instance = $class->instantiate();
     var_dump($instance);
 }

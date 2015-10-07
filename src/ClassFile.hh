@@ -55,7 +55,7 @@ final class ClassFile
     public function getClassName() : string
     {
         $relativeClassName = $this->relativeClassNameFrom($this->getFileName());
-        $fullClassName = $this->getNamespace() . $relativeClassName;
+        $fullClassName = $this->getNamespace() . '\\' . $relativeClassName;
 
         return $fullClassName;
     }

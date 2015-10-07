@@ -8,7 +8,7 @@ describe(ClassFile::class, function () {
   beforeEach(function () {
     $this->classFile = new ClassFile(
       realpath(__DIR__ . '/fixtures/Example1.hh'),
-      'package\\spec\\fixtures\\',
+      'package\\spec\\fixtures',
       realpath(__DIR__ . '/fixtures')
     );
   });

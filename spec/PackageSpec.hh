@@ -2,12 +2,12 @@
 
 namespace package\spec;
 
-use package\PackageSpecification;
+use package\Package;
 use package\spec\fixtures\Example1;
 
-describe(PackageSpecification::class, function () {
+describe(Package::class, function () {
   beforeEach(function () {
-    $this->package = new PackageSpecification(shape(
+    $this->package = new Package(shape(
       'namespace' => 'package\\spec\\fixtures\\',
       'packageDirectory' => __DIR__ . '/fixtures'
     ));

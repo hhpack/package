@@ -67,7 +67,7 @@ final class ClassFile
     public function instantiate<T>(array<mixed> $parameters = []) : T
     {
         try {
-            $instance = $this->reflection()->newInstanceArgs($parameters);
+            $instance = $this->reflect()->newInstanceArgs($parameters);
         } catch (Exception $exception) {
             throw new InstantiationException($this->getClassName());
         }
@@ -76,7 +76,7 @@ final class ClassFile
     }
 
     <<__Memoize>>
-    private function reflection() : ReflectionClass
+    private function reflect() : ReflectionClass
     {
         try {
             $reflection = new ReflectionClass($this->getClassName());

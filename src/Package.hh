@@ -43,6 +43,12 @@ final class Package
         return $this->packageDirectory;
     }
 
+    public function sources() : SourceFileStream
+    {
+        $collector = new FileCollector();
+        return $collector->collectFrom($this->getPackageDirectory());
+    }
+
     public function classes() : ClassFileStream
     {
         $collector = new FileCollector();

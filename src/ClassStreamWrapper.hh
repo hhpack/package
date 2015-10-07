@@ -22,32 +22,28 @@ final class ClassStreamWrapper
 
     public function implementsInterface(string $interfaceName) : ClassStreamWrapper
     {
-        return static::fromStream($this->_implementsInterface($interfaceName));
+        $factory = () ==> {
+          foreach ($this->classes as $class) {
+              if ($class->implementsInterface($interfaceName) === false) {
+                  continue;
+              }
+              yield $class;
+          }
+        };
+        return static::fromStream( $factory() );
     }
 
     public function isSubclassOf(string $className) : ClassStreamWrapper
     {
-        return static::fromStream($this->_isSubclassOf($className));
-    }
-
-    private function _implementsInterface(string $interfaceName) : ClassFileStream
-    {
-        foreach ($this->classes as $class) {
-            if ($class->implementsInterface($interfaceName) === false) {
-                continue;
-            }
-            yield $class;
-        }
-    }
-
-    private function _isSubclassOf(string $className) : ClassFileStream
-    {
-        foreach ($this->classes as $class) {
-            if ($class->isSubclassOf($className) === false) {
-                continue;
-            }
-            yield $class;
-        }
+        $factory = () ==> {
+          foreach ($this->classes as $class) {
+              if ($class->isSubclassOf($className) === false) {
+                  continue;
+              }
+              yield $class;
+          }
+        };
+        return static::fromStream( $factory() );
     }
 
     public static function fromStream(ClassFileStream $classes) : ClassStreamWrapper

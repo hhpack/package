@@ -23,12 +23,12 @@ final class ClassStreamWrapper
     public function implementsInterface(string $interfaceName) : ClassStreamWrapper
     {
         $factory = () ==> {
-          foreach ($this->classes as $class) {
-              if ($class->implementsInterface($interfaceName) === false) {
-                  continue;
-              }
-              yield $class;
-          }
+            foreach ($this->classes as $class) {
+                if ($class->implementsInterface($interfaceName) === false) {
+                    continue;
+                }
+                yield $class;
+            }
         };
         return static::fromStream( $factory() );
     }
@@ -36,12 +36,40 @@ final class ClassStreamWrapper
     public function subclassOf(string $className) : ClassStreamWrapper
     {
         $factory = () ==> {
-          foreach ($this->classes as $class) {
-              if ($class->isSubclassOf($className) === false) {
-                  continue;
-              }
-              yield $class;
-          }
+            foreach ($this->classes as $class) {
+                if ($class->isSubclassOf($className) === false) {
+                    continue;
+                }
+                yield $class;
+            }
+        };
+        return static::fromStream( $factory() );
+    }
+
+    public function startsWith(string $keyward) : ClassStreamWrapper
+    {
+        $pattern = "/^$keyward/";
+        $factory = () ==> {
+            foreach ($this->classes as $class) {
+                if (preg_match($pattern, $class->getClassName()) !== 1) {
+                    continue;
+                }
+                yield $class;
+            }
+        };
+        return static::fromStream( $factory() );
+    }
+
+    public function endsWith(string $keyward) : ClassStreamWrapper
+    {
+        $pattern = "/$keyward$/";
+        $factory = () ==> {
+            foreach ($this->classes as $class) {
+                if (preg_match($pattern, $class->getClassName()) !== 1) {
+                    continue;
+                }
+                yield $class;
+            }
         };
         return static::fromStream( $factory() );
     }

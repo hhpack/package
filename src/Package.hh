@@ -14,14 +14,14 @@ namespace package;
 use \ReflectionClass;
 use \ReflectionException;
 
-final class PackageSpecification
+final class Package
 {
 
     private PackageNamespace $namespace;
     private DirectoryPath $packageDirectory;
 
     public function __construct(
-        Package $package
+        PackageOptions $package
     )
     {
         $this->namespace = (string) $package['namespace'];
@@ -43,18 +43,29 @@ final class PackageSpecification
         return $this->packageDirectory;
     }
 
-    public function getClassFiles() : ClassFileStream
+    public function sources() : SourceFileStream
+    {
+        $collector = new FileCollector();
+        return $collector->collectFrom($this->getPackageDirectory());
+    }
+
+    public function classes() : ClassFileStream
     {
         $collector = new FileCollector();
         $sourceFiles = $collector->collectFrom($this->getPackageDirectory());
 
-        foreach ($sourceFiles->items() as $sourceFile) {
+        foreach ($sourceFiles as $sourceFile) {
             yield new ClassFile(
                 $sourceFile,
                 $this->getNamespace(),
                 $this->getPackageDirectory()
             );
         }
+    }
+
+    public static function fromOptions(PackageOptions $package) : this
+    {
+        return new static($package);
     }
 
 }

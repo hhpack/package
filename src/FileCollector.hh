@@ -13,21 +13,17 @@ namespace package;
 
 use \Generator;
 
-final class FileCollector implements Collector<DirectoryPath, SourceFileNameVector>
+final class FileCollector implements Collector<DirectoryPath, SourceFileStream>
 {
 
-    public function collectFrom(DirectoryPath $target) : SourceFileNameVector
+    public function collectFrom(DirectoryPath $target) : SourceFileStream
     {
-        $packageFiles = Vector {};
-        $collectedFiles = $this->findFiles($target);
-
-        foreach ($collectedFiles as $collectedFile) {
+        foreach ($this->findFiles($target) as $collectedFile) {
             if ($this->matchFile($collectedFile) === false) {
                 continue;
             }
-            $packageFiles->add($collectedFile);
+            yield $collectedFile;
         }
-        return $packageFiles->toImmVector();
     }
 
     private function matchFile(string $entry) : bool

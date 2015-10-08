@@ -2,12 +2,12 @@
 
 namespace package\spec;
 
-use package\PackageSpecification;
+use package\Package;
 use package\spec\fixtures\Example1;
 
-describe(PackageSpecification::class, function () {
+describe(Package::class, function () {
   beforeEach(function () {
-    $this->package = new PackageSpecification(shape(
+    $this->package = Package::fromOptions(shape(
       'namespace' => 'package\\spec\\fixtures\\',
       'packageDirectory' => __DIR__ . '/fixtures'
     ));
@@ -22,10 +22,10 @@ describe(PackageSpecification::class, function () {
       expect($this->package->getPackageDirectory())->toBe(realpath(__DIR__ . '/fixtures'));
     });
   });
-  describe('getClassFiles()', function () {
+  describe('classes()', function () {
     it('returns class files for vendor package', function () {
       $items = Vector {};
-      $classes = $this->package->getClassFiles();
+      $classes = $this->package->classes();
       foreach ($classes as $class) {
         $items->add($class);
       }

@@ -4,15 +4,14 @@ namespace package\examples;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use package\PackageSpecification;
+use package\Package;
 
-$params = shape(
+$package = Package::fromOptions(shape(
     'namespace' => 'package\\examples\\classes\\',
     'packageDirectory' => realpath(__DIR__ . '/src')
-);
-$package = new PackageSpecification($params);
+));
 
-foreach ($package->getClassFiles() as $class) {
+foreach ($package->classes() as $class) {
     $instance = $class->instantiate();
     var_dump($instance);
 }

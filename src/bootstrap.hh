@@ -17,10 +17,11 @@ namespace package
     type PackageNamespace = string;
     type SourceFileName = string;
     type ClassName = string;
-    type Package = shape(
+    type PackageOptions = shape(
         'namespace' => PackageNamespace,
         'packageDirectory' => DirectoryPath
     );
     type SourceFileNameVector = ImmVector<SourceFileName>;
     type ClassFileStream = Generator<int, ClassFile, void>;
+    type SourceFileStream = Generator<int, SourceFileName, void>;
 };

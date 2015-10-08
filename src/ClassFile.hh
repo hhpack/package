@@ -96,7 +96,13 @@ final class ClassFile
 
     public function implementsInterface(string $interfaceName) : bool
     {
-        return $this->reflect()->implementsInterface($interfaceName);
+        try {
+            $result = $this->reflect()->implementsInterface($interfaceName);
+        } catch (ReflectionException $exception) {
+            $result = false;
+        }
+
+        return $result;
     }
 
     public function isSubclassOf(string $className) : bool

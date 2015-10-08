@@ -51,7 +51,7 @@ final class ClassStreamWrapper implements StreamWrapper<ClassFile>
         $pattern = "/^$keyward/";
         $factory = () ==> {
             foreach ($this->classes as $class) {
-                if (preg_match($pattern, $class->getClassName()) !== 1) {
+                if (preg_match($pattern, $class->getShortClassName()) !== 1) {
                     continue;
                 }
                 yield $class;
@@ -65,7 +65,7 @@ final class ClassStreamWrapper implements StreamWrapper<ClassFile>
         $pattern = "/$keyward$/";
         $factory = () ==> {
             foreach ($this->classes as $class) {
-                if (preg_match($pattern, $class->getClassName()) !== 1) {
+                if (preg_match($pattern, $class->getShortClassName()) !== 1) {
                     continue;
                 }
                 yield $class;
@@ -83,7 +83,7 @@ final class ClassStreamWrapper implements StreamWrapper<ClassFile>
     {
         $classes = Vector {};
 
-        foreach ($classes as $class) {
+        foreach ($this->classes as $class) {
             $classes->add($class);
         }
 

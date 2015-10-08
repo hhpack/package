@@ -3,6 +3,7 @@
 namespace package\spec;
 
 use package\ClassFile;
+use package\spec\fixtures\Base;
 
 describe(ClassFile::class, function () {
   beforeEach(function () {
@@ -20,6 +21,13 @@ describe(ClassFile::class, function () {
   describe('getShortClassName()', function () {
     it('returns short class name', function() {
       expect($this->classFile->getShortClassName())->toBe('Example1');
+    });
+  });
+  describe('isSubclassOf()', function () {
+    context('when subclass', function () {
+      it('returns true', function() {
+        expect($this->classFile->isSubclassOf(Base::class))->toBeTrue();
+      });
     });
   });
   describe('instantiate()', function () {

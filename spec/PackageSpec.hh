@@ -29,7 +29,7 @@ describe(Package::class, function () {
       foreach ($classes as $class) {
         $items->add($class);
       }
-      expect($items->count())->toBe(1);
+      expect($items->count())->toBe(2);
     });
   });
 });

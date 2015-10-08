@@ -4,6 +4,7 @@ namespace package\spec;
 
 use package\ClassFile;
 use package\ClassStreamWrapper;
+use package\spec\fixtures\Base;
 
 describe(ClassStreamWrapper::class, function () {
   beforeEach(function () {
@@ -25,6 +26,12 @@ describe(ClassStreamWrapper::class, function () {
     });
   });
   describe('subclassOf()', function () {
+    context('when matched', function () {
+      it('returns matched class files', function () {
+        $files = $this->wrapper->subclassOf(Base::class)->toImmVector();
+        expect($files->count())->toBe(1);
+      });
+    });
     context('when unmatched', function () {
       it('class file does not return', function () {
         $files = $this->wrapper->subclassOf('foo')->toImmVector();

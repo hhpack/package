@@ -11,7 +11,7 @@
 
 namespace package;
 
-final class ClassStreamWrapper
+final class ClassStreamWrapper implements StreamWrapper<ClassFile>
 {
 
     public function __construct(
@@ -20,7 +20,7 @@ final class ClassStreamWrapper
     {
     }
 
-    public function implementsInterface(string $interfaceName) : ClassStreamWrapper
+    public function implementsInterface(string $interfaceName) : this
     {
         $factory = () ==> {
             foreach ($this->classes as $class) {
@@ -33,7 +33,7 @@ final class ClassStreamWrapper
         return static::fromStream( $factory() );
     }
 
-    public function subclassOf(string $className) : ClassStreamWrapper
+    public function subclassOf(string $className) : this
     {
         $factory = () ==> {
             foreach ($this->classes as $class) {
@@ -46,7 +46,7 @@ final class ClassStreamWrapper
         return static::fromStream( $factory() );
     }
 
-    public function startsWith(string $keyward) : ClassStreamWrapper
+    public function startsWith(string $keyward) : this
     {
         $pattern = "/^$keyward/";
         $factory = () ==> {
@@ -60,7 +60,7 @@ final class ClassStreamWrapper
         return static::fromStream( $factory() );
     }
 
-    public function endsWith(string $keyward) : ClassStreamWrapper
+    public function endsWith(string $keyward) : this
     {
         $pattern = "/$keyward$/";
         $factory = () ==> {
@@ -90,7 +90,7 @@ final class ClassStreamWrapper
         return $classes;
     }
 
-    public static function fromStream(ClassFileStream $classes) : ClassStreamWrapper
+    public static function fromStream(Stream<ClassFile> $classes) : this
     {
         return new static($classes);
     }

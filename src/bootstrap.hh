@@ -22,6 +22,7 @@ namespace package
         'packageDirectory' => DirectoryPath
     );
     type SourceFileNameVector = ImmVector<SourceFileName>;
-    type ClassFileStream = Generator<int, ClassFile, void>;
+    type Stream<T> = Generator<int, T, void>;
+    type ClassFileStream = Stream<ClassFile>;
     type SourceFileStream = Generator<int, SourceFileName, void>;
 };

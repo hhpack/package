@@ -53,12 +53,19 @@ final class ClassFile
     /**
      * Get class full name
      */
+    <<__Memoize>>
     public function getClassName() : string
     {
         $relativeClassName = $this->relativeClassNameFrom($this->getFileName());
         $fullClassName = $this->getNamespace() . '\\' . $relativeClassName;
 
         return $fullClassName;
+    }
+
+    <<__Memoize>>
+    public function getShortClassName() : string
+    {
+        return preg_replace('/^(\w+\\\\)+/', '', $this->getClassName());
     }
 
     /**

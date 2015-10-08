@@ -17,6 +17,11 @@ describe(ClassFile::class, function () {
       expect($this->classFile->getClassName())->toBe('package\\spec\\fixtures\\Example1');
     });
   });
+  describe('getShortClassName()', function () {
+    it('returns short class name', function() {
+      expect($this->classFile->getShortClassName())->toBe('Example1');
+    });
+  });
   describe('instantiate()', function () {
     context('when specify the parameters', function() {
       it('create an instance with the parameter', function() {

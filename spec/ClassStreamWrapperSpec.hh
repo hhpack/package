@@ -29,11 +29,11 @@ describe(ClassStreamWrapper::class, function () {
       });
     });
   });
-  describe('isSubclassOf()', function () {
+  describe('subclassOf()', function () {
     context('when unmatched', function () {
       it('class file does not return', function () {
         $items = Vector {};
-        $files = $this->wrapper->isSubclassOf('foo');
+        $files = $this->wrapper->subclassOf('foo');
 
         foreach ($files as $file) {
           $items->add($file);

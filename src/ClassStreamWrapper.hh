@@ -16,7 +16,7 @@ final class ClassStreamWrapper
 
     public function __construct(
         private ClassFileStream $classes
-    )  
+    )
     {
     }
 
@@ -33,7 +33,7 @@ final class ClassStreamWrapper
         return static::fromStream( $factory() );
     }
 
-    public function isSubclassOf(string $className) : ClassStreamWrapper
+    public function subclassOf(string $className) : ClassStreamWrapper
     {
         $factory = () ==> {
           foreach ($this->classes as $class) {

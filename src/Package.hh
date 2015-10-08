@@ -43,6 +43,7 @@ final class Package
         return $this->packageDirectory;
     }
 
+    <<Deprecated>>
     public function sources() : SourceFileStream
     {
         $collector = new FileCollector();

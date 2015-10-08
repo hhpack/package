@@ -50,18 +50,22 @@ final class Package
         return $collector->collectFrom($this->getPackageDirectory());
     }
 
-    public function classes() : ClassFileStream
+    public function classes() : ClassStreamWrapper
     {
-        $collector = new FileCollector();
-        $sourceFiles = $collector->collectFrom($this->getPackageDirectory());
+        $factory = () ==> {
+            $collector = new FileCollector();
+            $sourceFiles = $collector->collectFrom($this->getPackageDirectory());
 
-        foreach ($sourceFiles as $sourceFile) {
-            yield new ClassFile(
-                $sourceFile,
-                $this->getNamespace(),
-                $this->getPackageDirectory()
-            );
-        }
+            foreach ($sourceFiles as $sourceFile) {
+                yield new ClassFile(
+                    $sourceFile,
+                    $this->getNamespace(),
+                    $this->getPackageDirectory()
+                );
+            }
+        };
+
+        return ClassStreamWrapper::fromStream( $factory() );
     }
 
     public static function fromOptions(PackageOptions $package) : this

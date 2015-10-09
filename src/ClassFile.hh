@@ -18,12 +18,16 @@ use ReflectionException;
 final class ClassFile
 {
 
+    private ReflectionClass $class;
+
     public function __construct(
         private SourceFileName $name,
         private PackageNamespace $namespace,
         private DirectoryPath $packageDirectory
     )
     {
+        $this->class = new ReflectionClass(UnknownClassType::class);
+        $this->initialize();
     }
 
     /**
@@ -82,16 +86,24 @@ final class ClassFile
         return $instance;
     }
 
-    <<__Memoize>>
     private function reflect() : ReflectionClass
     {
         try {
-            $reflection = new ReflectionClass($this->getClassName());
+            $class = new ReflectionClass($this->getClassName());
         } catch (ReflectionException $exception) {
-            throw new AutoloadException($this->getClassName());
+            throw new UnknownClassException($this->getClassName());
         }
 
-        return $reflection;
+        return $class;
+    }
+
+    private function initialize() : void
+    {
+        try {
+            $this->class = new ReflectionClass($this->getClassName());
+        } catch (ReflectionException $exception) {
+            throw new UnknownClassException($this->getClassName());
+        }
     }
 
     public function implementsInterface(string $interfaceName) : bool

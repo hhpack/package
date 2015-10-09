@@ -13,7 +13,7 @@ namespace package;
 
 use \Exception;
 
-class AutoloadException extends Exception
+class UnknownClassException extends Exception
 {
 
     public function __construct(

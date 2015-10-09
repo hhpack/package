@@ -2,11 +2,12 @@
 
 namespace package\spec;
 
-use package\ClassFile;
+use package\ClassObject;
+use package\spec\fixtures\Base;
 
-describe(ClassFile::class, function () {
+describe(ClassObject::class, function () {
   beforeEach(function () {
-    $this->classFile = new ClassFile(
+    $this->classFile = new ClassObject(
       realpath(__DIR__ . '/fixtures/Example1.hh'),
       'package\\spec\\fixtures',
       realpath(__DIR__ . '/fixtures')
@@ -15,6 +16,18 @@ describe(ClassFile::class, function () {
   describe('getClassName()', function () {
     it('returns class name', function() {
       expect($this->classFile->getClassName())->toBe('package\\spec\\fixtures\\Example1');
+    });
+  });
+  describe('getShortClassName()', function () {
+    it('returns short class name', function() {
+      expect($this->classFile->getShortClassName())->toBe('Example1');
+    });
+  });
+  describe('isSubclassOf()', function () {
+    context('when subclass', function () {
+      it('returns true', function() {
+        expect($this->classFile->isSubclassOf(Base::class))->toBeTrue();
+      });
     });
   });
   describe('instantiate()', function () {

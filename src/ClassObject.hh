@@ -15,8 +15,10 @@ use Exception;
 use ReflectionClass;
 use ReflectionException;
 
-final class ClassFile
+final class ClassObject
 {
+
+    private ReflectionClass $class;
 
     public function __construct(
         private SourceFileName $name,
@@ -24,6 +26,8 @@ final class ClassFile
         private DirectoryPath $packageDirectory
     )
     {
+        $this->class = new ReflectionClass(UnknownClassType::class);
+        $this->initialize();
     }
 
     /**
@@ -53,6 +57,7 @@ final class ClassFile
     /**
      * Get class full name
      */
+    <<__Memoize>>
     public function getClassName() : string
     {
         $relativeClassName = $this->relativeClassNameFrom($this->getFileName());
@@ -61,13 +66,19 @@ final class ClassFile
         return $fullClassName;
     }
 
+    <<__Memoize>>
+    public function getShortClassName() : string
+    {
+        return preg_replace('/^(\w+\\\\)+/', '', $this->getClassName());
+    }
+
     /**
      * Get new instance
      */
     public function instantiate<T>(array<mixed> $parameters = []) : T
     {
         try {
-            $instance = $this->reflect()->newInstanceArgs($parameters);
+            $instance = $this->class->newInstanceArgs($parameters);
         } catch (Exception $exception) {
             throw new InstantiationException($this->getClassName());
         }
@@ -75,26 +86,29 @@ final class ClassFile
         return $instance;
     }
 
-    <<__Memoize>>
-    private function reflect() : ReflectionClass
+    private function initialize() : void
     {
         try {
-            $reflection = new ReflectionClass($this->getClassName());
+            $this->class = new ReflectionClass($this->getClassName());
         } catch (ReflectionException $exception) {
-            throw new AutoloadException($this->getClassName());
+            throw new UnknownClassException($this->getClassName());
         }
-
-        return $reflection;
     }
 
     public function implementsInterface(string $interfaceName) : bool
     {
-        return $this->reflect()->implementsInterface($interfaceName);
+        try {
+            $result = $this->class->implementsInterface($interfaceName);
+        } catch (ReflectionException $exception) {
+            $result = false;
+        }
+
+        return $result;
     }
 
     public function isSubclassOf(string $className) : bool
     {
-        return $this->reflect()->isSubclassOf($className);
+        return $this->class->isSubclassOf($className);
     }
 
     private function relativeClassNameFrom(SourceFileName $file) : string

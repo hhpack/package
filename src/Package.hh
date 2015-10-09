@@ -43,24 +43,34 @@ final class Package
         return $this->packageDirectory;
     }
 
+    <<Deprecated>>
     public function sources() : SourceFileStream
     {
         $collector = new FileCollector();
         return $collector->collectFrom($this->getPackageDirectory());
     }
 
-    public function classes() : ClassFileStream
+    public function classes() : ClassStreamWrapper
     {
-        $collector = new FileCollector();
-        $sourceFiles = $collector->collectFrom($this->getPackageDirectory());
+        $factory = () ==> {
+            $collector = new FileCollector();
+            $sourceFiles = $collector->collectFrom($this->getPackageDirectory());
 
-        foreach ($sourceFiles as $sourceFile) {
-            yield new ClassFile(
-                $sourceFile,
-                $this->getNamespace(),
-                $this->getPackageDirectory()
-            );
-        }
+            foreach ($sourceFiles as $sourceFile) {
+                try {
+                    $classObject = new ClassObject(
+                        $sourceFile,
+                        $this->getNamespace(),
+                        $this->getPackageDirectory()
+                    );
+                } catch (UnknownClassException $exception) {
+                    continue;
+                }
+                yield $classObject;
+            }
+        };
+
+        return ClassStreamWrapper::fromStream( $factory() );
     }
 
     public static function fromOptions(PackageOptions $package) : this

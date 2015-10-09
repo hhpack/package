@@ -16,7 +16,7 @@ describe(FileCollector::class, function () {
       foreach ($files as $file) {
         $items->add($file);
       }
-      expect($items->count())->toBe(1);
+      expect($items->count())->toBe(2);
     });
   });
 });

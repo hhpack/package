@@ -24,12 +24,8 @@ describe(Package::class, function () {
   });
   describe('classes()', function () {
     it('returns class files for vendor package', function () {
-      $items = Vector {};
-      $classes = $this->package->classes();
-      foreach ($classes as $class) {
-        $items->add($class);
-      }
-      expect($items->count())->toBe(1);
+      $classes = $this->package->classes()->toImmVector();
+      expect($classes->count())->toBe(2);
     });
   });
 });

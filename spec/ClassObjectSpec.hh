@@ -2,12 +2,12 @@
 
 namespace package\spec;
 
-use package\ClassFile;
+use package\ClassObject;
 use package\spec\fixtures\Base;
 
-describe(ClassFile::class, function () {
+describe(ClassObject::class, function () {
   beforeEach(function () {
-    $this->classFile = new ClassFile(
+    $this->classFile = new ClassObject(
       realpath(__DIR__ . '/fixtures/Example1.hh'),
       'package\\spec\\fixtures',
       realpath(__DIR__ . '/fixtures')

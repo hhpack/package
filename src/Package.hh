@@ -57,7 +57,7 @@ final class Package
             $sourceFiles = $collector->collectFrom($this->getPackageDirectory());
 
             foreach ($sourceFiles as $sourceFile) {
-                yield new ClassFile(
+                yield new ClassObject(
                     $sourceFile,
                     $this->getNamespace(),
                     $this->getPackageDirectory()

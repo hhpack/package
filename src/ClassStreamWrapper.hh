@@ -11,11 +11,11 @@
 
 namespace package;
 
-final class ClassStreamWrapper implements StreamWrapper<ClassFile>
+final class ClassStreamWrapper implements StreamWrapper<ClassObject>
 {
 
     public function __construct(
-        private ClassFileStream $classes
+        private ClassObjectStream $classes
     )
     {
     }
@@ -74,12 +74,12 @@ final class ClassStreamWrapper implements StreamWrapper<ClassFile>
         return static::fromStream( $factory() );
     }
 
-    public function toImmVector() : ImmVector<ClassFile>
+    public function toImmVector() : ImmVector<ClassObject>
     {
         return $this->toVector()->toImmVector();
     }
 
-    public function toVector() : Vector<ClassFile>
+    public function toVector() : Vector<ClassObject>
     {
         $classes = Vector {};
 
@@ -90,7 +90,7 @@ final class ClassStreamWrapper implements StreamWrapper<ClassFile>
         return $classes;
     }
 
-    public static function fromStream(Stream<ClassFile> $classes) : this
+    public static function fromStream(Stream<ClassObject> $classes) : this
     {
         return new static($classes);
     }

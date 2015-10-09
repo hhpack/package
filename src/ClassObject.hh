@@ -15,7 +15,7 @@ use Exception;
 use ReflectionClass;
 use ReflectionException;
 
-final class ClassFile
+final class ClassObject
 {
 
     private ReflectionClass $class;

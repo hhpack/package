@@ -13,8 +13,9 @@ namespace package;
 
 interface StreamWrapper<T>
 {
-    public function startsWith(string $keyward) : this;
-    public function endsWith(string $keyward) : this;
+    public function select(Matcher<T> $matcher) : this;
+    public function startsWith(string $keyword) : this;
+    public function endsWith(string $keyword) : this;
     public function toImmVector() : ImmVector<T>;
     public function toVector() : Vector<T>;
     public static function fromStream(Stream<T> $classes) : this;

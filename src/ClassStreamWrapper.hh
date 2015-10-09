@@ -46,26 +46,21 @@ final class ClassStreamWrapper implements StreamWrapper<ClassObject>
         return static::fromStream( $factory() );
     }
 
-    public function startsWith(string $keyward) : this
+    public function startsWith(string $keyword) : this
     {
-        $pattern = "/^$keyward/";
-        $factory = () ==> {
-            foreach ($this->classes as $class) {
-                if (preg_match($pattern, $class->getShortClassName()) !== 1) {
-                    continue;
-                }
-                yield $class;
-            }
-        };
-        return static::fromStream( $factory() );
+        return $this->select( ClassNameMatcher::startsWith($keyword) );
     }
 
-    public function endsWith(string $keyward) : this
+    public function endsWith(string $keyword) : this
     {
-        $pattern = "/$keyward$/";
+        return $this->select( ClassNameMatcher::endsWith($keyword) );
+    }
+
+    public function select(Matcher<ClassObject> $matcher) : this
+    {
         $factory = () ==> {
             foreach ($this->classes as $class) {
-                if (preg_match($pattern, $class->getShortClassName()) !== 1) {
+                if ($matcher->matches($class) === false) {
                     continue;
                 }
                 yield $class;

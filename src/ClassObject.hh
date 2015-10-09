@@ -111,6 +111,21 @@ final class ClassObject
         return $this->class->isSubclassOf($className);
     }
 
+    public function isAbstract() : bool
+    {
+        return $this->class->isAbstract();
+    }
+
+    public function isTrait() : bool
+    {
+        return $this->class->isTrait();
+    }
+
+    public function isInterface() : bool
+    {
+        return $this->class->isInterface();
+    }
+
     private function relativeClassNameFrom(SourceFileName $file) : string
     {
         $replaceTargets = [

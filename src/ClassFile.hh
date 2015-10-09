@@ -78,23 +78,12 @@ final class ClassFile
     public function instantiate<T>(array<mixed> $parameters = []) : T
     {
         try {
-            $instance = $this->reflect()->newInstanceArgs($parameters);
+            $instance = $this->class->newInstanceArgs($parameters);
         } catch (Exception $exception) {
             throw new InstantiationException($this->getClassName());
         }
 
         return $instance;
-    }
-
-    private function reflect() : ReflectionClass
-    {
-        try {
-            $class = new ReflectionClass($this->getClassName());
-        } catch (ReflectionException $exception) {
-            throw new UnknownClassException($this->getClassName());
-        }
-
-        return $class;
     }
 
     private function initialize() : void
@@ -109,7 +98,7 @@ final class ClassFile
     public function implementsInterface(string $interfaceName) : bool
     {
         try {
-            $result = $this->reflect()->implementsInterface($interfaceName);
+            $result = $this->class->implementsInterface($interfaceName);
         } catch (ReflectionException $exception) {
             $result = false;
         }
@@ -119,7 +108,7 @@ final class ClassFile
 
     public function isSubclassOf(string $className) : bool
     {
-        return $this->reflect()->isSubclassOf($className);
+        return $this->class->isSubclassOf($className);
     }
 
     private function relativeClassNameFrom(SourceFileName $file) : string

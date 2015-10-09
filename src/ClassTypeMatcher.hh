@@ -26,6 +26,20 @@ final class ClassTypeMatcher implements Matcher<ClassObject>
         return $matcher($item);
     }
 
+    public static function implementsInterface(string $interface) : this
+    {
+        return new ClassTypeMatcher(
+            (ClassObject $class) ==> $class->implementsInterface($interface)
+        );
+    }
+
+    public static function subclassOf(string $className) : this
+    {
+        return new ClassTypeMatcher(
+            (ClassObject $class) ==> $class->isSubclassOf($className)
+        );
+    }
+
     public static function classType() : this
     {
         return new ClassTypeMatcher((ClassObject $class) ==> {

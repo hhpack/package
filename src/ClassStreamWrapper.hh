@@ -22,28 +22,32 @@ final class ClassStreamWrapper implements StreamWrapper<ClassObject>
 
     public function implementsInterface(string $interfaceName) : this
     {
-        $factory = () ==> {
-            foreach ($this->classes as $class) {
-                if ($class->implementsInterface($interfaceName) === false) {
-                    continue;
-                }
-                yield $class;
-            }
-        };
-        return static::fromStream( $factory() );
+        return $this->select( ClassTypeMatcher::implementsInterface($interfaceName) );
     }
 
     public function subclassOf(string $className) : this
     {
-        $factory = () ==> {
-            foreach ($this->classes as $class) {
-                if ($class->isSubclassOf($className) === false) {
-                    continue;
-                }
-                yield $class;
-            }
-        };
-        return static::fromStream( $factory() );
+        return $this->select( ClassTypeMatcher::subclassOf($className) );
+    }
+
+    public function classes() : this
+    {
+        return $this->select( ClassTypeMatcher::classType() );
+    }
+
+    public function abstractClasses() : this
+    {
+        return $this->select( ClassTypeMatcher::abstractClassType() );
+    }
+
+    public function traits() : this
+    {
+        return $this->select( ClassTypeMatcher::traitType() );
+    }
+
+    public function interfaces() : this
+    {
+        return $this->select( ClassTypeMatcher::interfaceType() );
     }
 
     public function startsWith(string $keyword) : this

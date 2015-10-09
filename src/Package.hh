@@ -57,11 +57,16 @@ final class Package
             $sourceFiles = $collector->collectFrom($this->getPackageDirectory());
 
             foreach ($sourceFiles as $sourceFile) {
-                yield new ClassObject(
-                    $sourceFile,
-                    $this->getNamespace(),
-                    $this->getPackageDirectory()
-                );
+                try {
+                    $classObject = new ClassObject(
+                        $sourceFile,
+                        $this->getNamespace(),
+                        $this->getPackageDirectory()
+                    );
+                } catch (UnknownClassException $exception) {
+                    continue;
+                }
+                yield $classObject;
             }
         };
 

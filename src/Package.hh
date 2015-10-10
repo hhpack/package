@@ -43,8 +43,7 @@ final class Package
         return $this->packageDirectory;
     }
 
-    <<Deprecated>>
-    public function sources() : SourceFileStream
+    public function sources() : SourceFileStreamWrapper
     {
         $collector = new FileCollector();
         return $collector->collectFrom($this->getPackageDirectory());
@@ -52,25 +51,11 @@ final class Package
 
     public function classes() : ClassStreamWrapper
     {
-        $factory = () ==> {
-            $collector = new FileCollector();
-            $sourceFiles = $collector->collectFrom($this->getPackageDirectory());
-
-            foreach ($sourceFiles as $sourceFile) {
-                try {
-                    $classObject = new ClassObject(
-                        $sourceFile,
-                        $this->getNamespace(),
-                        $this->getPackageDirectory()
-                    );
-                } catch (UnknownClassException $exception) {
-                    continue;
-                }
-                yield $classObject;
-            }
-        };
-
-        return ClassStreamWrapper::fromStream( $factory() );
+        $middleware = ClassTransformer::fromOptions(shape(
+            'namespace' => $this->getNamespace(),
+            'packageDirectory' => $this->getPackageDirectory()
+        ));
+        return $this->sources()->pipe($middleware);
     }
 
     public static function fromOptions(PackageOptions $package) : this

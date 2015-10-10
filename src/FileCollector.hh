@@ -13,17 +13,21 @@ namespace package;
 
 use \Generator;
 
-final class FileCollector implements Collector<DirectoryPath, SourceFileStream>
+final class FileCollector implements Collector<DirectoryPath, SourceFileStreamWrapper>
 {
 
-    public function collectFrom(DirectoryPath $target) : SourceFileStream
+    public function collectFrom(DirectoryPath $target) : SourceFileStreamWrapper
     {
-        foreach ($this->findFiles($target) as $collectedFile) {
-            if ($this->matchFile($collectedFile) === false) {
-                continue;
+        $factory = () ==> {
+            foreach ($this->findFiles($target) as $collectedFile) {
+                if ($this->matchFile($collectedFile) === false) {
+                    continue;
+                }
+                yield new SourceFile($collectedFile);
             }
-            yield new SourceFile($collectedFile);
-        }
+        };
+
+        return SourceFileStreamWrapper::fromStream( $factory() );
     }
 
     private function matchFile(string $entry) : bool

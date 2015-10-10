@@ -3,12 +3,13 @@
 namespace package\spec;
 
 use package\ClassObject;
+use package\SourceFile;
 use package\ClassNameMatcher;
 
 describe(ClassNameMatcher::class, function () {
   beforeEach(function () {
     $this->classFile = new ClassObject(
-      realpath(__DIR__ . '/fixtures/Example1.hh'),
+      new SourceFile(realpath(__DIR__ . '/fixtures/Example1.hh')),
       'package\\spec\\fixtures',
       realpath(__DIR__ . '/fixtures')
     );

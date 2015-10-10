@@ -3,6 +3,7 @@
 namespace package\spec;
 
 use package\ClassObject;
+use package\SourceFile;
 use package\ClassStreamWrapper;
 use package\spec\fixtures\Base;
 
@@ -10,7 +11,7 @@ describe(ClassStreamWrapper::class, function () {
   beforeEach(function () {
     $stream = () ==> {
       yield new ClassObject(
-        realpath(__DIR__ . '/fixtures/Example1.hh'),
+        new SourceFile(realpath(__DIR__ . '/fixtures/Example1.hh')),
         'package\\spec\\fixtures',
         realpath(__DIR__ . '/fixtures')
       );

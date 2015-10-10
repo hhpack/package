@@ -21,7 +21,7 @@ final class ClassObject
     private ReflectionClass $class;
 
     public function __construct(
-        private SourceFileName $name,
+        private SourceFile $file,
         private PackageNamespace $namespace,
         private DirectoryPath $packageDirectory
     )
@@ -43,7 +43,7 @@ final class ClassObject
      */
     public function getFileName() : SourceFileName
     {
-        return $this->name;
+        return $this->file->getName();
     }
 
     /**

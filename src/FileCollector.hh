@@ -22,7 +22,7 @@ final class FileCollector implements Collector<DirectoryPath, SourceFileStream>
             if ($this->matchFile($collectedFile) === false) {
                 continue;
             }
-            yield $collectedFile;
+            yield new SourceFile($collectedFile);
         }
     }
 

@@ -1,7 +1,8 @@
 package
 ==============================
 
-Source file collector for vendor package
+Package utility library for vendor.
+Easily and quickly, and you can find a class or interface.
 
 [![Latest Stable Version](https://poser.pugx.org/holyshared/package/v/stable)](https://packagist.org/packages/holyshared/package)
 [![Build Status](https://travis-ci.org/holyshared/package.svg?branch=master)](https://travis-ci.org/holyshared/package)
@@ -11,39 +12,80 @@ Source file collector for vendor package
 Basic usage
 ------------------------------
 
-Find the source from the package.
+Find the source file from the package.
 
 ```hack
-use package\PackageSpecification;
+use package\Package;
 
-$package = new PackageSpecification(shape(
-    'namespace' => 'package\\spec\\fixtures\\',
-    'packageDirectory' => __DIR__ . '/fixtures'
-));
+$sources = Package::fromOptions(shape(
+    'namespace' => 'package\\examples\\classes\\',
+    'packageDirectory' => realpath(__DIR__ . '/src')
+))->sources()->toImmVector();
 
-$files = $package->getSourceFiles();
-
-foreach ($files->items() as $file) {
-    var_dump($file); // /path/to/example.hh
+foreach ($sources->items() as $source) {
+	var_dump($source->getName()); // /path/to/example.hh
+	var_dump($source->getDirectory()); // /path/to
 }
 ```
 
-Instantiation
+Result of filtering
 ------------------------------
 
-Get an instance from the source
+Use the filtering api, you can filter the results.
+Supported api is as follows.
+
+* implementsInterface
+* subclassOf
+* classes
+* abstractClasses
+* traits
+* interfaces
+* startsWith
+* endsWith
+* select
+
+In the following we are looking for a interface and traits.
 
 ```hack
-use package\PackageSpecification;
+use package\Package;
 
-$params = shape(
+$package = Package::fromOptions(shape(
     'namespace' => 'package\\examples\\classes\\',
     'packageDirectory' => realpath(__DIR__ . '/src')
-);
-$package = new PackageSpecification($params);
+));
 
-foreach ($package->getSourceFiles() as $source) {
-    $instance = $package->resolve($source);  // return instance
+$interfaces = $package->classes()
+	->interfaces()
+	->toImmVector();
+
+foreach ($interfaces as $interface) {
+    var_dump($interface->getName()); // interface
+}
+
+$traits = $package->classes()
+	->traits()
+	->toImmVector();
+
+foreach ($traits as $trait) {
+    var_dump($trait->getName()); // trait
+}
+```
+
+Instantiation of class
+------------------------------
+
+Get an instance from the source files
+
+```hack
+use package\Package;
+
+$classes = Package::fromOptions(shape(
+    'namespace' => 'package\\examples\\classes\\',
+    'packageDirectory' => realpath(__DIR__ . '/src')
+))->classes()->toImmVector();
+
+foreach ($classes as $class) {
+    $instance = $class->instantiate();
     var_dump($instance);
 }
 ```

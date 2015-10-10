@@ -50,6 +50,11 @@ final class SourceFileStreamWrapper implements StreamWrapper<SourceFile>
         }
     }
 
+    public function pipe<To>(Middleware<SourceFile, To> $middleware) : To
+    {
+        return $middleware->receive($this);
+    }
+
     public function toImmVector() : ImmVector<SourceFile>
     {
         return $this->toVector()->toImmVector();

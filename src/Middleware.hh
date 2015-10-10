@@ -13,5 +13,5 @@ namespace package;
 
 interface Middleware<Ti, To>
 {
-    public function receive(Ti $item) : To;
+    public function receive(StreamWrapper<Ti> $stream) : To;
 }

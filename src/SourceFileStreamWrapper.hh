@@ -43,6 +43,13 @@ final class SourceFileStreamWrapper implements StreamWrapper<SourceFile>
         return $this->select( SourceFileNameMatcher::endsWith($keyword) );
     }
 
+    public function items() : SourceFileStream
+    {
+        foreach ($this->sources as $source) {
+            yield $source;
+        }
+    }
+
     public function toImmVector() : ImmVector<SourceFile>
     {
         return $this->toVector()->toImmVector();
@@ -59,7 +66,7 @@ final class SourceFileStreamWrapper implements StreamWrapper<SourceFile>
         return $sources;
     }
 
-    public static function fromStream(Stream<SourceFile> $sources) : this
+    public static function fromStream(SourceFileStream $sources) : this
     {
         return new static($sources);
     }

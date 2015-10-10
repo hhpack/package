@@ -16,6 +16,7 @@ interface StreamWrapper<T>
     public function select(Matcher<T> $matcher) : this;
     public function startsWith(string $keyword) : this;
     public function endsWith(string $keyword) : this;
+    public function items() : Stream<T>;
     public function toImmVector() : ImmVector<T>;
     public function toVector() : Vector<T>;
     public static function fromStream(Stream<T> $classes) : this;

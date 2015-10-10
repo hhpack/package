@@ -71,9 +71,9 @@ final class SourceFileStreamWrapper implements StreamWrapper<SourceFile>
         return $sources;
     }
 
-    public static function fromStream(SourceFileStream $sources) : this
+    public static function fromStream(Stream<SourceFile> $items) : this
     {
-        return new static($sources);
+        return new static($items);
     }
 
 }

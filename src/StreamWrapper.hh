@@ -20,5 +20,5 @@ interface StreamWrapper<T>
     public function pipe<To>(Middleware<T, To> $middleware) : To;
     public function toImmVector() : ImmVector<T>;
     public function toVector() : Vector<T>;
-    public static function fromStream(Stream<T> $classes) : this;
+    public static function fromStream(Stream<T> $items) : this;
 }

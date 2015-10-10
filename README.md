@@ -1,7 +1,7 @@
 package
 ==============================
 
-Package utility library for vendor.
+Package utility library for vendor.  
 Easily and quickly, and you can find a class or interface.
 
 [![Latest Stable Version](https://poser.pugx.org/holyshared/package/v/stable)](https://packagist.org/packages/holyshared/package)
@@ -31,7 +31,7 @@ foreach ($sources->items() as $source) {
 Result of filtering
 ------------------------------
 
-Use the filtering api, you can filter the results.
+Use the filtering api, you can filter the results.  
 Supported api is as follows.
 
 * implementsInterface

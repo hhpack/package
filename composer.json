@@ -21,11 +21,13 @@
   "autoload": {
     "psr-4": {
       "package\\": "src"
-    }
+    },
+    "files": [ "src/bootstrap.hh" ]
   },
   "autoload-dev": {
     "psr-4": {
-      "package\\spec\\fixtures\\": "spec/fixtures"
+      "package\\spec\\fixtures\\": "spec/fixtures",
+      "package\\examples\\classes\\": "example/src"
     }
   },
   "scripts": {

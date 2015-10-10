@@ -11,12 +11,20 @@
 
 namespace package
 {
+    use Generator;
+
     type DirectoryPath = string;
     type PackageNamespace = string;
-    type PackageFile = string;
-    type Package = shape(
+    type SourceFileName = string;
+    type ClassName = string;
+    type PackageOptions = shape(
         'namespace' => PackageNamespace,
         'packageDirectory' => DirectoryPath
     );
-    type PackageFileVector = ImmVector<PackageFile>;
+    type SourceFileNameVector = ImmVector<SourceFileName>;
+    type Stream<T> = Generator<int, T, void>;
+    type ClassObjectStream = Stream<ClassObject>;
+    type SourceFileStream = Stream<SourceFile>;
+
+    type ClassMatcher = Matcher<ClassObject>;
 };

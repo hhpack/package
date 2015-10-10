@@ -13,16 +13,16 @@ namespace package;
 
 use \Exception;
 
-class NotPackageFileException extends Exception
+class UnknownClassException extends Exception
 {
 
     public function __construct(
-        protected string $message = '',
+        protected string $className,
         protected int $code = 0,
         protected ?Exception $previous = null
     )
     {
-        parent::__construct($message, $code, $previous);
+        parent::__construct("Please be $className is sure possible autoload", $code, $previous);
     }
 
 }

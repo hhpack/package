@@ -2,18 +2,6 @@
 
 namespace package\spec\fixtures;
 
-class Example1
+class Example1 extends Base
 {
-
-    public function __construct(
-        private $name = ''
-    )
-    {
-    }
-
-    public function getName() : string
-    {
-        return $this->name;
-    }
-
 }

@@ -15,7 +15,7 @@ Basic usage
 Find the source file from the package.
 
 ```hack
-use package\Package;
+use hhpack\package\Package;
 
 $sources = Package::fromOptions(shape(
     'namespace' => 'package\\examples\\classes\\',
@@ -47,7 +47,7 @@ Supported api is as follows.
 In the following we are looking for a interface and traits.
 
 ```hack
-use package\Package;
+use hhpack\package\Package;
 
 $package = Package::fromOptions(shape(
     'namespace' => 'package\\examples\\classes\\',
@@ -77,7 +77,7 @@ Instantiation of class
 Get an instance from the source files
 
 ```hack
-use package\Package;
+use hhpack\package\Package;
 
 $classes = Package::fromOptions(shape(
     'namespace' => 'package\\examples\\classes\\',

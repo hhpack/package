@@ -1,13 +1,13 @@
 <?hh // partial
 
-namespace package\examples;
+namespace hhpack\package\examples;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use package\Package;
+use hhpack\package\Package;
 
 $classes = Package::fromOptions(shape(
-    'namespace' => 'package\\examples\\classes\\',
+    'namespace' => 'hhpack\\package\\examples\\classes\\',
     'packageDirectory' => realpath(__DIR__ . '/src')
 ))->classes()->toImmVector();
 

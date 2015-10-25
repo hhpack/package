@@ -1,18 +1,18 @@
 <?hh //partial
 
-namespace package\spec;
+namespace hhpack\package\spec;
 
-use package\ClassObject;
-use package\SourceFile;
-use package\ClassStreamWrapper;
-use package\spec\fixtures\Base;
+use hhpack\package\ClassObject;
+use hhpack\package\SourceFile;
+use hhpack\package\ClassStreamWrapper;
+use hhpack\package\spec\fixtures\Base;
 
 describe(ClassStreamWrapper::class, function () {
   beforeEach(function () {
     $stream = () ==> {
       yield new ClassObject(
         new SourceFile(realpath(__DIR__ . '/fixtures/Example1.hh')),
-        'package\\spec\\fixtures',
+        'hhpack\\package\\spec\\fixtures',
         realpath(__DIR__ . '/fixtures')
       );
     };

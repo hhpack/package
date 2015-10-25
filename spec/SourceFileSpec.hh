@@ -1,9 +1,9 @@
 <?hh //partial
 
-namespace package\spec;
+namespace hhpack\package\spec;
 
-use package\SourceFile;
-use package\spec\fixtures\Example1;
+use hhpack\package\SourceFile;
+use hhpack\package\spec\fixtures\Example1;
 
 describe(SourceFile::class, function () {
   beforeEach(function () {

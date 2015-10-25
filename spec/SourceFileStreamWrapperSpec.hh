@@ -1,9 +1,9 @@
 <?hh //partial
 
-namespace package\spec;
+namespace hhpack\package\spec;
 
-use package\SourceFile;
-use package\SourceFileStreamWrapper;
+use hhpack\package\SourceFile;
+use hhpack\package\SourceFileStreamWrapper;
 
 describe(SourceFileStreamWrapper::class, function () {
   beforeEach(function () {

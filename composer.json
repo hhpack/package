@@ -1,5 +1,5 @@
 {
-  "name": "holyshared/package",
+  "name": "hhpack/package",
   "type": "library",
   "keywords": [ "hack", "hhvm", "package", "file collector" ],
   "description": "Package utility library for vendor",
@@ -20,14 +20,14 @@
   },
   "autoload": {
     "psr-4": {
-      "package\\": "src"
+      "hhpack\\package\\": "src"
     },
     "files": [ "src/bootstrap.hh" ]
   },
   "autoload-dev": {
     "psr-4": {
-      "package\\spec\\fixtures\\": "spec/fixtures",
-      "package\\examples\\classes\\": "example/src"
+      "hhpack\\package\\spec\\fixtures\\": "spec/fixtures",
+      "hhpack\\package\\examples\\classes\\": "example/src"
     }
   },
   "scripts": {

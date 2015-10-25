@@ -1,22 +1,22 @@
 <?hh //partial
 
-namespace package\spec;
+namespace hhpack\package\spec;
 
-use package\ClassObject;
-use package\SourceFile;
-use package\spec\fixtures\Base;
+use hhpack\package\ClassObject;
+use hhpack\package\SourceFile;
+use hhpack\package\spec\fixtures\Base;
 
 describe(ClassObject::class, function () {
   beforeEach(function () {
     $this->classFile = new ClassObject(
       new SourceFile(realpath(__DIR__ . '/fixtures/Example1.hh')),
-      'package\\spec\\fixtures',
+      'hhpack\\package\\spec\\fixtures',
       realpath(__DIR__ . '/fixtures')
     );
   });
   describe('getClassName()', function () {
     it('returns class name', function() {
-      expect($this->classFile->getClassName())->toBe('package\\spec\\fixtures\\Example1');
+      expect($this->classFile->getClassName())->toBe('hhpack\\package\\spec\\fixtures\\Example1');
     });
   });
   describe('getShortClassName()', function () {
@@ -35,13 +35,13 @@ describe(ClassObject::class, function () {
     context('when specify the parameters', function() {
       it('create an instance with the parameter', function() {
         $instance = $this->classFile->instantiate([ 'foo' ]);
-        expect($instance)->toBeAnInstanceOf('package\\spec\\fixtures\\Example1');
+        expect($instance)->toBeAnInstanceOf('hhpack\\package\\spec\\fixtures\\Example1');
         expect($instance->getName())->toBe('foo');
       });
     });
     context('when not specify the parameters', function() {
       it('create an instance', function() {
-        expect($this->classFile->instantiate())->toBeAnInstanceOf('package\\spec\\fixtures\\Example1');
+        expect($this->classFile->instantiate())->toBeAnInstanceOf('hhpack\\package\\spec\\fixtures\\Example1');
       });
     });
   });

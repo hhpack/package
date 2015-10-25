@@ -1,6 +1,6 @@
 <?hh //partial
 
-namespace package\spec\fixtures;
+namespace hhpack\package\spec\fixtures;
 
 class Example1 extends Base
 {

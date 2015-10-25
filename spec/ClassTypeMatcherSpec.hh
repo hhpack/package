@@ -1,16 +1,16 @@
 <?hh //partial
 
-namespace package\spec;
+namespace hhpack\package\spec;
 
-use package\ClassObject;
-use package\SourceFile;
-use package\ClassTypeMatcher;
+use hhpack\package\ClassObject;
+use hhpack\package\SourceFile;
+use hhpack\package\ClassTypeMatcher;
 
 describe(ClassTypeMatcher::class, function () {
   beforeEach(function () {
     $this->classFile = new ClassObject(
       new SourceFile(realpath(__DIR__ . '/fixtures/Example1.hh')),
-      'package\\spec\\fixtures',
+      'hhpack\\package\\spec\\fixtures',
       realpath(__DIR__ . '/fixtures')
     );
   });

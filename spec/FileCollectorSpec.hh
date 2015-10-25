@@ -1,8 +1,8 @@
 <?hh //partial
 
-namespace package\spec;
+namespace hhpack\package\spec;
 
-use package\FileCollector;
+use hhpack\package\FileCollector;
 
 describe(FileCollector::class, function () {
   beforeEach(function () {

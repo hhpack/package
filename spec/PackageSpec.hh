@@ -1,20 +1,20 @@
 <?hh //partial
 
-namespace package\spec;
+namespace hhpack\package\spec;
 
-use package\Package;
-use package\spec\fixtures\Example1;
+use hhpack\package\Package;
+use hhpack\package\spec\fixtures\Example1;
 
 describe(Package::class, function () {
   beforeEach(function () {
     $this->package = Package::fromOptions(shape(
-      'namespace' => 'package\\spec\\fixtures\\',
+      'namespace' => 'hhpack\\package\\spec\\fixtures\\',
       'packageDirectory' => __DIR__ . '/fixtures'
     ));
   });
   describe('getNamespace()', function () {
     it('returns namespace', function () {
-      expect($this->package->getNamespace())->toBe('package\\spec\\fixtures');
+      expect($this->package->getNamespace())->toBe('hhpack\\package\\spec\\fixtures');
     });
   });
   describe('getPackageDirectory()', function () {

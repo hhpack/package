@@ -1,6 +1,6 @@
 <?php
 
-namespace package\spec\fixtures;
+namespace hhpack\package\spec\fixtures;
 
 class Example2
 {

@@ -11,9 +11,7 @@
 
 namespace hhpack\package;
 
-use \Generator;
-
-interface Collector<Tt, Tr>
+interface Collector<T>
 {
-    public function collectFrom(Tt $target) : Tr;
+    public function collect() : T;
 }

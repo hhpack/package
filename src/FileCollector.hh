@@ -11,15 +11,21 @@
 
 namespace hhpack\package;
 
-use \Generator;
+//use \Generator;
 
-final class FileCollector implements Collector<DirectoryPath, SourceFileStreamWrapper>
+final class FileCollector implements Collector<SourceFileStreamWrapper>
 {
 
-    public function collectFrom(DirectoryPath $target) : SourceFileStreamWrapper
+    public function __construct(
+        private DirectoryPath $directory
+    )
+    {
+    }
+
+    public function collect() : SourceFileStreamWrapper
     {
         $factory = () ==> {
-            foreach ($this->findFiles($target) as $collectedFile) {
+            foreach ($this->findFiles($this->directory) as $collectedFile) {
                 if ($this->matchFile($collectedFile) === false) {
                     continue;
                 }
@@ -46,7 +52,7 @@ final class FileCollector implements Collector<DirectoryPath, SourceFileStreamWr
         return true;
     }
 
-    private function findFiles(string $target) : Generator<int, SourceFileName, void>
+    private function findFiles(DirectoryPath $target) : Iterator<SourceFileName>
     {
         $targetDirectory = dir($target);
         $currentDirectory = $target;

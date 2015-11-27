@@ -45,8 +45,8 @@ final class Package
 
     public function sources() : SourceFileStreamWrapper
     {
-        $collector = new FileCollector();
-        return $collector->collectFrom($this->getPackageDirectory());
+        $collector = new FileCollector($this->getPackageDirectory());
+        return $collector->collect();
     }
 
     public function classes() : ClassStreamWrapper

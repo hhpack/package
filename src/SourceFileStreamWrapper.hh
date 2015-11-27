@@ -20,7 +20,7 @@ final class SourceFileStreamWrapper implements StreamWrapper<SourceFile>
     {
     }
 
-    public function select(Matcher<SourceFile> $matcher) : this
+    public function select(Matcher<SourceFile> $matcher = new AnyMatcher()) : this
     {
         $factory = () ==> {
             foreach ($this->sources as $source) {

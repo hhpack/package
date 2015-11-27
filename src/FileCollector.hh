@@ -12,7 +12,7 @@
 namespace hhpack\package;
 
 
-final class FileCollector implements Collector<SourceFileStreamWrapper>
+final class FileCollector implements Collector<Matcher<SourceFile>, SourceFileStreamWrapper>
 {
 
     private NoisePathMatcher $noiseMatcher;
@@ -26,7 +26,7 @@ final class FileCollector implements Collector<SourceFileStreamWrapper>
         $this->sourceMatcher = new HackSourceFileMathcer();
     }
 
-    public function collect() : SourceFileStreamWrapper
+    public function collect(Matcher<SourceFile> $matcher = new AnyMatcher()) : SourceFileStreamWrapper
     {
         $factory = () ==> {
             foreach ($this->findFiles($this->directory) as $collectedFile) {
@@ -37,7 +37,7 @@ final class FileCollector implements Collector<SourceFileStreamWrapper>
             }
         };
 
-        return SourceFileStreamWrapper::fromStream( $factory() );
+        return SourceFileStreamWrapper::fromStream( $factory() )->select($matcher);
     }
 
     private function findFiles(DirectoryPath $target) : Iterator<SourceFileName>

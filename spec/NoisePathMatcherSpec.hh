@@ -2,11 +2,11 @@
 
 namespace hhpack\package\spec;
 
-use hhpack\package\DirectoryMatcher;
+use hhpack\package\NoisePathMatcher;
 
-describe(DirectoryMatcher::class, function () {
+describe(NoisePathMatcher::class, function () {
   beforeEach(function () {
-    $this->matcher = new DirectoryMatcher();
+    $this->matcher = new NoisePathMatcher();
   });
   describe('matches()', function () {
     context('when matched', function () {

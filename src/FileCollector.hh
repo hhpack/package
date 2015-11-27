@@ -11,15 +11,17 @@
 
 namespace hhpack\package;
 
-//use \Generator;
 
 final class FileCollector implements Collector<SourceFileStreamWrapper>
 {
+
+    private NoisePathMatcher $directoryMatcher;
 
     public function __construct(
         private DirectoryPath $directory
     )
     {
+        $this->directoryMatcher = new NoisePathMatcher();
     }
 
     public function collect() : SourceFileStreamWrapper
@@ -43,7 +45,7 @@ final class FileCollector implements Collector<SourceFileStreamWrapper>
         }
         return true;
     }
-
+/*
     private function matchDirectory(string $entry) : bool
     {
         if ($entry === ".." || $entry === ".") {
@@ -51,14 +53,14 @@ final class FileCollector implements Collector<SourceFileStreamWrapper>
         }
         return true;
     }
-
+*/
     private function findFiles(DirectoryPath $target) : Iterator<SourceFileName>
     {
         $targetDirectory = dir($target);
         $currentDirectory = $target;
 
         while (false !== ($entry = $targetDirectory->read())) {
-            if ($this->matchDirectory($entry) === false) {
+            if ($this->directoryMatcher->matches($entry)) {
                 continue;
             }
 

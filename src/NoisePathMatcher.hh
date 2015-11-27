@@ -11,12 +11,15 @@
 
 namespace hhpack\package;
 
-final class DirectoryMatcher implements Matcher<DirectoryPath>
+final class NoisePathMatcher implements Matcher<DirectoryPath>
 {
 
     public function matches(DirectoryPath $item) : bool
     {
-        return is_dir($item);
+        if ($item === ".." || $item === ".") {
+            return true;
+        }
+        return false;
     }
 
 }

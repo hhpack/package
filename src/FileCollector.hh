@@ -15,20 +15,22 @@ namespace hhpack\package;
 final class FileCollector implements Collector<SourceFileStreamWrapper>
 {
 
-    private NoisePathMatcher $directoryMatcher;
+    private NoisePathMatcher $noiseMatcher;
+    private HackSourceFileMathcer $sourceMatcher;
 
     public function __construct(
         private DirectoryPath $directory
     )
     {
-        $this->directoryMatcher = new NoisePathMatcher();
+        $this->noiseMatcher = new NoisePathMatcher();
+        $this->sourceMatcher = new HackSourceFileMathcer();
     }
 
     public function collect() : SourceFileStreamWrapper
     {
         $factory = () ==> {
             foreach ($this->findFiles($this->directory) as $collectedFile) {
-                if ($this->matchFile($collectedFile) === false) {
+                if ($this->sourceMatcher->matches($collectedFile) === false) {
                     continue;
                 }
                 yield new SourceFile($collectedFile);
@@ -38,29 +40,13 @@ final class FileCollector implements Collector<SourceFileStreamWrapper>
         return SourceFileStreamWrapper::fromStream( $factory() );
     }
 
-    private function matchFile(string $entry) : bool
-    {
-        if (preg_match('/^.+\.hh$/', $entry) === 0) {
-            return false;
-        }
-        return true;
-    }
-/*
-    private function matchDirectory(string $entry) : bool
-    {
-        if ($entry === ".." || $entry === ".") {
-            return false;
-        }
-        return true;
-    }
-*/
     private function findFiles(DirectoryPath $target) : Iterator<SourceFileName>
     {
         $targetDirectory = dir($target);
         $currentDirectory = $target;
 
         while (false !== ($entry = $targetDirectory->read())) {
-            if ($this->directoryMatcher->matches($entry)) {
+            if ($this->noiseMatcher->matches($entry)) {
                 continue;
             }
 

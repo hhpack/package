@@ -23,7 +23,7 @@
     "psr-4": {
       "hhpack\\package\\": "src"
     },
-    "files": [ "src/bootstrap.hh" ]
+    "files": [ "src/bootstrap.hh", "src/shortcut.hh" ]
   },
   "autoload-dev": {
     "psr-4": {

@@ -43,10 +43,10 @@ final class Package
         return $this->packageDirectory;
     }
 
-    public function sources() : SourceFileStreamWrapper
+    public function sources(Matcher<SourceFile> $matcher = new AnyMatcher()) : SourceFileStreamWrapper
     {
         $collector = new FileCollector($this->getPackageDirectory());
-        return $collector->collect();
+        return $collector->collect($matcher);
     }
 
     public function classes() : ClassStreamWrapper

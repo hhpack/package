@@ -9,50 +9,47 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\package\matcher
+namespace hhpack\package\matcher;
+
+use hhpack\package\ClassTypeMatcher;
+use hhpack\package\ClassNameMatcher;
+
+function implementsInterface(string $interfaceName) : ClassTypeMatcher
 {
+    return ClassTypeMatcher::implementsInterface($interfaceName);
+}
 
-    use hhpack\package\ClassTypeMatcher;
-    use hhpack\package\ClassNameMatcher;
+function subclassOf(string $className) : ClassTypeMatcher
+{
+    return ClassTypeMatcher::subclassOf($className);
+}
 
-    function implementsInterface(string $interfaceName) : ClassTypeMatcher
-    {
-        return ClassTypeMatcher::implementsInterface($interfaceName);
-    }
+function classes() : ClassTypeMatcher
+{
+    return ClassTypeMatcher::classType();
+}
 
-    function subclassOf(string $className) : ClassTypeMatcher
-    {
-        return ClassTypeMatcher::subclassOf($className);
-    }
+function abstractClasses() : ClassTypeMatcher
+{
+    return ClassTypeMatcher::abstractClassType();
+}
 
-    function classes() : ClassTypeMatcher
-    {
-        return ClassTypeMatcher::classType();
-    }
+function traits() : ClassTypeMatcher
+{
+    return ClassTypeMatcher::traitType();
+}
 
-    function abstractClasses() : ClassTypeMatcher
-    {
-        return ClassTypeMatcher::abstractClassType();
-    }
+function interfaces() : ClassTypeMatcher
+{
+    return ClassTypeMatcher::interfaceType();
+}
 
-    function traits() : ClassTypeMatcher
-    {
-        return ClassTypeMatcher::traitType();
-    }
+function startsWith(string $keyword) : ClassNameMatcher
+{
+    return ClassNameMatcher::startsWith($keyword);
+}
 
-    function interfaces() : ClassTypeMatcher
-    {
-        return ClassTypeMatcher::interfaceType();
-    }
-
-    function startsWith(string $keyword) : ClassNameMatcher
-    {
-        return ClassNameMatcher::startsWith($keyword);
-    }
-
-    function endsWith(string $keyword) : ClassNameMatcher
-    {
-        return ClassNameMatcher::endsWith($keyword);
-    }
-
+function endsWith(string $keyword) : ClassNameMatcher
+{
+    return ClassNameMatcher::endsWith($keyword);
 }

@@ -11,7 +11,7 @@
 
 namespace hhpack\package;
 
-final class NameMatcher implements Matcher<NamedObject>
+final class NameMatcher<T as NamedObject> implements Matcher<T as NamedObject>
 {
 
     private string $pattern;
@@ -23,7 +23,7 @@ final class NameMatcher implements Matcher<NamedObject>
         $this->pattern = '/' . $pattern . '/';
     }
 
-    public function matches(NamedObject $item) : bool
+    public function matches(T $item) : bool
     {
         return preg_match($this->pattern, $item->getName()) === 1;
     }

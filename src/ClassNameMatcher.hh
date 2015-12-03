@@ -25,7 +25,7 @@ final class ClassNameMatcher implements Matcher<ClassObject>
 
     public function matches(ClassObject $item) : bool
     {
-        return preg_match($this->pattern, $item->getShortClassName()) === 1;
+        return preg_match($this->pattern, $item->getName()) === 1;
     }
 
     public static function startsWith(string $keyword) : this

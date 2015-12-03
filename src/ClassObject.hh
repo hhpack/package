@@ -73,24 +73,6 @@ final class ClassObject implements NamedObject
     }
 
     /**
-     * Get class full name
-     */
-    /*<<__Memoize>>
-    public function getClassName() : string
-    {
-        $relativeClassName = $this->relativeClassNameFrom($this->getFileName());
-        $fullClassName = $this->getNamespace() . '\\' . $relativeClassName;
-
-        return $fullClassName;
-    }
-
-    <<__Memoize>>
-    public function getShortClassName() : string
-    {
-        return preg_replace('/^(\w+\\\\)+/', '', $this->getClassName());
-    }
-*/
-    /**
      * Get new instance
      */
     public function instantiate<T>(array<mixed> $parameters = []) : T

@@ -15,7 +15,7 @@ use Exception;
 use ReflectionClass;
 use ReflectionException;
 
-final class ClassObject
+final class ClassObject implements NamedObject
 {
 
     private ReflectionClass $class;

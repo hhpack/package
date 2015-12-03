@@ -13,6 +13,7 @@ namespace hhpack\package\selector;
 
 use hhpack\package\ClassTypeMatcher;
 use hhpack\package\NameMatcher;
+use hhpack\package\NamedObject;
 
 function implementsInterface(string $interfaceName) : ClassTypeMatcher
 {
@@ -44,12 +45,12 @@ function interfaces() : ClassTypeMatcher
     return ClassTypeMatcher::interfaceType();
 }
 
-function startsWith(string $keyword) : NameMatcher
+function startsWith(string $keyword) : NameMatcher<NamedObject>
 {
     return NameMatcher::startsWith($keyword);
 }
 
-function endsWith(string $keyword) : NameMatcher
+function endsWith(string $keyword) : NameMatcher<NamedObject>
 {
     return NameMatcher::endsWith($keyword);
 }

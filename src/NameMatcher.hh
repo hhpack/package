@@ -11,7 +11,7 @@
 
 namespace hhpack\package;
 
-final class NameMatcher<T as NamedObject> implements Matcher<T as NamedObject>
+final class NameMatcher<T as NamedObject> implements Matcher<T>
 {
 
     private string $pattern;

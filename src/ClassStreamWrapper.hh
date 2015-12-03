@@ -52,12 +52,12 @@ final class ClassStreamWrapper implements StreamWrapper<ClassObject>
 
     public function startsWith(string $keyword) : this
     {
-        return $this->select( ClassNameMatcher::startsWith($keyword) );
+        return $this->select( NameMatcher::startsWith($keyword) );
     }
 
     public function endsWith(string $keyword) : this
     {
-        return $this->select( ClassNameMatcher::endsWith($keyword) );
+        return $this->select( NameMatcher::endsWith($keyword) );
     }
 
     public function select(Matcher<ClassObject> $matcher) : this

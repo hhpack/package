@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\package\matcher;
+namespace hhpack\package\selector;
 
 use hhpack\package\ClassTypeMatcher;
 use hhpack\package\ClassNameMatcher;

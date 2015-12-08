@@ -22,7 +22,7 @@ namespace hhpack\package
         'packageDirectory' => DirectoryPath
     );
     type SourceFileNameVector = ImmVector<SourceFileName>;
-    type Stream<T> = Generator<int, T, void>;
+    type Stream<T> = KeyedIterator<int, T>;
     type ClassObjectStream = Stream<ClassObject>;
     type SourceFileStream = Stream<SourceFile>;
 

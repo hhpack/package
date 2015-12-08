@@ -4,10 +4,10 @@ namespace hhpack\package\examples;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use hhpack\package\Package;
+use hhpack\package;
 use hhpack\package\selector;
 
-$pkg = Package::fromOptions(shape(
+$pkg = package\package(shape(
     'namespace' => 'hhpack\\package\\examples\\classes\\',
     'packageDirectory' => realpath(__DIR__ . '/src')
 ));

@@ -4,9 +4,9 @@ namespace hhpack\package\examples;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use hhpack\package\Package;
+use hhpack\package;
 
-$classes = Package::fromOptions(shape(
+$classes = package\package(shape(
     'namespace' => 'hhpack\\package\\examples\\classes\\',
     'packageDirectory' => realpath(__DIR__ . '/src')
 ))->classes()->toImmVector();

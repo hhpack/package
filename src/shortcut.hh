@@ -9,48 +9,59 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\package\selector;
+namespace hhpack\package {
 
-use hhpack\package\ClassTypeMatcher;
-use hhpack\package\NameMatcher;
-use hhpack\package\NamedObject;
+    function package(PackageOptions $package) : Package
+    {
+        return Package::fromOptions($package);
+    }
 
-function implementsInterface(string $interfaceName) : ClassTypeMatcher
-{
-    return ClassTypeMatcher::implementsInterface($interfaceName);
 }
 
-function subclassOf(string $className) : ClassTypeMatcher
-{
-    return ClassTypeMatcher::subclassOf($className);
-}
+namespace hhpack\package\selector {
 
-function classes() : ClassTypeMatcher
-{
-    return ClassTypeMatcher::classType();
-}
+    use hhpack\package\ClassTypeMatcher;
+    use hhpack\package\NameMatcher;
+    use hhpack\package\NamedObject;
 
-function abstractClasses() : ClassTypeMatcher
-{
-    return ClassTypeMatcher::abstractClassType();
-}
+    function implementsInterface(string $interfaceName) : ClassTypeMatcher
+    {
+        return ClassTypeMatcher::implementsInterface($interfaceName);
+    }
 
-function traits() : ClassTypeMatcher
-{
-    return ClassTypeMatcher::traitType();
-}
+    function subclassOf(string $className) : ClassTypeMatcher
+    {
+        return ClassTypeMatcher::subclassOf($className);
+    }
 
-function interfaces() : ClassTypeMatcher
-{
-    return ClassTypeMatcher::interfaceType();
-}
+    function classes() : ClassTypeMatcher
+    {
+        return ClassTypeMatcher::classType();
+    }
 
-function startsWith(string $keyword) : NameMatcher<NamedObject>
-{
-    return NameMatcher::startsWith($keyword);
-}
+    function abstractClasses() : ClassTypeMatcher
+    {
+        return ClassTypeMatcher::abstractClassType();
+    }
 
-function endsWith(string $keyword) : NameMatcher<NamedObject>
-{
-    return NameMatcher::endsWith($keyword);
-}
+    function traits() : ClassTypeMatcher
+    {
+        return ClassTypeMatcher::traitType();
+    }
+
+    function interfaces() : ClassTypeMatcher
+    {
+        return ClassTypeMatcher::interfaceType();
+    }
+
+    function startsWith(string $keyword) : NameMatcher<NamedObject>
+    {
+        return NameMatcher::startsWith($keyword);
+    }
+
+    function endsWith(string $keyword) : NameMatcher<NamedObject>
+    {
+        return NameMatcher::endsWith($keyword);
+    }
+
+};

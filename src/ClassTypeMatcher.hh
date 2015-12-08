@@ -62,4 +62,9 @@ final class ClassTypeMatcher implements Matcher<ClassObject>
         return new ClassTypeMatcher((ClassObject $class) ==> $class->isInterface());
     }
 
+    public static function instantiable() : this
+    {
+        return new ClassTypeMatcher((ClassObject $class) ==> $class->isInstantiable());
+    }
+
 }

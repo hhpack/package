@@ -54,6 +54,11 @@ namespace hhpack\package\selector {
         return ClassTypeMatcher::interfaceType();
     }
 
+    function instantiable() : ClassTypeMatcher
+    {
+        return ClassTypeMatcher::instantiable();
+    }
+
     function startsWith(string $keyword) : NameMatcher<NamedObject>
     {
         return NameMatcher::startsWith($keyword);

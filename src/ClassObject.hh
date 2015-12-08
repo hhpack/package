@@ -126,6 +126,11 @@ final class ClassObject implements NamedObject
         return $this->class->isInterface();
     }
 
+    public function isInstantiable() : bool
+    {
+        return $this->class->isInstantiable();
+    }
+
     private function relativeClassNameFrom(SourceFileName $file) : string
     {
         $replaceTargets = [

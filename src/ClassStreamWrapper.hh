@@ -33,7 +33,7 @@ final class ClassStreamWrapper implements StreamWrapper<ClassObject>
         return static::fromStream( $factory() );
     }
 
-    public function pipe<To>(Middleware<ClassObject, To> $middleware) : To
+    public function pipeTo<To>(Middleware<ClassObject, To> $middleware) : To
     {
         return $middleware->receive($this);
     }

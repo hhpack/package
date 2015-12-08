@@ -55,7 +55,7 @@ final class Package
             'namespace' => $this->getNamespace(),
             'packageDirectory' => $this->getPackageDirectory()
         ));
-        return $this->sources()->pipe($middleware)->select($matcher);
+        return $this->sources()->pipeTo($middleware)->select($matcher);
     }
 
     public static function fromOptions(PackageOptions $package) : this

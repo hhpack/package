@@ -40,7 +40,7 @@ final class SourceFileStreamWrapper implements StreamWrapper<SourceFile>
         }
     }
 
-    public function pipe<To>(Middleware<SourceFile, To> $middleware) : To
+    public function pipeTo<To>(Middleware<SourceFile, To> $middleware) : To
     {
         return $middleware->receive($this);
     }

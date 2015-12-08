@@ -33,16 +33,6 @@ final class SourceFileStreamWrapper implements StreamWrapper<SourceFile>
         return static::fromStream( $factory() );
     }
 
-    public function startsWith(string $keyword) : this
-    {
-        return $this->select( NameMatcher::startsWith($keyword) );
-    }
-
-    public function endsWith(string $keyword) : this
-    {
-        return $this->select( NameMatcher::endsWith($keyword) );
-    }
-
     public function items() : SourceFileStream
     {
         foreach ($this->sources as $source) {

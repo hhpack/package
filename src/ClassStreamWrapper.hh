@@ -20,46 +20,6 @@ final class ClassStreamWrapper implements StreamWrapper<ClassObject>
     {
     }
 
-    public function implementsInterface(string $interfaceName) : this
-    {
-        return $this->select( ClassTypeMatcher::implementsInterface($interfaceName) );
-    }
-
-    public function subclassOf(string $className) : this
-    {
-        return $this->select( ClassTypeMatcher::subclassOf($className) );
-    }
-
-    public function classes() : this
-    {
-        return $this->select( ClassTypeMatcher::classType() );
-    }
-
-    public function abstractClasses() : this
-    {
-        return $this->select( ClassTypeMatcher::abstractClassType() );
-    }
-
-    public function traits() : this
-    {
-        return $this->select( ClassTypeMatcher::traitType() );
-    }
-
-    public function interfaces() : this
-    {
-        return $this->select( ClassTypeMatcher::interfaceType() );
-    }
-
-    public function startsWith(string $keyword) : this
-    {
-        return $this->select( NameMatcher::startsWith($keyword) );
-    }
-
-    public function endsWith(string $keyword) : this
-    {
-        return $this->select( NameMatcher::endsWith($keyword) );
-    }
-
     public function select(Matcher<ClassObject> $matcher) : this
     {
         $factory = () ==> {

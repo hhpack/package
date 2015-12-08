@@ -5,6 +5,7 @@ namespace hhpack\package\spec;
 use hhpack\package\ClassObject;
 use hhpack\package\SourceFile;
 use hhpack\package\ClassStreamWrapper;
+use hhpack\package\selector;
 use hhpack\package\spec\fixtures\Base;
 
 describe(ClassStreamWrapper::class, function () {
@@ -18,41 +19,11 @@ describe(ClassStreamWrapper::class, function () {
     };
     $this->wrapper = new ClassStreamWrapper($stream());
   });
-  describe('implementsInterface()', function () {
+  describe('select()', function () {
     context('when unmatched', function () {
       it('class file does not return', function () {
-        $files = $this->wrapper->implementsInterface('foo')->toImmVector();
+        $files = $this->wrapper->select(selector\implementsInterface('foo'))->toImmVector();
         expect($files->count())->toBe(0);
-      });
-    });
-  });
-  describe('subclassOf()', function () {
-    context('when matched', function () {
-      it('returns matched class files', function () {
-        $files = $this->wrapper->subclassOf(Base::class)->toImmVector();
-        expect($files->count())->toBe(1);
-      });
-    });
-    context('when unmatched', function () {
-      it('class file does not return', function () {
-        $files = $this->wrapper->subclassOf('foo')->toImmVector();
-        expect($files->count())->toBe(0);
-      });
-    });
-  });
-  describe('startsWith()', function () {
-    context('when matched', function () {
-      it('returns matched class files', function () {
-        $files = $this->wrapper->startsWith('Ex')->toImmVector();
-        expect($files->count())->toBe(1);
-      });
-    });
-  });
-  describe('endsWith()', function () {
-    context('when matched', function () {
-      it('returns matched class files', function () {
-        $files = $this->wrapper->endsWith('1')->toImmVector();
-        expect($files->count())->toBe(1);
       });
     });
   });

@@ -2,13 +2,13 @@
 
 namespace hhpack\package\spec;
 
+use hhpack\package\selector;
 use hhpack\package\ClassObject;
 use hhpack\package\SourceFile;
-use hhpack\package\ClassStreamWrapper;
-use hhpack\package\selector;
+use hhpack\package\NamedObjectStream;
 use hhpack\package\spec\fixtures\Base;
 
-describe(ClassStreamWrapper::class, function () {
+describe(NamedObjectStream::class, function () {
   beforeEach(function () {
     $stream = () ==> {
       yield new ClassObject(
@@ -17,7 +17,7 @@ describe(ClassStreamWrapper::class, function () {
         realpath(__DIR__ . '/fixtures')
       );
     };
-    $this->wrapper = new ClassStreamWrapper($stream());
+    $this->wrapper = new NamedObjectStream($stream());
   });
   describe('select()', function () {
     context('when unmatched', function () {

@@ -44,7 +44,7 @@ final class ClassTransformer implements Middleware<SourceFile, ClassStreamWrappe
             }
         };
 
-        return ClassStreamWrapper::fromStream( $factory() );
+        return NamedObjectStream::fromStream( $factory() );
     }
 
     public static function fromOptions(PackageOptions $package) : this

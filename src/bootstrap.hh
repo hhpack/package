@@ -11,8 +11,6 @@
 
 namespace hhpack\package
 {
-    use Generator;
-
     type DirectoryPath = string;
     type PackageNamespace = string;
     type SourceFileName = string;
@@ -25,6 +23,9 @@ namespace hhpack\package
     type Stream<T> = KeyedIterator<int, T>;
     type ClassObjectStream = Stream<ClassObject>;
     type SourceFileStream = Stream<SourceFile>;
+
+    type SourceFileStreamWrapper = NamedObjectStream<SourceFile>;
+    type ClassStreamWrapper = NamedObjectStream<ClassObject>;
 
     type ClassMatcher = Matcher<ClassObject>;
 };

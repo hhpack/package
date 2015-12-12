@@ -15,24 +15,18 @@ namespace hhpack\package;
 final class FileCollector implements Collector<Matcher<SourceFile>, NamedObjectStream<SourceFile>>
 {
 
-    private NoisePathMatcher $noiseMatcher;
-    private HackSourceFileMathcer $sourceMatcher;
-
     public function __construct(
         private DirectoryPath $directory
     )
     {
-        $this->noiseMatcher = new NoisePathMatcher();
-        $this->sourceMatcher = new HackSourceFileMathcer();
     }
 
     public function collect(Matcher<SourceFile> $matcher = new AnyMatcher()) : SourceFileStreamWrapper
     {
         $factory = () ==> {
-            foreach ($this->findFiles($this->directory) as $collectedFile) {
-                if ($this->sourceMatcher->matches($collectedFile) === false) {
-                    continue;
-                }
+            $pattern = realpath($this->directory) . '/*.hh';
+
+            foreach ($this->findFiles($pattern) as $collectedFile) {
                 yield new SourceFile($collectedFile);
             }
         };
@@ -40,28 +34,22 @@ final class FileCollector implements Collector<Matcher<SourceFile>, NamedObjectS
         return NamedObjectStream::fromStream( $factory() )->select($matcher);
     }
 
-    private function findFiles(DirectoryPath $target) : Iterator<SourceFileName>
+    private function findFiles(string $pattern) : Iterator<SourceFileName>
     {
-        $targetDirectory = dir($target);
-        $currentDirectory = $target;
+        foreach (glob($pattern) as $file) {
+            yield $file;
+        }
 
-        while (false !== ($entry = $targetDirectory->read())) {
-            if ($this->noiseMatcher->matches($entry)) {
-                continue;
-            }
+        // GLOB_NOSORT = 4, GLOB_ONLYDIR = 8192
+        $directories = glob(dirname($pattern) . '/*', 4 | 8192);
 
-            $absoluteFilePath = $currentDirectory . '/' . $entry;
+        foreach ($directories as $directory) {
+            $files = $this->findFiles($directory . '/' . basename($pattern));
 
-            if (is_file($absoluteFilePath)) {
-                yield $absoluteFilePath;
-            } else if (is_dir($absoluteFilePath)) {
-                $files = $this->findFiles($absoluteFilePath);
-                foreach ($files as $file) {
-                    yield $file;
-                }
+            foreach ($files as $file) {
+                yield $file;
             }
         }
-        $targetDirectory->close();
     }
 
 }

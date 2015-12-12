@@ -11,7 +11,7 @@
 
 namespace hhpack\package;
 
-interface Collector<Tm, Tr>
+interface NamedObject
 {
-    public function collect(Tm $matcher) : Tr;
+    public function getName() : string;
 }

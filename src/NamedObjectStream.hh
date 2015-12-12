@@ -11,16 +11,16 @@
 
 namespace hhpack\package;
 
-final class SourceFileStreamWrapper implements StreamWrapper<SourceFile>
+final class NamedObjectStream<T as NamedObject> implements StreamWrapper<T>
 {
 
     public function __construct(
-        private SourceFileStream $sources
+        private Stream<T> $sources
     )
     {
     }
 
-    public function select(Matcher<SourceFile> $matcher) : this
+    public function select(Matcher<T> $matcher = new AnyMatcher()) : this
     {
         $factory = () ==> {
             foreach ($this->sources as $source) {
@@ -33,34 +33,24 @@ final class SourceFileStreamWrapper implements StreamWrapper<SourceFile>
         return static::fromStream( $factory() );
     }
 
-    public function startsWith(string $keyword) : this
-    {
-        return $this->select( SourceFileNameMatcher::startsWith($keyword) );
-    }
-
-    public function endsWith(string $keyword) : this
-    {
-        return $this->select( SourceFileNameMatcher::endsWith($keyword) );
-    }
-
-    public function items() : SourceFileStream
+    public function items() : Stream<T>
     {
         foreach ($this->sources as $source) {
             yield $source;
         }
     }
 
-    public function pipe<To>(Middleware<SourceFile, To> $middleware) : To
+    public function pipeTo<To>(Middleware<T, To> $middleware) : To
     {
         return $middleware->receive($this);
     }
 
-    public function toImmVector() : ImmVector<SourceFile>
+    public function toImmVector() : ImmVector<T>
     {
         return $this->toVector()->toImmVector();
     }
 
-    public function toVector() : Vector<SourceFile>
+    public function toVector() : Vector<T>
     {
         $sources = Vector {};
 
@@ -71,7 +61,7 @@ final class SourceFileStreamWrapper implements StreamWrapper<SourceFile>
         return $sources;
     }
 
-    public static function fromStream(Stream<SourceFile> $items) : this
+    public static function fromStream(Stream<T> $items) : this
     {
         return new static($items);
     }

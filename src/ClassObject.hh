@@ -15,7 +15,7 @@ use Exception;
 use ReflectionClass;
 use ReflectionException;
 
-final class ClassObject
+final class ClassObject implements NamedObject
 {
 
     private ReflectionClass $class;
@@ -54,22 +54,22 @@ final class ClassObject
         return $this->packageDirectory;
     }
 
+    <<__Memoize>>
+    public function getName() : string
+    {
+        return preg_replace('/^(\w+\\\\)+/', '', $this->getFullName());
+    }
+
     /**
      * Get class full name
      */
     <<__Memoize>>
-    public function getClassName() : string
+    public function getFullName() : string
     {
         $relativeClassName = $this->relativeClassNameFrom($this->getFileName());
         $fullClassName = $this->getNamespace() . '\\' . $relativeClassName;
 
         return $fullClassName;
-    }
-
-    <<__Memoize>>
-    public function getShortClassName() : string
-    {
-        return preg_replace('/^(\w+\\\\)+/', '', $this->getClassName());
     }
 
     /**
@@ -80,7 +80,7 @@ final class ClassObject
         try {
             $instance = $this->class->newInstanceArgs($parameters);
         } catch (Exception $exception) {
-            throw new InstantiationException($this->getClassName());
+            throw new InstantiationException($this->getFullName());
         }
 
         return $instance;
@@ -89,9 +89,9 @@ final class ClassObject
     private function initialize() : void
     {
         try {
-            $this->class = new ReflectionClass($this->getClassName());
+            $this->class = new ReflectionClass($this->getFullName());
         } catch (ReflectionException $exception) {
-            throw new UnknownClassException($this->getClassName());
+            throw new UnknownClassException($this->getFullName());
         }
     }
 
@@ -124,6 +124,11 @@ final class ClassObject
     public function isInterface() : bool
     {
         return $this->class->isInterface();
+    }
+
+    public function isInstantiable() : bool
+    {
+        return $this->class->isInstantiable();
     }
 
     private function relativeClassNameFrom(SourceFileName $file) : string

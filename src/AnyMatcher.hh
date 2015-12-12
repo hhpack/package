@@ -11,7 +11,10 @@
 
 namespace hhpack\package;
 
-interface Collector<Tm, Tr>
+final class AnyMatcher<T> implements Matcher<T>
 {
-    public function collect(Tm $matcher) : Tr;
+    public function matches(T $item) : bool
+    {
+        return true;
+    }
 }

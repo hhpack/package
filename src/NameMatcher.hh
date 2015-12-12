@@ -11,7 +11,7 @@
 
 namespace hhpack\package;
 
-final class ClassNameMatcher implements Matcher<ClassObject>
+final class NameMatcher<T as NamedObject> implements Matcher<T>
 {
 
     private string $pattern;
@@ -23,21 +23,21 @@ final class ClassNameMatcher implements Matcher<ClassObject>
         $this->pattern = '/' . $pattern . '/';
     }
 
-    public function matches(ClassObject $item) : bool
+    public function matches(T $item) : bool
     {
-        return preg_match($this->pattern, $item->getShortClassName()) === 1;
+        return preg_match($this->pattern, $item->getName()) === 1;
     }
 
     public static function startsWith(string $keyword) : this
     {
         $pattern = '^' . preg_quote($keyword, '/');
-        return new ClassNameMatcher($pattern);
+        return new static($pattern);
     }
 
     public static function endsWith(string $keyword) : this
     {
         $pattern = preg_quote($keyword, '/') . '$';
-        return new ClassNameMatcher($pattern);
+        return new static($pattern);
     }
 
 }

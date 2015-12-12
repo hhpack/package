@@ -43,19 +43,19 @@ final class Package
         return $this->packageDirectory;
     }
 
-    public function sources() : SourceFileStreamWrapper
+    public function sources(Matcher<SourceFile> $matcher = new AnyMatcher()) : SourceFileStreamWrapper
     {
-        $collector = new FileCollector();
-        return $collector->collectFrom($this->getPackageDirectory());
+        $collector = new FileCollector($this->getPackageDirectory());
+        return $collector->collect($matcher);
     }
 
-    public function classes() : ClassStreamWrapper
+    public function classes(Matcher<ClassObject> $matcher = new AnyMatcher()) : ClassStreamWrapper
     {
         $middleware = ClassTransformer::fromOptions(shape(
             'namespace' => $this->getNamespace(),
             'packageDirectory' => $this->getPackageDirectory()
         ));
-        return $this->sources()->pipe($middleware);
+        return $this->sources()->pipeTo($middleware)->select($matcher);
     }
 
     public static function fromOptions(PackageOptions $package) : this

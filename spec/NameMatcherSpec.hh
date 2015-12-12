@@ -4,9 +4,9 @@ namespace hhpack\package\spec;
 
 use hhpack\package\ClassObject;
 use hhpack\package\SourceFile;
-use hhpack\package\ClassNameMatcher;
+use hhpack\package\NameMatcher;
 
-describe(ClassNameMatcher::class, function () {
+describe(NameMatcher::class, function () {
   beforeEach(function () {
     $this->classFile = new ClassObject(
       new SourceFile(realpath(__DIR__ . '/fixtures/Example1.hh')),
@@ -16,7 +16,7 @@ describe(ClassNameMatcher::class, function () {
   });
   describe('startsWith()', function () {
     beforeEach(function () {
-      $this->matcher = ClassNameMatcher::startsWith('Exa');
+      $this->matcher = NameMatcher::startsWith('Exa');
     });
     context('when matched', function () {
       it('returns true', function () {
@@ -26,7 +26,7 @@ describe(ClassNameMatcher::class, function () {
   });
   describe('endsWith()', function () {
     beforeEach(function () {
-      $this->matcher = ClassNameMatcher::endsWith('1');
+      $this->matcher = NameMatcher::endsWith('1');
     });
     context('when matched', function () {
       it('returns true', function () {

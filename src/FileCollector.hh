@@ -40,6 +40,7 @@ final class FileCollector implements Collector<Matcher<SourceFile>, NamedObjectS
             yield $file;
         }
 
+        // An error may appear in the check type, do not use the constant.
         // GLOB_NOSORT = 4, GLOB_ONLYDIR = 8192
         $directories = glob(dirname($pattern) . '/*', 4 | 8192);
 

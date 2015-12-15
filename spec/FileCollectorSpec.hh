@@ -6,11 +6,11 @@ use hhpack\package\FileCollector;
 
 describe(FileCollector::class, function () {
   beforeEach(function () {
-    $this->collector = new FileCollector();
+    $this->collector = new FileCollector(__DIR__ . '/fixtures');
   });
-  describe('collectFrom()', function () {
+  describe('collect()', function () {
     it('returns files', function () {
-      $files = $this->collector->collectFrom(__DIR__ . '/fixtures');
+      $files = $this->collector->collect();
       expect($files->toImmVector()->count())->toBe(2);
     });
   });

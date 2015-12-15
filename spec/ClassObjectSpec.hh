@@ -14,14 +14,14 @@ describe(ClassObject::class, function () {
       realpath(__DIR__ . '/fixtures')
     );
   });
-  describe('getClassName()', function () {
+  describe('getFullName()', function () {
     it('returns class name', function() {
-      expect($this->classFile->getClassName())->toBe('hhpack\\package\\spec\\fixtures\\Example1');
+      expect($this->classFile->getFullName())->toBe('hhpack\\package\\spec\\fixtures\\Example1');
     });
   });
-  describe('getShortClassName()', function () {
+  describe('getName()', function () {
     it('returns short class name', function() {
-      expect($this->classFile->getShortClassName())->toBe('Example1');
+      expect($this->classFile->getName())->toBe('Example1');
     });
   });
   describe('isSubclassOf()', function () {

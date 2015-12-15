@@ -14,18 +14,18 @@ namespace hhpack\package;
 use \ReflectionClass;
 use \ReflectionException;
 
-final class Package
+final class Package implements FromOptions<PackageOptions>
 {
 
     private PackageNamespace $namespace;
     private DirectoryPath $packageDirectory;
 
     public function __construct(
-        PackageOptions $package
+        PackageOptions $options
     )
     {
-        $this->namespace = (string) $package['namespace'];
-        $this->packageDirectory = realpath($package['packageDirectory']);
+        $this->namespace = (string) $options['namespace'];
+        $this->packageDirectory = realpath($options['packageDirectory']);
     }
 
     <<__Memoize>>
@@ -43,24 +43,24 @@ final class Package
         return $this->packageDirectory;
     }
 
-    public function sources() : SourceFileStreamWrapper
+    public function sources(Matcher<SourceFile> $matcher = new AnyMatcher()) : StreamObject<SourceFile>
     {
-        $collector = new FileCollector();
-        return $collector->collectFrom($this->getPackageDirectory());
+        $collector = new FileCollector($this->getPackageDirectory());
+        return $collector->collect($matcher);
     }
 
-    public function classes() : ClassStreamWrapper
+    public function classes(Matcher<ClassObject> $matcher = new AnyMatcher()) : StreamObject<ClassObject>
     {
         $middleware = ClassTransformer::fromOptions(shape(
             'namespace' => $this->getNamespace(),
             'packageDirectory' => $this->getPackageDirectory()
         ));
-        return $this->sources()->pipe($middleware);
+        return $this->sources()->pipeTo($middleware)->select($matcher);
     }
 
-    public static function fromOptions(PackageOptions $package) : this
+    public static function fromOptions(PackageOptions $options) : this
     {
-        return new static($package);
+        return new static($options);
     }
 
 }

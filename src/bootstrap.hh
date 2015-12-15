@@ -11,8 +11,6 @@
 
 namespace hhpack\package
 {
-    use Generator;
-
     type DirectoryPath = string;
     type PackageNamespace = string;
     type SourceFileName = string;
@@ -21,10 +19,8 @@ namespace hhpack\package
         'namespace' => PackageNamespace,
         'packageDirectory' => DirectoryPath
     );
-    type SourceFileNameVector = ImmVector<SourceFileName>;
-    type Stream<T> = Generator<int, T, void>;
-    type ClassObjectStream = Stream<ClassObject>;
-    type SourceFileStream = Stream<SourceFile>;
+
+    type StreamSource<T> = Traversable<T>;
 
     type ClassMatcher = Matcher<ClassObject>;
 };

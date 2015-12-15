@@ -11,7 +11,7 @@
 
 namespace hhpack\package;
 
-final class SourceFile
+final class SourceFile implements NamedObject
 {
 
     public function __construct(

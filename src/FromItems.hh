@@ -11,7 +11,7 @@
 
 namespace hhpack\package;
 
-interface Collector<Tm, Tr>
+interface FromItems<T>
 {
-    public function collect(Tm $matcher) : Tr;
+    public static function fromItems(StreamSource<T> $items) : this;
 }

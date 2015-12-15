@@ -11,7 +11,7 @@
 
 namespace hhpack\package;
 
-interface Collector<Tm, Tr>
+interface FromOptions<T>
 {
-    public function collect(Tm $matcher) : Tr;
+    public static function fromOptions(T $options) : this;
 }

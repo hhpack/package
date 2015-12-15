@@ -11,7 +11,7 @@
 
 namespace hhpack\package;
 
-final class ClassTransformer implements Middleware<SourceFile, StreamObject<ClassObject>>
+final class ClassTransformer implements Middleware<SourceFile, StreamObject<ClassObject>>, FromOptions<PackageOptions>
 {
 
     private PackageNamespace $namespace;

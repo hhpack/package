@@ -15,7 +15,7 @@ final class StreamObject<T> implements StreamWrapper<T>
 {
 
     public function __construct(
-        private Stream<T> $sources
+        private StreamSource<T> $sources
     )
     {
     }
@@ -33,7 +33,7 @@ final class StreamObject<T> implements StreamWrapper<T>
         return static::fromStream( $factory() );
     }
 
-    public function items() : Stream<T>
+    public function items() : StreamSource<T>
     {
         foreach ($this->sources as $source) {
             yield $source;
@@ -61,7 +61,7 @@ final class StreamObject<T> implements StreamWrapper<T>
         return $sources;
     }
 
-    public static function fromStream(Stream<T> $items) : this
+    public static function fromStream(StreamSource<T> $items) : this
     {
         return new static($items);
     }

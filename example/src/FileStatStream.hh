@@ -2,7 +2,7 @@
 
 namespace hhpack\package\examples\classes;
 
-use hhpack\package\Stream;
+use hhpack\package\StreamSource;
 use hhpack\package\SourceFile;
 use hhpack\package\Matcher;
 use hhpack\package\AnyMatcher;
@@ -14,7 +14,7 @@ final class FileStatStream implements StreamWrapper<SplFileInfo>
 {
 
     public function __construct(
-        private Stream<SplFileInfo> $sources
+        private StreamSource<SplFileInfo> $sources
     )
     {
     }
@@ -32,7 +32,7 @@ final class FileStatStream implements StreamWrapper<SplFileInfo>
         return static::fromStream( $factory() );
     }
 
-    public function items() : Stream<SplFileInfo>
+    public function items() : StreamSource<SplFileInfo>
     {
         foreach ($this->sources as $source) {
             yield $source;
@@ -60,7 +60,7 @@ final class FileStatStream implements StreamWrapper<SplFileInfo>
         return $sources;
     }
 
-    public static function fromStream(Stream<SplFileInfo> $items) : this
+    public static function fromStream(StreamSource<SplFileInfo> $items) : this
     {
         return new static($items);
     }

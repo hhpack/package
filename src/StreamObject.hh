@@ -11,7 +11,7 @@
 
 namespace hhpack\package;
 
-final class StreamObject<T> implements StreamWrapper<T>
+final class StreamObject<T> implements Stream<T>
 {
 
     public function __construct(

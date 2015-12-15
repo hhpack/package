@@ -25,7 +25,7 @@ final class ClassTransformer implements Middleware<SourceFile, StreamObject<Clas
         $this->packageDirectory = realpath($package['packageDirectory']);
     }
 
-    public function receive(StreamWrapper<SourceFile> $stream) : StreamObject<ClassObject>
+    public function receive(Stream<SourceFile> $stream) : StreamObject<ClassObject>
     {
         $factory = () ==> {
             $sourceFiles = $stream->items();

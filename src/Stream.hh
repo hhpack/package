@@ -11,7 +11,7 @@
 
 namespace hhpack\package;
 
-interface StreamWrapper<T>
+interface Stream<T>
 {
     public function select(Matcher<T> $matcher) : this;
     public function items() : StreamSource<T>;

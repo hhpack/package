@@ -6,11 +6,11 @@ use hhpack\package\StreamSource;
 use hhpack\package\SourceFile;
 use hhpack\package\Matcher;
 use hhpack\package\AnyMatcher;
-use hhpack\package\StreamWrapper;
+use hhpack\package\Stream;
 use hhpack\package\Middleware;
 use SplFileInfo;
 
-final class FileStatStream implements StreamWrapper<SplFileInfo>
+final class FileStatStream implements Stream<SplFileInfo>
 {
 
     public function __construct(

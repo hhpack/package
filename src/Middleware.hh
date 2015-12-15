@@ -13,5 +13,5 @@ namespace hhpack\package;
 
 interface Middleware<Ti, To>
 {
-    public function receive(StreamWrapper<Ti> $stream) : To;
+    public function receive(Stream<Ti> $stream) : To;
 }

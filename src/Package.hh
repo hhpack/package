@@ -43,13 +43,13 @@ final class Package
         return $this->packageDirectory;
     }
 
-    public function sources(Matcher<SourceFile> $matcher = new AnyMatcher()) : SourceFileStreamWrapper
+    public function sources(Matcher<SourceFile> $matcher = new AnyMatcher()) : StreamObject<SourceFile>
     {
         $collector = new FileCollector($this->getPackageDirectory());
         return $collector->collect($matcher);
     }
 
-    public function classes(Matcher<ClassObject> $matcher = new AnyMatcher()) : ClassStreamWrapper
+    public function classes(Matcher<ClassObject> $matcher = new AnyMatcher()) : StreamObject<ClassObject>
     {
         $middleware = ClassTransformer::fromOptions(shape(
             'namespace' => $this->getNamespace(),

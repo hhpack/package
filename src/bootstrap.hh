@@ -24,8 +24,5 @@ namespace hhpack\package
     type ClassObjectStream = Stream<ClassObject>;
     type SourceFileStream = Stream<SourceFile>;
 
-    type SourceFileStreamWrapper = StreamObject<SourceFile>;
-    type ClassStreamWrapper = StreamObject<ClassObject>;
-
     type ClassMatcher = Matcher<ClassObject>;
 };

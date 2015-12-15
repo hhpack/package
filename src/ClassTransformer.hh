@@ -11,7 +11,7 @@
 
 namespace hhpack\package;
 
-final class ClassTransformer implements Middleware<SourceFile, ClassStreamWrapper>
+final class ClassTransformer implements Middleware<SourceFile, StreamObject<ClassObject>>
 {
 
     private PackageNamespace $namespace;
@@ -25,7 +25,7 @@ final class ClassTransformer implements Middleware<SourceFile, ClassStreamWrappe
         $this->packageDirectory = realpath($package['packageDirectory']);
     }
 
-    public function receive(StreamWrapper<SourceFile> $stream) : ClassStreamWrapper
+    public function receive(StreamWrapper<SourceFile> $stream) : StreamObject<ClassObject>
     {
         $factory = () ==> {
             $sourceFiles = $stream->items();

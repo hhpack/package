@@ -21,7 +21,7 @@ final class FileCollector implements Collector<Matcher<SourceFile>, StreamObject
     {
     }
 
-    public function collect(Matcher<SourceFile> $matcher = new AnyMatcher()) : SourceFileStreamWrapper
+    public function collect(Matcher<SourceFile> $matcher = new AnyMatcher()) : StreamObject<SourceFile>
     {
         $factory = () ==> {
             $pattern = realpath($this->directory) . '/*.hh';

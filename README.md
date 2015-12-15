@@ -90,7 +90,7 @@ Pipeline of stream
 ------------------------------
 
 You can build a pipeline.  
-You can achieve when implement the interface **Middleware** and **StreamWrapper**.  
+You can achieve when implement the interface **Middleware** and **Stream**.  
 
 Please look at the **example/pipeline.hh** for details.
 

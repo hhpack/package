@@ -12,7 +12,7 @@
 namespace hhpack\package;
 
 
-final class FileCollector implements Collector<Matcher<SourceFile>, NamedObjectStream<SourceFile>>
+final class FileCollector implements Collector<Matcher<SourceFile>, StreamObject<SourceFile>>
 {
 
     public function __construct(
@@ -31,7 +31,7 @@ final class FileCollector implements Collector<Matcher<SourceFile>, NamedObjectS
             }
         };
 
-        return NamedObjectStream::fromStream( $factory() )->select($matcher);
+        return StreamObject::fromStream( $factory() )->select($matcher);
     }
 
     private function findFiles(string $pattern) : Iterator<SourceFileName>

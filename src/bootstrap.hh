@@ -19,11 +19,8 @@ namespace hhpack\package
         'namespace' => PackageNamespace,
         'packageDirectory' => DirectoryPath
     );
-    type SourceFileNameVector = ImmVector<SourceFileName>;
 
     type StreamSource<T> = KeyedIterator<int, T>;
-    type ClassObjectStream = StreamSource<ClassObject>;
-    type SourceFileStream = StreamSource<SourceFile>;
 
     type ClassMatcher = Matcher<ClassObject>;
 };

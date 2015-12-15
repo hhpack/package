@@ -30,7 +30,7 @@ final class StreamObject<T> implements Stream<T>
                 yield $source;
             }
         };
-        return static::fromStream( $factory() );
+        return static::fromItems( $factory() );
     }
 
     public function items() : StreamSource<T>
@@ -61,7 +61,7 @@ final class StreamObject<T> implements Stream<T>
         return $sources;
     }
 
-    public static function fromStream(StreamSource<T> $items) : this
+    public static function fromItems(StreamSource<T> $items) : this
     {
         return new static($items);
     }

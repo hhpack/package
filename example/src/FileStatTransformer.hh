@@ -19,7 +19,7 @@ final class FileStatTransformer implements Middleware<SourceFile, StreamObject<S
             }
         };
 
-        return StreamObject::fromStream( $factory() );
+        return StreamObject::fromItems( $factory() );
     }
 
 }

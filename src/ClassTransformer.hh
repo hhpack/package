@@ -44,7 +44,7 @@ final class ClassTransformer implements Middleware<SourceFile, StreamObject<Clas
             }
         };
 
-        return StreamObject::fromStream( $factory() );
+        return StreamObject::fromItems( $factory() );
     }
 
     public static function fromOptions(PackageOptions $package) : this

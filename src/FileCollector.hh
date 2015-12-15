@@ -31,7 +31,7 @@ final class FileCollector implements Collector<Matcher<SourceFile>, StreamObject
             }
         };
 
-        return StreamObject::fromStream( $factory() )->select($matcher);
+        return StreamObject::fromItems( $factory() )->select($matcher);
     }
 
     private function findFiles(string $pattern) : Iterator<SourceFileName>

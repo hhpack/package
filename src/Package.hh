@@ -14,18 +14,18 @@ namespace hhpack\package;
 use \ReflectionClass;
 use \ReflectionException;
 
-final class Package
+final class Package implements FromOptions<PackageOptions>
 {
 
     private PackageNamespace $namespace;
     private DirectoryPath $packageDirectory;
 
     public function __construct(
-        PackageOptions $package
+        PackageOptions $options
     )
     {
-        $this->namespace = (string) $package['namespace'];
-        $this->packageDirectory = realpath($package['packageDirectory']);
+        $this->namespace = (string) $options['namespace'];
+        $this->packageDirectory = realpath($options['packageDirectory']);
     }
 
     <<__Memoize>>
@@ -58,9 +58,9 @@ final class Package
         return $this->sources()->pipeTo($middleware)->select($matcher);
     }
 
-    public static function fromOptions(PackageOptions $package) : this
+    public static function fromOptions(PackageOptions $options) : this
     {
-        return new static($package);
+        return new static($options);
     }
 
 }

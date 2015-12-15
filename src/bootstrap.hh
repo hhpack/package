@@ -20,7 +20,7 @@ namespace hhpack\package
         'packageDirectory' => DirectoryPath
     );
 
-    type StreamSource<T> = KeyedIterator<int, T>;
+    type StreamSource<T> = Traversable<T>;
 
     type ClassMatcher = Matcher<ClassObject>;
 };

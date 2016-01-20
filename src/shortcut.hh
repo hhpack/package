@@ -59,12 +59,12 @@ namespace hhpack\package\selector {
         return ClassTypeMatcher::instantiable();
     }
 
-    function startsWith(string $keyword) : NameMatcher<NamedObject>
+    function startsWith<T as NamedObject>(string $keyword) : NameMatcher<T>
     {
         return NameMatcher::startsWith($keyword);
     }
 
-    function endsWith(string $keyword) : NameMatcher<NamedObject>
+    function endsWith<T as NamedObject>(string $keyword) : NameMatcher<T>
     {
         return NameMatcher::endsWith($keyword);
     }

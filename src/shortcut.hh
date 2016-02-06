@@ -60,3 +60,7 @@ function instantiable() : (function(ClassObject):bool)
 {
     return ($object) ==> $object->isInstantiable();
 }
+function instantiator<Tu>(array<mixed> $parameters = []) : (function(ClassObject):Tu)
+{
+    return ($object) ==> $object->instantiate($parameters);
+}

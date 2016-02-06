@@ -18,7 +18,7 @@ interface Stream<T> extends FromItems<T>
     public function reduce(T $initial, (function(T,T):T) $reducer) : T;
     public function filter((function(T):bool) $matcher) : this;
     public function forEach((function(T):void) $callback) : void;
-    public function items() : Iterator<T>;
+    public function items() : Iterable<T>;
     public function count() : int;
     public function isEmpty() : bool;
     public function firstValue() : ?T;

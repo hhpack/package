@@ -51,6 +51,30 @@ final class ResourceStream<T> implements Stream<T>
         return static::fromItems( $results );
     }
 
+    public function skip(int $n) : Stream<T>
+    {
+        $results = $this->sources->skip($n);
+        return static::fromItems( $results );
+    }
+
+    public function skipWhile((function(T):bool) $n) : Stream<T>
+    {
+        $results = $this->sources->skipWhile($n);
+        return static::fromItems( $results );
+    }
+
+    public function take(int $n) : Stream<T>
+    {
+        $results = $this->sources->take($n);
+        return static::fromItems( $results );
+    }
+
+    public function takeWhile((function(T):bool) $n) : Stream<T>
+    {
+        $results = $this->sources->takeWhile($n);
+        return static::fromItems( $results );
+    }
+
     public function forEach((function(T):void) $callback) : void
     {
         foreach ($this->sources as $source) {

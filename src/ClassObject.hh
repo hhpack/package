@@ -21,9 +21,9 @@ final class ClassObject implements NamedObject
     private ReflectionClass $class;
 
     public function __construct(
-        private SourceFile $file,
-        private PackageNamespace $namespace,
-        private DirectoryPath $packageDirectory
+        private string $namespace,
+        private string $packageDirectory,
+        private SourceFile $file
     )
     {
         $this->class = new ReflectionClass(UnknownClassType::class);
@@ -33,7 +33,7 @@ final class ClassObject implements NamedObject
     /**
      * Get namespace
      */
-    public function getNamespace() : PackageNamespace
+    public function namespace() : string
     {
         return $this->namespace;
     }
@@ -41,33 +41,33 @@ final class ClassObject implements NamedObject
     /**
      * Get source file name
      */
-    public function getFileName() : SourceFileName
+    public function fileName() : string
     {
-        return $this->file->getName();
+        return $this->file->name();
     }
 
     /**
      * Get package directory path
      */
-    public function getPackageDirectory() : DirectoryPath
+    public function directory() : string
     {
         return $this->packageDirectory;
     }
 
     <<__Memoize>>
-    public function getName() : string
+    public function name() : string
     {
-        return preg_replace('/^(\w+\\\\)+/', '', $this->getFullName());
+        return preg_replace('/^(\w+\\\\)+/', '', $this->fullName());
     }
 
     /**
      * Get class full name
      */
     <<__Memoize>>
-    public function getFullName() : string
+    public function fullName() : string
     {
-        $relativeClassName = $this->relativeClassNameFrom($this->getFileName());
-        $fullClassName = $this->getNamespace() . '\\' . $relativeClassName;
+        $relativeClassName = $this->relativeClassNameFrom($this->fileName());
+        $fullClassName = $this->namespace() . '\\' . $relativeClassName;
 
         return $fullClassName;
     }
@@ -80,7 +80,7 @@ final class ClassObject implements NamedObject
         try {
             $instance = $this->class->newInstanceArgs($parameters);
         } catch (Exception $exception) {
-            throw new InstantiationException($this->getFullName());
+            throw new InstantiationException($this->fullName());
         }
 
         return $instance;
@@ -89,9 +89,9 @@ final class ClassObject implements NamedObject
     private function initialize() : void
     {
         try {
-            $this->class = new ReflectionClass($this->getFullName());
+            $this->class = new ReflectionClass($this->fullName());
         } catch (ReflectionException $exception) {
-            throw new UnknownClassException($this->getFullName());
+            throw new UnknownClassException($this->fullName());
         }
     }
 
@@ -131,10 +131,10 @@ final class ClassObject implements NamedObject
         return $this->class->isInstantiable();
     }
 
-    private function relativeClassNameFrom(SourceFileName $file) : string
+    private function relativeClassNameFrom(string $file) : string
     {
         $replaceTargets = [
-            $this->getPackageDirectory() . '/',
+            $this->directory() . '/',
             '/',
             '.hh'
         ];

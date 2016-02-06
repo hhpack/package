@@ -11,12 +11,11 @@ use hhpack\package\examples\classes\FileStatTransformer;
 
 function pipeline_main() : void
 {
-    $pkg = package\package(shape(
-        'namespace' => 'hhpack\\package\\examples\\classes\\',
-        'packageDirectory' => realpath(__DIR__ . '/src')
-    ));
+    $package = VendorPackage::fromItems([
+        Pair { 'hhpack\\package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+    ]);
 
-    $pkg->sources()->pipeTo(new FileStatTransformer())->pipeTo(new FileStatOutput());
+    $package->sources()->pipeTo(new FileStatTransformer())->pipeTo(new FileStatOutput());
 }
 
 pipeline_main();

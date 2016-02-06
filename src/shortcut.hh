@@ -9,64 +9,54 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\package {
+namespace hhpack\package;
 
-    function package(PackageOptions $package) : Package
-    {
-        return Package::fromOptions($package);
-    }
-
+function any<T>() : (function(T):bool)
+{
+    return ($object) ==> true;
 }
 
-namespace hhpack\package\selector {
+function startsWith<T as NamedObject>(string $keyword) : (function(T):bool)
+{
+    return ($object) ==> preg_match('/^' . preg_quote($keyword, '/') . '/', $object->name()) === 1;
+}
 
-    use hhpack\package\ClassTypeMatcher;
-    use hhpack\package\NameMatcher;
-    use hhpack\package\NamedObject;
+function endsWith<T as NamedObject>(string $keyword) : (function(T):bool)
+{
+    return ($object) ==> preg_match('/' . preg_quote($keyword, '/') . '$/', $object->name()) === 1;
+}
 
-    function implementsInterface(string $interfaceName) : ClassTypeMatcher
-    {
-        return ClassTypeMatcher::implementsInterface($interfaceName);
-    }
+function implementsInterface(string $interfaceName) : (function(ClassObject):bool)
+{
+    return ($object) ==> $object->implementsInterface($interfaceName);
+}
 
-    function subclassOf(string $className) : ClassTypeMatcher
-    {
-        return ClassTypeMatcher::subclassOf($className);
-    }
+function subclassOf(string $className) : (function(ClassObject):bool)
+{
+    return ($object) ==> $object->isSubclassOf($className);
+}
 
-    function classes() : ClassTypeMatcher
-    {
-        return ClassTypeMatcher::classType();
-    }
+function classes() : (function(ClassObject):bool)
+{
+    return ($object) ==> ($object->isTrait() || $object->isInterface()) === false;
+}
 
-    function abstractClasses() : ClassTypeMatcher
-    {
-        return ClassTypeMatcher::abstractClassType();
-    }
+function abstractClasses() : (function(ClassObject):bool)
+{
+    return ($object) ==> $object->isAbstract();
+}
 
-    function traits() : ClassTypeMatcher
-    {
-        return ClassTypeMatcher::traitType();
-    }
+function traits() : (function(ClassObject):bool)
+{
+    return ($object) ==> $object->isTrait();
+}
 
-    function interfaces() : ClassTypeMatcher
-    {
-        return ClassTypeMatcher::interfaceType();
-    }
+function interfaces() : (function(ClassObject):bool)
+{
+    return ($object) ==> $object->isInterface();
+}
 
-    function instantiable() : ClassTypeMatcher
-    {
-        return ClassTypeMatcher::instantiable();
-    }
-
-    function startsWith<T as NamedObject>(string $keyword) : NameMatcher<T>
-    {
-        return NameMatcher::startsWith($keyword);
-    }
-
-    function endsWith<T as NamedObject>(string $keyword) : NameMatcher<T>
-    {
-        return NameMatcher::endsWith($keyword);
-    }
-
-};
+function instantiable() : (function(ClassObject):bool)
+{
+    return ($object) ==> $object->isInstantiable();
+}

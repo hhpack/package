@@ -19,8 +19,4 @@ namespace hhpack\package
         'namespace' => PackageNamespace,
         'packageDirectory' => DirectoryPath
     );
-
-    type StreamSource<T> = Traversable<T>;
-
-    type ClassMatcher = Matcher<ClassObject>;
 };

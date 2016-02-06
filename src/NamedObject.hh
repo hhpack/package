@@ -13,5 +13,5 @@ namespace hhpack\package;
 
 interface NamedObject
 {
-    public function getName() : string;
+    public function name() : string;
 }

@@ -11,21 +11,20 @@
 
 namespace hhpack\package;
 
-final class ClassTransformer implements Middleware<SourceFile, StreamObject<ClassObject>>, FromOptions<PackageOptions>
+final class ClassTransformer implements Middleware<SourceFile, ResourceStream<ClassObject>>
 {
 
-    private PackageNamespace $namespace;
-    private DirectoryPath $packageDirectory;
+    private string $name;
+    private string $directory;
 
     public function __construct(
-        PackageOptions $package
+        Pair<string, string> $namespace
     )
     {
-        $this->namespace = (string) $package['namespace'];
-        $this->packageDirectory = realpath($package['packageDirectory']);
+        list($this->name, $this->directory) = $namespace;
     }
 
-    public function receive(Stream<SourceFile> $stream) : StreamObject<ClassObject>
+    public function receive(Stream<SourceFile> $stream) : ResourceStream<ClassObject>
     {
         $factory = () ==> {
             $sourceFiles = $stream->items();
@@ -33,9 +32,9 @@ final class ClassTransformer implements Middleware<SourceFile, StreamObject<Clas
             foreach ($sourceFiles as $sourceFile) {
                 try {
                     $classObject = new ClassObject(
-                        $sourceFile,
-                        $this->namespace,
-                        $this->packageDirectory
+                        $this->name,
+                        $this->directory,
+                        $sourceFile
                     );
                 } catch (UnknownClassException $exception) {
                     continue;
@@ -44,12 +43,12 @@ final class ClassTransformer implements Middleware<SourceFile, StreamObject<Clas
             }
         };
 
-        return StreamObject::fromItems( $factory() );
+        return ResourceStream::fromItems( $factory() );
     }
 
-    public static function fromOptions(PackageOptions $package) : this
+    public static function of(Pair<string, string> $namespace) : this
     {
-        return new static($package);
+        return new static($namespace);
     }
 
 }

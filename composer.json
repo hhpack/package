@@ -16,8 +16,7 @@
   "require-dev": {
     "expect/peridot-expect-plugin": "~3.0",
     "peridot-php/peridot": "~1.16",
-    "peridot-php/peridot-dot-reporter": "~1.0",
-    "hhpack/typesafety": "~0.4"
+    "peridot-php/peridot-dot-reporter": "~1.0"
   },
   "autoload": {
     "psr-4": {
@@ -28,12 +27,13 @@
   "autoload-dev": {
     "psr-4": {
       "hhpack\\package\\spec\\fixtures\\": "spec/fixtures",
+      "hhpack\\package\\spec\\mock\\": "spec/mock",
       "hhpack\\package\\examples\\classes\\": "example/src"
     }
   },
   "scripts": {
     "test": "vendor/bin/peridot -c peridot.hh --grep *Spec.hh spec -r dot",
     "check:init": "touch .hhconfig",
-    "check": "vendor/bin/typesafety"
+    "check": "./typecheck"
   }
 }

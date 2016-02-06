@@ -11,7 +11,7 @@
 
 namespace hhpack\package;
 
-interface Collector<Tm, Tr>
+interface Collector<Ti, To>
 {
-    public function collect(Tm $matcher) : Tr;
+    public function collect((function(Ti):bool) $matcher) : To;
 }

@@ -9,19 +9,19 @@ use hhpack\package\spec\fixtures\Base;
 describe(ClassObject::class, function () {
   beforeEach(function () {
     $this->classFile = new ClassObject(
-      new SourceFile(realpath(__DIR__ . '/fixtures/Example1.hh')),
       'hhpack\\package\\spec\\fixtures',
-      realpath(__DIR__ . '/fixtures')
+      realpath(__DIR__ . '/fixtures'),
+      new SourceFile(realpath(__DIR__ . '/fixtures/Example1.hh'))
     );
   });
-  describe('getFullName()', function () {
+  describe('fullName()', function () {
     it('returns class name', function() {
-      expect($this->classFile->getFullName())->toBe('hhpack\\package\\spec\\fixtures\\Example1');
+      expect($this->classFile->fullName())->toBe('hhpack\\package\\spec\\fixtures\\Example1');
     });
   });
-  describe('getName()', function () {
+  describe('name()', function () {
     it('returns short class name', function() {
-      expect($this->classFile->getName())->toBe('Example1');
+      expect($this->classFile->name())->toBe('Example1');
     });
   });
   describe('isSubclassOf()', function () {

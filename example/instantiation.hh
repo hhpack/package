@@ -8,15 +8,13 @@ use hhpack\package;
 
 function instantiate_main() : void
 {
-    $classes = package\package(shape(
-        'namespace' => 'hhpack\\package\\examples\\classes\\',
-        'packageDirectory' => realpath(__DIR__ . '/src')
-    ))->classes()->toImmVector();
-
-    foreach ($classes as $class) {
-        $instance = $class->instantiate();
+    $package = VendorPackage::fromItems([
+        Pair { 'hhpack\\package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+    ]);
+    $instances = $package->classes()->map(($class) ==> $class->instantiate());
+    $instances->forEach(($instance) ==> {
         var_dump($instance);
-    }
+    });
 }
 
 instantiate_main();

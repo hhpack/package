@@ -13,5 +13,5 @@ namespace hhpack\package;
 
 interface FromItems<T>
 {
-    public static function fromItems(StreamSource<T> $items) : this;
+    public static function fromItems(Traversable<T> $items) : this;
 }

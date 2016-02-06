@@ -15,18 +15,18 @@ final class SourceFile implements NamedObject
 {
 
     public function __construct(
-        private SourceFileName $name
+        private string $name
     )
     {
     }
 
-    public function getName() : string
+    public function name() : string
     {
         return $this->name;
     }
 
     <<__Memoize>>
-    public function getDirectory() : string
+    public function directory() : string
     {
         return dirname($this->name);
     }
@@ -45,7 +45,7 @@ final class SourceFile implements NamedObject
 
     public function match(string $pattern) : bool
     {
-        return preg_match($pattern, $this->getName()) === 1;
+        return preg_match($pattern, $this->name()) === 1;
     }
 
 }

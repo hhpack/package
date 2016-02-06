@@ -15,16 +15,15 @@ Basic usage
 Find the source file from the package.
 
 ```hack
-use hhpack\package;
+use hhpack\package\VendorPackage;
 
-$sources = package\package(shape(
-    'namespace' => 'package\\examples\\classes\\',
-    'packageDirectory' => realpath(__DIR__ . '/src')
-))->sources()->toImmVector();
+$sources = VendorPackage::fromItems([
+    Pair { 'package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+])->sources();
 
-foreach ($sources->items() as $source) {
-	var_dump($source->getName()); // /path/to/example.hh
-	var_dump($source->getDirectory()); // /path/to
+foreach ($sources as $source) {
+	var_dump($source->name()); // /path/to/example.hh
+	var_dump($source->directory()); // /path/to
 }
 ```
 
@@ -46,21 +45,20 @@ You can select the elements in the following function.
 In the following we are looking for a interface and traits.
 
 ```hack
-use hhpack\package;
-use hhpack\package\selector;
+use hhpack\package as package;
+use hhpack\package\VendorPackage;
 
-$package = package\package(shape(
-    'namespace' => 'package\\examples\\classes\\',
-    'packageDirectory' => realpath(__DIR__ . '/src')
-));
-
-$interfaces = $package->classes(selector\interfaces())->toImmVector();
+$interfaces = VendorPackage::fromItems([
+    Pair { 'package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+])->classes(package\interfaces());
 
 foreach ($interfaces as $interface) {
-    var_dump($interface->getName()); // interface
+    var_dump($interface->name()); // interface
 }
 
-$traits = $package->classes(selector\traits())->toImmVector();
+$traits = VendorPackage::fromItems([
+    Pair { 'package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+])->classes(package\traits());
 
 foreach ($traits as $trait) {
     var_dump($trait->getName()); // trait
@@ -73,15 +71,13 @@ Instantiation of class
 Get an instance from the source files
 
 ```hack
-use hhpack\package;
+use hhpack\package\VendorPackage;
 
-$classes = package\package(shape(
-    'namespace' => 'package\\examples\\classes\\',
-    'packageDirectory' => realpath(__DIR__ . '/src')
-))->classes()->toImmVector();
+$instances = VendorPackage::fromItems([
+    Pair { 'package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+])->classes()->map(($class) ==> $class->instantiate());
 
-foreach ($classes as $class) {
-    $instance = $class->instantiate();
+foreach ($instances as $instance) {
     var_dump($instance);
 }
 ```
@@ -95,18 +91,17 @@ You can achieve when implement the interface **Middleware** and **Stream**.
 Please look at the **example/pipeline.hh** for details.
 
 ```hack
-use hhpack\package;
+use hhpack\package\VendorPackage;
 use hhpack\package\examples\classes\FileStatTransformer;
 use hhpack\package\examples\classes\FileStatOutput;
 
-$pkg = package\package(shape(
-    'namespace' => 'hhpack\\package\\examples\\classes\\',
-    'packageDirectory' => realpath(__DIR__ . '/src')
-));
+$package = VendorPackage::fromItems([
+    Pair { 'package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+]);
 
-$pkg->sources()
-	->pipeTo(new FileStatTransformer())
-	->pipeTo(new FileStatOutput());
+$package->sources()
+    ->pipeTo(new FileStatTransformer())
+    ->pipeTo(new FileStatOutput());
 ```
 
 Run the test

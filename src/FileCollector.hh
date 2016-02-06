@@ -16,7 +16,7 @@ final class FileCollector implements Collector<SourceFile, ResourceStream<Source
 {
 
     public function __construct(
-        private DirectoryPath $directory
+        private string $directory
     )
     {
     }
@@ -34,7 +34,7 @@ final class FileCollector implements Collector<SourceFile, ResourceStream<Source
         return ResourceStream::fromItems( $factory() )->filter($matcher);
     }
 
-    private function findFiles(string $pattern) : Iterator<SourceFileName>
+    private function findFiles(string $pattern) : Iterator<string>
     {
         foreach (glob($pattern) as $file) {
             yield $file;

@@ -26,12 +26,12 @@ function endsWith<T as NamedObject>(string $keyword) : (function(T):bool)
     return ($object) ==> preg_match('/' . preg_quote($keyword, '/') . '$/', $object->name()) === 1;
 }
 
-function implementsInterface(string $interfaceName) : (function(ClassObject):bool)
+function implementsInterface<Tu>(classname<Tu> $interfaceName) : (function(ClassObject):bool)
 {
     return ($object) ==> $object->implementsInterface($interfaceName);
 }
 
-function subclassOf(string $className) : (function(ClassObject):bool)
+function subclassOf<Tu>(classname<Tu> $className) : (function(ClassObject):bool)
 {
     return ($object) ==> $object->isSubclassOf($className);
 }

@@ -5,6 +5,7 @@ namespace hhpack\package\examples;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use hhpack\package;
+use hhpack\package\VendorPackage;
 
 function instantiate_main() : void
 {

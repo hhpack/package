@@ -8,6 +8,7 @@ use hhpack\package;
 use hhpack\package\examples\classes\FileStatOutput;
 use hhpack\package\examples\classes\FileStatStream;
 use hhpack\package\examples\classes\FileStatTransformer;
+use hhpack\package\VendorPackage;
 
 function pipeline_main() : void
 {

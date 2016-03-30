@@ -11,6 +11,8 @@
 
 namespace hhpack\package;
 
+use FredEmmott\DefinitionFinder\FileParser;
+
 final class SourceFile implements NamedObject
 {
 
@@ -46,6 +48,19 @@ final class SourceFile implements NamedObject
     public function match(string $pattern) : bool
     {
         return preg_match($pattern, $this->name()) === 1;
+    }
+
+    <<__Memoize>>
+    public function resourcesNames() : ImmVector<string>
+    {
+        $parser = FileParser::FromFile($this->name);
+
+        $resources = Vector {};
+        $resources->addAll($parser->getClassNames());
+        $resources->addAll($parser->getInterfaceNames());
+        $resources->addAll($parser->getTraitNames());
+
+        return $resources->toImmVector();
     }
 
 }

@@ -12,6 +12,7 @@
 namespace hhpack\package;
 
 use FredEmmott\DefinitionFinder\FileParser;
+use ReflectionClass;
 
 final class SourceFile implements NamedObject
 {
@@ -51,7 +52,7 @@ final class SourceFile implements NamedObject
     }
 
     <<__Memoize>>
-    public function resourcesNames() : ImmVector<string>
+    public function resources() : ImmVector<ReflectionClass>
     {
         $parser = FileParser::FromFile($this->name);
 
@@ -60,7 +61,13 @@ final class SourceFile implements NamedObject
         $resources->addAll($parser->getInterfaceNames());
         $resources->addAll($parser->getTraitNames());
 
-        return $resources->toImmVector();
+        return $resources->map(($name) ==> new ReflectionClass($name))
+            ->toImmVector();
+    }
+
+    public function hasResources() : bool
+    {
+        return $this->resources()->isEmpty();
     }
 
 }

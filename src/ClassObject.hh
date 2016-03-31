@@ -18,16 +18,10 @@ use ReflectionException;
 final class ClassObject implements NamedObject
 {
 
-    private ReflectionClass $class;
-
     public function __construct(
-        private string $namespace,
-        private string $packageDirectory,
-        private SourceFile $file
+        private ReflectionClass $class
     )
     {
-        $this->class = new ReflectionClass(UnknownClassType::class);
-        $this->initialize();
     }
 
     /**
@@ -35,7 +29,7 @@ final class ClassObject implements NamedObject
      */
     public function namespace() : string
     {
-        return $this->namespace;
+        return $this->class->getNamespaceName();
     }
 
     /**
@@ -43,7 +37,8 @@ final class ClassObject implements NamedObject
      */
     public function fileName() : string
     {
-        return $this->file->name();
+        //see reflection.hhi:51
+        return (string) $this->class->getFileName();
     }
 
     /**
@@ -51,25 +46,20 @@ final class ClassObject implements NamedObject
      */
     public function directory() : string
     {
-        return $this->packageDirectory;
+        return dirname($this->fileName());
     }
 
-    <<__Memoize>>
     public function name() : string
     {
-        return preg_replace('/^(\w+\\\\)+/', '', $this->fullName());
+        return $this->class->getShortName();
     }
 
     /**
      * Get class full name
      */
-    <<__Memoize>>
     public function fullName() : string
     {
-        $relativeClassName = $this->relativeClassNameFrom($this->fileName());
-        $fullClassName = $this->namespace() . '\\' . $relativeClassName;
-
-        return $fullClassName;
+        return $this->class->getName();
     }
 
     /**
@@ -84,15 +74,6 @@ final class ClassObject implements NamedObject
         }
 
         return $instance;
-    }
-
-    private function initialize() : void
-    {
-        try {
-            $this->class = new ReflectionClass($this->fullName());
-        } catch (ReflectionException $exception) {
-            throw new UnknownClassException($this->fullName());
-        }
     }
 
     public function implementsInterface(string $interfaceName) : bool
@@ -129,22 +110,6 @@ final class ClassObject implements NamedObject
     public function isInstantiable() : bool
     {
         return $this->class->isInstantiable();
-    }
-
-    private function relativeClassNameFrom(string $file) : string
-    {
-        $replaceTargets = [
-            $this->directory() . '/',
-            '/',
-            '.hh'
-        ];
-        $replaceValues = [
-            '',
-            '\\',
-            ''
-        ];
-        $relativeClass = str_replace($replaceTargets, $replaceValues, $file);
-        return $relativeClass;
     }
 
 }

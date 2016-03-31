@@ -27,19 +27,16 @@ final class ClassTransformer implements Middleware<SourceFile, ResourceStream<Cl
     public function receive(Stream<SourceFile> $stream) : ResourceStream<ClassObject>
     {
         $factory = () ==> {
-            $sourceFiles = $stream->items();
+            $sources = $stream->items();
 
-            foreach ($sourceFiles as $sourceFile) {
-                try {
-                    $classObject = new ClassObject(
-                        $this->name,
-                        $this->directory,
-                        $sourceFile
-                    );
-                } catch (UnknownClassException $exception) {
-                    continue;
+            foreach ($sources as $source) {
+                $classes = $source->resources()->map(($ref) ==> {
+                    return new ClassObject($ref);
+                });
+
+                foreach ($classes as $class) {
+                    yield $class;
                 }
-                yield $classObject;
             }
         };
 

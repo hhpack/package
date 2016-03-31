@@ -3,16 +3,12 @@
 namespace hhpack\package\spec;
 
 use hhpack\package\ClassObject;
-use hhpack\package\SourceFile;
 use hhpack\package\spec\fixtures\Base;
+use ReflectionClass;
 
 describe(ClassObject::class, function () {
   beforeEach(function () {
-    $this->classFile = new ClassObject(
-      'hhpack\\package\\spec\\fixtures',
-      realpath(__DIR__ . '/fixtures'),
-      new SourceFile(realpath(__DIR__ . '/fixtures/Example1.hh'))
-    );
+    $this->classFile = new ClassObject(new ReflectionClass('hhpack\package\spec\fixtures\Example1'));
   });
   describe('fullName()', function () {
     it('returns class name', function() {

@@ -7,6 +7,7 @@ use hhpack\package\ClassObject;
 use hhpack\package\SourceFile;
 use hhpack\package\spec\mock\ResourceMock;
 use hhpack\package\spec\fixtures\Base;
+use hhpack\package\spec\fixtures\Example1;
 use ReflectionClass;
 
 describe('package', function () {
@@ -34,7 +35,7 @@ describe('package', function () {
   });
   describe('package\implementsInterface', function () {
     beforeEach(function () {
-      $this->item = new ClassObject(new ReflectionClass('hhpack\package\spec\fixtures\Example1'));
+      $this->item = new ClassObject(new ReflectionClass((string) Example1::class));
     });
     context('when unmatched', function (){
       it('returns false', function () {
@@ -45,7 +46,7 @@ describe('package', function () {
   });
   describe('package\subclassOf', function () {
     beforeEach(function () {
-      $this->item = new ClassObject(new ReflectionClass('hhpack\package\spec\fixtures\Example1'));
+      $this->item = new ClassObject(new ReflectionClass((string) Example1::class));
     });
     context('when matched', function (){
       it('returns ture', function () {

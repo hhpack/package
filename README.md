@@ -15,7 +15,7 @@ Basic usage
 Find the source file from the package.
 
 ```hack
-use hhpack\package\VendorPackage;
+use HHPack\Package\VendorPackage;
 
 $sources = VendorPackage::fromItems([
     Pair { 'package\\examples\\classes\\', realpath(__DIR__ . '/src') }
@@ -32,24 +32,24 @@ Selection of elements
 
 You can select the elements in the following function.
 
-* hhpack\package\implementsInterface
-* hhpack\package\subclassOf
-* hhpack\package\classes
-* hhpack\package\abstractClasses
-* hhpack\package\traits
-* hhpack\package\interfaces
-* hhpack\package\instantiable
-* hhpack\package\startsWith
-* hhpack\package\endsWith
+* HHPack\Package\implementsInterface
+* HHPack\Package\subclassOf
+* HHPack\Package\classes
+* HHPack\Package\abstractClasses
+* HHPack\Package\traits
+* HHPack\Package\interfaces
+* HHPack\Package\instantiable
+* HHPack\Package\startsWith
+* HHPack\Package\endsWith
 
 In the following we are looking for a interface and traits.
 
 ```hack
-use hhpack\package as package;
-use hhpack\package\VendorPackage;
+use HHPack\Package as package;
+use HHPack\Package\VendorPackage;
 
 $interfaces = VendorPackage::fromItems([
-    Pair { 'package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+    Pair { 'Package\\Examples\\Classes\\', realpath(__DIR__ . '/src') }
 ])->classes(package\interfaces());
 
 foreach ($interfaces as $interface) {
@@ -57,7 +57,7 @@ foreach ($interfaces as $interface) {
 }
 
 $traits = VendorPackage::fromItems([
-    Pair { 'package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+    Pair { 'Package\\Examples\\Classes\\', realpath(__DIR__ . '/src') }
 ])->classes(package\traits());
 
 foreach ($traits as $trait) {
@@ -71,10 +71,10 @@ Instantiation of class
 Get an instance from the source files
 
 ```hack
-use hhpack\package\VendorPackage;
+use HHPack\Package\VendorPackage;
 
 $instances = VendorPackage::fromItems([
-    Pair { 'package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+    Pair { 'Package\\Examples\\Classes\\', realpath(__DIR__ . '/src') }
 ])->classes()->map(($class) ==> $class->instantiate());
 
 foreach ($instances as $instance) {
@@ -91,12 +91,12 @@ You can achieve when implement the interface **Middleware** and **Stream**.
 Please look at the **example/pipeline.hh** for details.
 
 ```hack
-use hhpack\package\VendorPackage;
-use hhpack\package\examples\classes\FileStatTransformer;
-use hhpack\package\examples\classes\FileStatOutput;
+use HHPack\Package\VendorPackage;
+use HHPack\Package\Examples\Classes\FileStatTransformer;
+use HHPack\Package\Examples\Classes\FileStatOutput;
 
 $package = VendorPackage::fromItems([
-    Pair { 'package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+    Pair { 'Package\\Examples\\Classes\\', realpath(__DIR__ . '/src') }
 ]);
 
 $package->sources()

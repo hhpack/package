@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of hhpack\package.
+ * This file is part of HHPack\Package.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace hhpack\package;
+namespace HHPack\Package;
 
 use Exception;
 use ReflectionClass;

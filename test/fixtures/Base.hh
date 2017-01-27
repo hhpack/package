@@ -1,6 +1,6 @@
 <?hh //partial
 
-namespace hhpack\package\spec\fixtures;
+namespace HHPack\Package\Test\Fixtures;
 
 class Base
 {

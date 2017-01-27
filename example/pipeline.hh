@@ -1,14 +1,14 @@
 <?hh // partial
 
-namespace hhpack\package\examples;
+namespace HHPack\Package\examples;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use hhpack\package;
-use hhpack\package\examples\classes\FileStatOutput;
-use hhpack\package\examples\classes\FileStatStream;
-use hhpack\package\examples\classes\FileStatTransformer;
-use hhpack\package\VendorPackage;
+use HHPack\Package;
+use HHPack\Package\Examples\Classes\FileStatOutput;
+use HHPack\Package\Examples\Classes\FileStatStream;
+use HHPack\Package\Examples\Classes\FileStatTransformer;
+use HHPack\Package\VendorPackage;
 
 function pipeline_main() : void
 {

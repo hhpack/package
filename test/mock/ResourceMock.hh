@@ -1,8 +1,8 @@
 <?hh //strict
 
-namespace hhpack\package\spec\mock;
+namespace HHPack\Package\Test\Mock;
 
-use hhpack\package\NamedObject;
+use HHPack\Package\NamedObject;
 
 final class ResourceMock implements NamedObject
 {

@@ -1,6 +1,6 @@
 <?hh // strict
 
-namespace hhpack\package\examples\classes;
+namespace HHPack\Package\Examples\Classes;
 
 class Example
 {

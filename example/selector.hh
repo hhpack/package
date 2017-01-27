@@ -1,11 +1,11 @@
 <?hh // partial
 
-namespace hhpack\package\examples;
+namespace HHPack\Package\Examples;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
-use hhpack\package as package;
-use hhpack\package\VendorPackage;
+use HHPack\Package as package;
+use HHPack\Package\VendorPackage;
 
 function selector_main() : void
 {

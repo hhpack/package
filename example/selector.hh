@@ -10,7 +10,7 @@ use HHPack\Package\VendorPackage;
 function selector_main() : void
 {
     $package = VendorPackage::fromItems([
-        Pair { 'hhpack\\package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+        Pair { 'HHPack\\Package\\Examples\\Classes\\', realpath(__DIR__ . '/src') }
     ]);
 
     $package->classes(package\startsWith('Exa'))

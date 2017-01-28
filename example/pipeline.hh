@@ -13,7 +13,7 @@ use HHPack\Package\VendorPackage;
 function pipeline_main() : void
 {
     $package = VendorPackage::fromItems([
-        Pair { 'hhpack\\package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+        Pair { 'HHPack\\Package\\Examples\\Classes\\', realpath(__DIR__ . '/src') }
     ]);
 
     $package->sources()->pipeTo(new FileStatTransformer())->pipeTo(new FileStatOutput());

@@ -10,7 +10,7 @@ use HHPack\Package\VendorPackage;
 function instantiate_main() : void
 {
     $package = VendorPackage::fromItems([
-        Pair { 'hhpack\\package\\examples\\classes\\', realpath(__DIR__ . '/src') }
+        Pair { 'HHPack\\Package\\Examples\\Classes\\', realpath(__DIR__ . '/src') }
     ]);
     $instances = $package->classes()->map(($class) ==> $class->instantiate());
     $instances->forEach(($instance) ==> {

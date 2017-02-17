@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of HHPack\Package.
+ * This file is part of hhpack\package.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *
@@ -11,7 +11,7 @@
 
 namespace HHPack\Package;
 
-use FredEmmott\DefinitionFinder\FileParser;
+use Facebook\DefinitionFinder\FileParser;
 use ReflectionClass;
 
 final class SourceFile implements NamedObject

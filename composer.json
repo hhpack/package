@@ -12,11 +12,19 @@
   ],
   "require": {
     "hhvm": ">=3.12.0",
-    "fredemmott/definition-finder": "^1.4"
+    "facebook/definition-finder": "^1.5"
   },
   "require-dev": {
-    "hackpack/hackunit": "^1.0"
+    "hackpack/hackunit": "dev-master"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:holyshared/HackUnit.git"
+    }
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "HHPack\\Package\\": "src"

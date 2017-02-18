@@ -1,7 +1,7 @@
 <?hh //strict
 
 /**
- * This file is part of HHPack\Package.
+ * This file is part of hhpack\package.
  *
  * (c) Noritaka Horio <holy.shared.design@gmail.com>
  *

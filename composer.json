@@ -17,14 +17,6 @@
   "require-dev": {
     "hackpack/hackunit": "dev-master"
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@github.com:holyshared/HackUnit.git"
-    }
-  ],
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "autoload": {
     "psr-4": {
       "HHPack\\Package\\": "src"
@@ -38,6 +30,8 @@
       "HHPack\\Package\\Examples\\Classes\\": "example/src"
     }
   },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
   "scripts": {
     "test": "vendor/bin/hackunit test",
     "check:init": "touch .hhconfig",

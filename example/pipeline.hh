@@ -5,9 +5,7 @@ namespace HHPack\Package\examples;
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use HHPack\Package;
-use HHPack\Package\Examples\Classes\FileStatOutput;
-use HHPack\Package\Examples\Classes\FileStatStream;
-use HHPack\Package\Examples\Classes\FileStatTransformer;
+use HHPack\Package\Examples\Classes\{ FileStatOutput, FileStatStream, FileStatTransformer };
 use HHPack\Package\VendorPackage;
 
 function pipeline_main() : void

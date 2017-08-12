@@ -2,8 +2,7 @@
 
 namespace HHPack\Package\Test;
 
-use HHPack\Package\VendorPackage;
-use HHPack\Package\VendorNamespace;
+use HHPack\Package\{ VendorPackage, VendorNamespace };
 use HHPack\Package\Test\Fixtures\Example1;
 use HackPack\HackUnit\Contract\Assert;
 

@@ -4,8 +4,7 @@ namespace HHPack\Package\Test;
 
 use ReflectionClass;
 use HHPack\Package\ClassObject;
-use HHPack\Package\Test\Fixtures\Base;
-use HHPack\Package\Test\Fixtures\Example1;
+use HHPack\Package\Test\Fixtures\{ Base, Example1 };
 use HackPack\HackUnit\Contract\Assert;
 
 final class ClassObjectTest

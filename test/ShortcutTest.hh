@@ -3,11 +3,9 @@
 namespace HHPack\Package\Test;
 
 use HHPack\Package as package;
-use HHPack\Package\ClassObject;
-use HHPack\Package\SourceFile;
+use HHPack\Package\{ ClassObject, SourceFile };
 use HHPack\Package\Test\Mock\ResourceMock;
-use HHPack\Package\Test\Fixtures\Base;
-use HHPack\Package\Test\Fixtures\Example1;
+use HHPack\Package\Test\Fixtures\{ Base, Example1 };
 use ReflectionClass;
 use HackPack\HackUnit\Contract\Assert;
 

@@ -2,10 +2,7 @@
 
 namespace HHPack\Package\Examples\Classes;
 
-use HHPack\Package\SourceFile;
-use HHPack\Package\Stream;
-use HHPack\Package\ResourceStream;
-use HHPack\Package\Middleware;
+use HHPack\Package\{ SourceFile, Stream, ResourceStream, Middleware };
 use SplFileInfo;
 
 final class FileStatTransformer implements Middleware<SourceFile, ResourceStream<SplFileInfo>>

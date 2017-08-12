@@ -2,10 +2,7 @@
 
 namespace HHPack\Package\Test;
 
-use HHPack\Package\Selector;
-use HHPack\Package\ClassObject;
-use HHPack\Package\SourceFile;
-use HHPack\Package\ResourceStream;
+use HHPack\Package\{ Selector, ClassObject, SourceFile, ResourceStream };
 use HHPack\Package\Test\Fixtures\Base;
 use HackPack\HackUnit\Contract\Assert;
 

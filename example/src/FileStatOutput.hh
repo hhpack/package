@@ -2,8 +2,7 @@
 
 namespace HHPack\Package\Examples\Classes;
 
-use HHPack\Package\Middleware;
-use HHPack\Package\Stream;
+use HHPack\Package\{ Middleware, Stream };
 use SplFileInfo;
 
 final class FileStatOutput implements Middleware<SplFileInfo, void>

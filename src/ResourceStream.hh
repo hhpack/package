@@ -31,7 +31,7 @@ final class ResourceStream<T> implements Stream<T>
 
     public function reduce(T $initial, (function(T,T):T) $reducer) : T
     {
-        $previous = clone $initial;
+        $previous = $initial;
 
         foreach ($this->sources as $source) {
             $previous = $reducer($previous, $source);

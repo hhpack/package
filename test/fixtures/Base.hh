@@ -2,18 +2,12 @@
 
 namespace HHPack\Package\Test\Fixtures;
 
-class Base
-{
+class Base {
 
-    public function __construct(
-        private $name = ''
-    )
-    {
-    }
+  public function __construct(private $name = '') {}
 
-    public function getName() : string
-    {
-        return $this->name;
-    }
+  public function getName(): string {
+    return $this->name;
+  }
 
 }

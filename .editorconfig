@@ -1,14 +1,14 @@
 [*.hh]
 indent_style = space
-indent_size = 4
+indent_size = 2
 
-[spec/**/*.hh]
+[example/**/*.hh]
 indent_style = space
 indent_size = 2
 
 [test/**/*.hh]
 indent_style = space
-indent_size = 4
+indent_size = 2
 
 [*.md]
 indent_style = tab

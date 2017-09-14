@@ -11,7 +11,6 @@
 
 namespace HHPack\Package;
 
-interface Middleware<Ti, To>
-{
-    public function receive(Stream<Ti> $stream) : To;
+interface Middleware<Ti, To> {
+  public function receive(Stream<Ti> $stream): To;
 }

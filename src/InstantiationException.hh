@@ -13,16 +13,18 @@ namespace HHPack\Package;
 
 use \Exception;
 
-class InstantiationException extends Exception
-{
+class InstantiationException extends Exception {
 
-    public function __construct(
-        protected string $className,
-        protected int $code = 0,
-        protected ?Exception $previous = null
-    )
-    {
-        parent::__construct("Could not instantiate the $className", $code, $previous);
-    }
+  public function __construct(
+    protected string $className,
+    protected int $code = 0,
+    protected ?Exception $previous = null,
+  ) {
+    parent::__construct(
+      "Could not instantiate the $className",
+      $code,
+      $previous,
+    );
+  }
 
 }

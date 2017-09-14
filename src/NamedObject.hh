@@ -11,7 +11,6 @@
 
 namespace HHPack\Package;
 
-interface NamedObject
-{
-    public function name() : string;
+interface NamedObject {
+  public function name(): string;
 }

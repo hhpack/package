@@ -11,7 +11,6 @@
 
 namespace HHPack\Package;
 
-interface FromItems<T>
-{
-    public static function fromItems(Traversable<T> $items) : this;
+interface FromItems<T> {
+  public static function fromItems(Traversable<T> $items): this;
 }

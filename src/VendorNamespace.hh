@@ -14,52 +14,48 @@ namespace HHPack\Package;
 use \ReflectionClass;
 use \ReflectionException;
 
-final class VendorNamespace
-{
+final class VendorNamespace {
 
-    private string $name;
-    private string $directory;
+  private string $name;
+  private string $directory;
 
-    public function __construct(
-        Pair<string, string> $namespace
-    )
-    {
-        list($this->name, $this->directory) = $namespace;
-    }
+  public function __construct(Pair<string, string> $namespace) {
+    list($this->name, $this->directory) = $namespace;
+  }
 
-    <<__Memoize>>
-    public function name() : string
-    {
-        $atoms = explode('\\', $this->name);
-        $atoms = (new Vector($atoms))->filter((string $atom) ==> {
-            return trim($atom) !== '';
-        });
-        return implode('\\', $atoms);
-    }
+  <<__Memoize>>
+  public function name(): string {
+    $atoms = explode('\\', $this->name);
+    $atoms =
+      (new Vector($atoms))->filter(
+        (string $atom) ==> {
+          return trim($atom) !== '';
+        },
+      );
+    return implode('\\', $atoms);
+  }
 
-    public function directory() : string
-    {
-        return $this->directory;
-    }
+  public function directory(): string {
+    return $this->directory;
+  }
 
-    public function sources((function(SourceFile):bool) $matcher = any()) : Stream<SourceFile>
-    {
-        $collector = new FileCollector($this->directory());
-        return $collector->collect($matcher);
-    }
+  public function sources(
+    (function(SourceFile): bool) $matcher = any(),
+  ): Stream<SourceFile> {
+    $collector = new FileCollector($this->directory());
+    return $collector->collect($matcher);
+  }
 
-    public function classes((function(ClassObject):bool) $matcher = any()) : Stream<ClassObject>
-    {
-        $middleware = ClassTransformer::of(Pair {
-            $this->name(),
-            $this->directory()
-        });
-        return $this->sources()->pipeTo($middleware)->filter($matcher);
-    }
+  public function classes(
+    (function(ClassObject): bool) $matcher = any(),
+  ): Stream<ClassObject> {
+    $middleware =
+      ClassTransformer::of(Pair {$this->name(), $this->directory()});
+    return $this->sources()->pipeTo($middleware)->filter($matcher);
+  }
 
-    public static function of(Pair<string, string> $namespace) : this
-    {
-        return new static($namespace);
-    }
+  public static function of(Pair<string, string> $namespace): this {
+    return new static($namespace);
+  }
 
 }

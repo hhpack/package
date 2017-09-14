@@ -13,30 +13,24 @@ namespace HHPack\Package;
 
 use LazyIterable;
 
-final class ResourceIterator<T> implements Iterable<T>, FromItems<T>
-{
+final class ResourceIterator<T> implements Iterable<T>, FromItems<T> {
 
-    use LazyIterable<T>;
+  use LazyIterable<T>;
 
-    private Traversable<T> $elements;
+  private Traversable<T> $elements;
 
-    public function __construct(
-        Traversable<T> $elements = []
-    )
-    {
-        $this->elements = $elements;
+  public function __construct(Traversable<T> $elements = []) {
+    $this->elements = $elements;
+  }
+
+  public function getIterator(): Iterator<T> {
+    foreach ($this->elements as $element) {
+      yield $element;
     }
+  }
 
-    public function getIterator() : Iterator<T>
-    {
-        foreach ($this->elements as $element) {
-            yield $element;
-        }
-    }
-
-    public static function fromItems(Traversable<T> $items) : this
-    {
-        return new static($items);
-    }
+  public static function fromItems(Traversable<T> $items): this {
+    return new static($items);
+  }
 
 }

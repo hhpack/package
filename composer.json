@@ -31,7 +31,13 @@
       "HHPack\\Package\\Examples\\Classes\\": "example/src"
     }
   },
-  "minimum-stability": "dev",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/holyshared/HackUnit"
+    }
+  ],
+  "minimum-stability": "stable",
   "prefer-stable": true,
   "scripts": {
     "test": "vendor/bin/hackunit test",

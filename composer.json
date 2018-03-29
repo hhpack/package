@@ -38,7 +38,9 @@
     }
   ],
   "minimum-stability": "stable",
-  "prefer-stable": true,
+  "config": {
+    "preferred-install": "dist"
+  },
   "scripts": {
     "test": "vendor/bin/hackunit test",
     "check:init": "touch .hhconfig",

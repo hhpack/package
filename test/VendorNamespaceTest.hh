@@ -13,7 +13,7 @@ final class VendorNamespaceTest {
       Pair {'HHPack\\Package\\Test\\Fixtures\\', __DIR__.'/fixtures'},
     );
     $assert->string($ns->name())->is('HHPack\\Package\\Test\\Fixtures');
-    $assert->string($ns->directory())->is(realpath(__DIR__.'/fixtures'));
+    $assert->string($ns->directory())->is(\realpath(__DIR__.'/fixtures'));
   }
 
   <<Test>>

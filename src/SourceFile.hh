@@ -24,21 +24,21 @@ final class SourceFile implements NamedObject {
 
   <<__Memoize>>
   public function directory(): string {
-    return dirname($this->name);
+    return \dirname($this->name);
   }
 
   public function startsWith(string $keyward): bool {
-    $pattern = "/^".preg_quote($keyward, '/')."/";
+    $pattern = "/^".\preg_quote($keyward, '/')."/";
     return $this->match($pattern);
   }
 
   public function endsWith(string $keyward): bool {
-    $pattern = "/".preg_quote($keyward, '/')."$/";
+    $pattern = "/".\preg_quote($keyward, '/')."$/";
     return $this->match($pattern);
   }
 
   public function match(string $pattern): bool {
-    return preg_match($pattern, $this->name()) === 1;
+    return \preg_match($pattern, $this->name()) === 1;
   }
 
   <<__Memoize>>

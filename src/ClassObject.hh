@@ -38,7 +38,7 @@ final class ClassObject implements NamedObject {
    * Get package directory path
    */
   public function directory(): string {
-    return dirname($this->fileName());
+    return \dirname($this->fileName());
   }
 
   public function name(): string {

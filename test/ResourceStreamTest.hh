@@ -10,7 +10,7 @@ final class ResourceStreamTest {
   <<Test>>
   public function streamConsume(Assert $assert): void {
     $sourceStream = () ==> {
-      yield new SourceFile(realpath(__DIR__.'/fixtures/Example1.hh'));
+      yield new SourceFile(\realpath(__DIR__.'/fixtures/Example1.hh'));
     };
     $stream = new ResourceStream($sourceStream());
 
@@ -21,12 +21,12 @@ final class ResourceStreamTest {
   <<Test>>
   public function concatStreams(Assert $assert): void {
     $sourceStream1 = () ==> {
-      yield new SourceFile(realpath(__DIR__.'/fixtures/Example1.hh'));
+      yield new SourceFile(\realpath(__DIR__.'/fixtures/Example1.hh'));
     };
     $stream1 = new ResourceStream($sourceStream1());
 
     $sourceStream2 = () ==> {
-      yield new SourceFile(realpath(__DIR__.'/fixtures/Example1.hh'));
+      yield new SourceFile(\realpath(__DIR__.'/fixtures/Example1.hh'));
     };
 
     $results =

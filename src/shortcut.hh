@@ -16,16 +16,16 @@ function any<T>(): (function(T): bool) {
 }
 
 function startsWith<T as NamedObject>(string $keyword): (function(T): bool) {
-  return ($object) ==> preg_match(
-    '/^'.preg_quote($keyword, '/').'/',
+  return ($object) ==> \preg_match(
+    '/^'.\preg_quote($keyword, '/').'/',
     $object->name(),
   ) ===
   1;
 }
 
 function endsWith<T as NamedObject>(string $keyword): (function(T): bool) {
-  return ($object) ==> preg_match(
-    '/'.preg_quote($keyword, '/').'$/',
+  return ($object) ==> \preg_match(
+    '/'.\preg_quote($keyword, '/').'$/',
     $object->name(),
   ) ===
   1;

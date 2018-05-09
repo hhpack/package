@@ -25,14 +25,14 @@ final class VendorNamespace {
 
   <<__Memoize>>
   public function name(): string {
-    $atoms = explode('\\', $this->name);
+    $atoms = \explode('\\', $this->name);
     $atoms =
       (new Vector($atoms))->filter(
         (string $atom) ==> {
-          return trim($atom) !== '';
+          return \trim($atom) !== '';
         },
       );
-    return implode('\\', $atoms);
+    return \implode('\\', $atoms);
   }
 
   public function directory(): string {

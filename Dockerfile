@@ -1,6 +1,6 @@
 FROM holyshared/typesafety:latest
 ENV DEBIAN_FRONTEND noninteractive
-MAINTAINER Noritaka Horio <holy.shared.design@gmail.com>
+LABEL maintainer "Noritaka Horio <holy.shared.design@gmail.com>"
 ARG hack_user
 ARG hack_group
 ARG GITHUB_CREDENTIALS_TOKEN

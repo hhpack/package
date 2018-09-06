@@ -28,7 +28,7 @@ final class ShortcutTest {
 
   <<Test>>
   public function implementsInterfaceWhenUnmatched(Assert $assert): void {
-    $item = new ClassObject(new ReflectionClass((string) Example1::class));
+    $item = new ClassObject(new ReflectionClass((string)Example1::class));
     $matcher = package\implementsInterface(Iterator::class);
 
     $assert->bool($matcher($item))->is(false);
@@ -36,7 +36,7 @@ final class ShortcutTest {
 
   <<Test>>
   public function subclassOfWhenMatched(Assert $assert): void {
-    $item = new ClassObject(new ReflectionClass((string) Example1::class));
+    $item = new ClassObject(new ReflectionClass((string)Example1::class));
     $matcher = package\subclassOf(Base::class);
 
     $assert->bool($matcher($item))->is(true);
@@ -44,7 +44,7 @@ final class ShortcutTest {
 
   <<Test>>
   public function subclassOfWhenUnmatched(Assert $assert): void {
-    $item = new ClassObject(new ReflectionClass((string) Example1::class));
+    $item = new ClassObject(new ReflectionClass((string)Example1::class));
     $matcher = package\subclassOf(Iterator::class);
 
     $assert->bool($matcher($item))->is(false);

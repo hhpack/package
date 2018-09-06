@@ -17,10 +17,11 @@ function selector_main(): void {
     ],
   );
 
-  $package->classes(package\startsWith('Exa'))->forEach(
-    ($class) ==> {
-      var_dump($class->name());
-    },
-  );
+  $package->classes(package\startsWith('Exa'))
+    ->forEach(
+      ($class) ==> {
+        var_dump($class->name());
+      },
+    );
 }
 selector_main();

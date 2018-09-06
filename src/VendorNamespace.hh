@@ -26,12 +26,11 @@ final class VendorNamespace {
   <<__Memoize>>
   public function name(): string {
     $atoms = \explode('\\', $this->name);
-    $atoms =
-      (new Vector($atoms))->filter(
-        (string $atom) ==> {
-          return \trim($atom) !== '';
-        },
-      );
+    $atoms = (new Vector($atoms))->filter(
+      (string $atom) ==> {
+        return \trim($atom) !== '';
+      },
+    );
     return \implode('\\', $atoms);
   }
 
@@ -50,7 +49,7 @@ final class VendorNamespace {
     (function(ClassObject): bool) $matcher = any(),
   ): Stream<ClassObject> {
     $middleware =
-      ClassTransformer::of(Pair {$this->name(), $this->directory()});
+      ClassTransformer::of(Pair { $this->name(), $this->directory() });
     return $this->sources()->pipeTo($middleware)->filter($matcher);
   }
 

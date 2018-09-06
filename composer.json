@@ -12,8 +12,8 @@
   ],
   "require": {
     "hhvm": ">=3.21.0",
-    "facebook/definition-finder": "^1.6",
-    "hhvm/hhvm-autoload": "^1.5"
+    "facebook/definition-finder": "^2.1",
+    "hhvm/hhvm-autoload": "^1.6"
   },
   "require-dev": {
     "hackpack/hackunit": "^1.1"

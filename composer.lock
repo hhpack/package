@@ -254,16 +254,16 @@
     "packages-dev": [
         {
             "name": "hackpack/hackunit",
-            "version": "v1.1.7",
+            "version": "v1.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/holyshared/HackUnit.git",
-                "reference": "95c376dbd47d8ace735acdc2162d3839a45aba3b"
+                "reference": "e2f02ccfa27bea2db1309b9aae4292ae3cec0c8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/holyshared/HackUnit/zipball/95c376dbd47d8ace735acdc2162d3839a45aba3b",
-                "reference": "95c376dbd47d8ace735acdc2162d3839a45aba3b",
+                "url": "https://api.github.com/repos/holyshared/HackUnit/zipball/e2f02ccfa27bea2db1309b9aae4292ae3cec0c8d",
+                "reference": "e2f02ccfa27bea2db1309b9aae4292ae3cec0c8d",
                 "shasum": ""
             },
             "require": {
@@ -320,10 +320,10 @@
                 "xunit"
             ],
             "support": {
-                "source": "https://github.com/holyshared/HackUnit/tree/v1.1.7",
+                "source": "https://github.com/holyshared/HackUnit/tree/v1.1.8",
                 "issues": "https://github.com/holyshared/HackUnit/issues"
             },
-            "time": "2018-09-06T03:01:17+00:00"
+            "time": "2018-09-06T09:07:52+00:00"
         }
     ],
     "aliases": [],

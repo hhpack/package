@@ -31,7 +31,7 @@ final class ClassObject implements NamedObject {
    */
   public function fileName(): string {
     //see reflection.hhi:51
-    return (string) $this->class->getFileName();
+    return (string)$this->class->getFileName();
   }
 
   /**

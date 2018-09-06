@@ -16,19 +16,13 @@ function any<T>(): (function(T): bool) {
 }
 
 function startsWith<T as NamedObject>(string $keyword): (function(T): bool) {
-  return ($object) ==> \preg_match(
-    '/^'.\preg_quote($keyword, '/').'/',
-    $object->name(),
-  ) ===
-  1;
+  return ($object) ==>
+    \preg_match('/^'.\preg_quote($keyword, '/').'/', $object->name()) === 1;
 }
 
 function endsWith<T as NamedObject>(string $keyword): (function(T): bool) {
-  return ($object) ==> \preg_match(
-    '/'.\preg_quote($keyword, '/').'$/',
-    $object->name(),
-  ) ===
-  1;
+  return ($object) ==>
+    \preg_match('/'.\preg_quote($keyword, '/').'$/', $object->name()) === 1;
 }
 
 function implementsInterface<Tu>(
@@ -44,8 +38,7 @@ function subclassOf<Tu>(
 }
 
 function classes(): (function(ClassObject): bool) {
-  return ($object) ==> ($object->isTrait() || $object->isInterface()) ===
-  false;
+  return ($object) ==> ($object->isTrait() || $object->isInterface()) === false;
 }
 
 function abstractClasses(): (function(ClassObject): bool) {

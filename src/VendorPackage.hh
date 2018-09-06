@@ -28,9 +28,8 @@ final class VendorPackage implements FromItems<Pair<string, string>> {
     $results =
       $this->namespaces->map(($namespace) ==> $namespace->sources($matcher));
 
-    return
-      ResourceStream::fromItems($results)
-        ->reduce(new ResourceStream(), ($a, $b) ==> $a->concat($b));
+    return ResourceStream::fromItems($results)
+      ->reduce(new ResourceStream(), ($a, $b) ==> $a->concat($b));
   }
 
   public function classes(
@@ -39,17 +38,15 @@ final class VendorPackage implements FromItems<Pair<string, string>> {
     $results =
       $this->namespaces->map(($namespace) ==> $namespace->classes($matcher));
 
-    return
-      ResourceStream::fromItems($results)
-        ->reduce(new ResourceStream(), ($a, $b) ==> $a->concat($b));
+    return ResourceStream::fromItems($results)
+      ->reduce(new ResourceStream(), ($a, $b) ==> $a->concat($b));
   }
 
   public static function fromItems(
     Traversable<Pair<string, string>> $items,
   ): this {
-    $results =
-      ImmVector::fromItems($items)
-        ->map(($item) ==> VendorNamespace::of($item));
+    $results = ImmVector::fromItems($items)
+      ->map(($item) ==> VendorNamespace::of($item));
     return new static($results);
   }
 

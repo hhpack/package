@@ -10,7 +10,7 @@ final class VendorPackageTest {
   <<Test>>
   public function packageName(Assert $assert): void {
     $namespace = VendorNamespace::of(
-      Pair {'HHPack\\Package\\Test\\Fixtures\\', __DIR__.'/fixtures'},
+      Pair { 'HHPack\\Package\\Test\\Fixtures\\', __DIR__.'/fixtures' },
     );
     $package = new VendorPackage([$namespace]);
 

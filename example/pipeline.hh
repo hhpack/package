@@ -8,7 +8,7 @@ use HHPack\Package;
 use HHPack\Package\Examples\Classes\{
   FileStatOutput,
   FileStatStream,
-  FileStatTransformer
+  FileStatTransformer,
 };
 use HHPack\Package\VendorPackage;
 

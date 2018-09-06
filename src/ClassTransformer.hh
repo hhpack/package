@@ -28,8 +28,8 @@ final class ClassTransformer
       $sources = $stream->items();
 
       foreach ($sources as $source) {
-        $classes =
-          $source->resources()->map(
+        $classes = $source->resources()
+          ->map(
             ($ref) ==> {
               return new ClassObject($ref);
             },

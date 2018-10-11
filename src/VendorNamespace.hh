@@ -11,6 +11,7 @@
 
 namespace HHPack\Package;
 
+use namespace HH\Lib\Str;
 use \ReflectionClass;
 use \ReflectionException;
 
@@ -28,10 +29,10 @@ final class VendorNamespace {
     $atoms = \explode('\\', $this->name);
     $atoms = (new Vector($atoms))->filter(
       (string $atom) ==> {
-        return \trim($atom) !== '';
+        return Str\trim($atom) !== '';
       },
     );
-    return \implode('\\', $atoms);
+    return Str\join($atoms, '\\');
   }
 
   public function directory(): string {

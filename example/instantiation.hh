@@ -7,7 +7,8 @@ require_once __DIR__.'/../vendor/autoload.php';
 use HHPack\Package;
 use HHPack\Package\VendorPackage;
 
-function instantiate_main(): void {
+<<__Entrypoint>>
+function instantiate_main(): noreturn {
   $package = VendorPackage::fromItems(
     [
       Pair {
@@ -22,6 +23,6 @@ function instantiate_main(): void {
       var_dump($instance);
     },
   );
-}
 
-instantiate_main();
+  exit(0);
+}

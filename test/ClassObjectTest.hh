@@ -5,36 +5,34 @@ namespace HHPack\Package\Test;
 use ReflectionClass;
 use HHPack\Package\ClassObject;
 use HHPack\Package\Test\Fixtures\{Base, Example1};
-use HackPack\HackUnit\Contract\Assert;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class ClassObjectTest {
-  <<Test>>
-  public function className(Assert $assert): void {
+final class ClassObjectTest extends HackTest {
+  public function testClassName(): void {
     $classFile = new ClassObject(new ReflectionClass((string)Example1::class));
-    $assert->string($classFile->fullName())->is((string)Example1::class);
-    $assert->string($classFile->name())->is('Example1');
+
+    expect($classFile->fullName())->toBeSame((string)Example1::class);
+    expect($classFile->name())->toBeSame('Example1');
   }
 
-  <<Test>>
-  public function isSubclassOfWhenSubclass(Assert $assert): void {
+  public function testIsSubclassOfWhenSubclass(): void {
     $classFile = new ClassObject(new ReflectionClass((string)Example1::class));
-    $assert->bool($classFile->isSubclassOf(Base::class))->is(true);
+    expect($classFile->isSubclassOf(Base::class))->toBeTrue();
   }
 
-  <<Test>>
-  public function instantiateWhenSpecifyTheParameters(Assert $assert): void {
+  public function testInstantiateWhenSpecifyTheParameters(): void {
     $classFile = new ClassObject(new ReflectionClass((string)Example1::class));
     $instance = $classFile->instantiate(['foo']);
 
-    $assert->mixed($instance)->isTypeOf((string)Example1::class);
-    $assert->string($instance->getName())->is('foo');
+    expect($instance)->toBeInstanceOf(Example1::class);
+    expect($instance->getName())->toBeSame('foo');
   }
 
-  <<Test>>
-  public function instantiateWhenNotSpecifyTheParameters(Assert $assert): void {
+  public function testInstantiateWhenNotSpecifyTheParameters(): void {
     $classFile = new ClassObject(new ReflectionClass((string)Example1::class));
     $instance = $classFile->instantiate();
 
-    $assert->mixed($instance)->isTypeOf((string)Example1::class);
+    expect($instance)->toBeInstanceOf(Example1::class);
   }
 }

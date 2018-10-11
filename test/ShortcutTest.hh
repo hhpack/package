@@ -7,46 +7,42 @@ use HHPack\Package\{ClassObject, SourceFile};
 use HHPack\Package\Test\Mock\ResourceMock;
 use HHPack\Package\Test\Fixtures\{Base, Example1};
 use ReflectionClass;
-use HackPack\HackUnit\Contract\Assert;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class ShortcutTest {
-  <<Test>>
-  public function startsWithWhenMatched(Assert $assert): void {
+final class ShortcutTest extends HackTest {
+  public function testStartsWithWhenMatched(): void {
     $item = new ResourceMock('foobar');
     $matcher = package\startsWith('foo');
 
-    $assert->bool($matcher($item))->is(true);
+    expect($matcher($item))->toBeSame(true);
   }
 
-  <<Test>>
-  public function endsWithWhenMatched(Assert $assert): void {
+  public function testEndsWithWhenMatched(): void {
     $item = new ResourceMock('foobar');
     $matcher = package\endsWith('bar');
 
-    $assert->bool($matcher($item))->is(true);
+    expect($matcher($item))->toBeTrue();
   }
 
-  <<Test>>
-  public function implementsInterfaceWhenUnmatched(Assert $assert): void {
+  public function testImplementsInterfaceWhenUnmatched(): void {
     $item = new ClassObject(new ReflectionClass((string)Example1::class));
     $matcher = package\implementsInterface(Iterator::class);
 
-    $assert->bool($matcher($item))->is(false);
+    expect($matcher($item))->toBeFalse();
   }
 
-  <<Test>>
-  public function subclassOfWhenMatched(Assert $assert): void {
+  public function testSubclassOfWhenMatched(): void {
     $item = new ClassObject(new ReflectionClass((string)Example1::class));
     $matcher = package\subclassOf(Base::class);
 
-    $assert->bool($matcher($item))->is(true);
+    expect($matcher($item))->toBeTrue();
   }
 
-  <<Test>>
-  public function subclassOfWhenUnmatched(Assert $assert): void {
+  public function testSubclassOfWhenUnmatched(): void {
     $item = new ClassObject(new ReflectionClass((string)Example1::class));
     $matcher = package\subclassOf(Iterator::class);
 
-    $assert->bool($matcher($item))->is(false);
+    expect($matcher($item))->toBeFalse();
   }
 }

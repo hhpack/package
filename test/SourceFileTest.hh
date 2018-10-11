@@ -4,30 +4,27 @@ namespace HHPack\Package\Test;
 
 use HHPack\Package\SourceFile;
 use HHPack\Package\Test\Fixtures\Example1;
-use HackPack\HackUnit\Contract\Assert;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class SourceFileTest {
-  <<Test>>
-  public function startsWithWhenMatched(Assert $assert): void {
+final class SourceFileTest extends HackTest {
+  public function testStartsWithWhenMatched(): void {
     $sourceFile = new SourceFile(\realpath(__DIR__.'/fixtures/Example1.hh'));
-    $assert->bool($sourceFile->startsWith(__DIR__))->is(true);
+    expect($sourceFile->startsWith(__DIR__))->toBeTrue();
   }
 
-  <<Test>>
-  public function startsWithWhenUnmatched(Assert $assert): void {
+  public function testStartsWithWhenUnmatched(): void {
     $sourceFile = new SourceFile(\realpath(__DIR__.'/fixtures/Example1.hh'));
-    $assert->bool($sourceFile->startsWith('/Foo'))->is(false);
+    expect($sourceFile->startsWith('/Foo'))->toBeFalse();
   }
 
-  <<Test>>
-  public function endsWithWhenMatched(Assert $assert): void {
+  public function testEndsWithWhenMatched(): void {
     $sourceFile = new SourceFile(\realpath(__DIR__.'/fixtures/Example1.hh'));
-    $assert->bool($sourceFile->endsWith('/Example1.hh'))->is(true);
+    expect($sourceFile->endsWith('/Example1.hh'))->toBeTrue();
   }
 
-  <<Test>>
-  public function endsWithWhenUnmatched(Assert $assert): void {
+  public function testEndsWithWhenUnmatched(): void {
     $sourceFile = new SourceFile(\realpath(__DIR__.'/fixtures/Example1.hh'));
-    $assert->bool($sourceFile->endsWith(__DIR__))->is(false);
+    expect($sourceFile->endsWith(__DIR__))->toBeFalse();
   }
 }

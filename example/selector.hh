@@ -2,7 +2,7 @@
 
 namespace HHPack\Package\Examples;
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/hh_autoload.php';
 
 use HHPack\Package as package;
 use HHPack\Package\VendorPackage;

@@ -2,12 +2,13 @@
 
 namespace HHPack\Package\Examples;
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/hh_autoload.php';
 
 use HHPack\Package as package;
 use HHPack\Package\VendorPackage;
 
-function selector_main(): void {
+<<__Entrypoint>>
+function selector_main(): noreturn {
   $package = VendorPackage::fromItems(
     [
       Pair {
@@ -23,5 +24,6 @@ function selector_main(): void {
         var_dump($class->name());
       },
     );
+
+  exit(0);
 }
-selector_main();

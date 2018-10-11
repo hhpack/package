@@ -3,14 +3,14 @@
 namespace HHPack\Package\Test;
 
 use HHPack\Package\FileCollector;
-use HackPack\HackUnit\Contract\Assert;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class FileCollectorTest {
-  <<Test>>
-  public function collectFiles(Assert $assert): void {
+final class FileCollectorTest extends HackTest {
+  public function testCollectFiles(): void {
     $collector = new FileCollector(__DIR__.'/fixtures');
     $files = $collector->collect();
 
-    $assert->int($files->toImmVector()->count())->eq(2);
+    expect($files->toImmVector()->count())->toBeSame(2);
   }
 }

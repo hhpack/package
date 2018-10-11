@@ -4,22 +4,21 @@ namespace HHPack\Package\Test;
 
 use HHPack\Package\{Selector, ClassObject, SourceFile, ResourceStream};
 use HHPack\Package\Test\Fixtures\Base;
-use HackPack\HackUnit\Contract\Assert;
+use type Facebook\HackTest\HackTest;
+use function Facebook\FBExpect\expect;
 
-final class ResourceStreamTest {
-  <<Test>>
-  public function streamConsume(Assert $assert): void {
+final class ResourceStreamTest extends HackTest {
+  public function testStreamConsume(): void {
     $sourceStream = () ==> {
       yield new SourceFile(\realpath(__DIR__.'/fixtures/Example1.hh'));
     };
     $stream = new ResourceStream($sourceStream());
 
     $files = $stream->toImmVector();
-    $assert->int($files->count())->eq(1);
+    expect($files->count())->toBeSame(1);
   }
 
-  <<Test>>
-  public function concatStreams(Assert $assert): void {
+  public function testConcatStreams(): void {
     $sourceStream1 = () ==> {
       yield new SourceFile(\realpath(__DIR__.'/fixtures/Example1.hh'));
     };
@@ -31,6 +30,6 @@ final class ResourceStreamTest {
 
     $results =
       $stream1->concat(new ResourceStream($sourceStream2()))->toImmVector();
-    $assert->int($results->count())->eq(2);
+    expect($results->count())->toBeSame(2);
   }
 }

@@ -2,7 +2,7 @@
 
 namespace HHPack\Package\examples;
 
-require_once __DIR__.'/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/hh_autoload.php';
 
 use HHPack\Package;
 use HHPack\Package\Examples\Classes\{
@@ -12,7 +12,8 @@ use HHPack\Package\Examples\Classes\{
 };
 use HHPack\Package\VendorPackage;
 
-function pipeline_main(): void {
+<<__Entrypoint>>
+function pipeline_main(): noreturn {
   $package = VendorPackage::fromItems(
     [
       Pair {
@@ -25,6 +26,6 @@ function pipeline_main(): void {
   $package->sources()
     ->pipeTo(new FileStatTransformer())
     ->pipeTo(new FileStatOutput());
-}
 
-pipeline_main();
+  exit(0);
+}

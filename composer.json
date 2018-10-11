@@ -13,10 +13,12 @@
   "require": {
     "hhvm": ">=3.21.0",
     "facebook/definition-finder": "^2.1",
-    "hhvm/hhvm-autoload": "^1.6"
+    "hhvm/hhvm-autoload": "^1.6",
+    "hhvm/hsl": "^3.28"
   },
   "require-dev": {
-    "hackpack/hackunit": "^1.1"
+    "hhvm/hacktest": "^1.1",
+    "facebook/fbexpect": "^2.1"
   },
   "autoload": {
     "psr-4": {
@@ -31,18 +33,12 @@
       "HHPack\\Package\\Examples\\Classes\\": "example/src"
     }
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/holyshared/HackUnit"
-    }
-  ],
   "minimum-stability": "stable",
   "config": {
     "preferred-install": "dist"
   },
   "scripts": {
-    "test": "vendor/bin/hackunit test",
+    "test": "vendor/bin/hacktest test",
     "check:init": "touch .hhconfig",
     "check": "./hhtool check"
   }

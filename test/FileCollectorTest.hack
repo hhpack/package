@@ -1,5 +1,3 @@
-<?hh //strict
-
 namespace HHPack\Package\Test;
 
 use HHPack\Package\FileCollector;
@@ -11,6 +9,6 @@ final class FileCollectorTest extends HackTest {
     $collector = new FileCollector(__DIR__.'/fixtures');
     $files = $collector->collect();
 
-    expect($files->toImmVector()->count())->toBeSame(2);
+    expect($files->toImmVector()->count())->toBeSame(3);
   }
 }

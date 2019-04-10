@@ -1,8 +1,6 @@
-<?hh // partial
-
 namespace HHPack\Package\examples;
 
-require_once __DIR__.'/../vendor/hh_autoload.php';
+require_once __DIR__.'/../vendor/hh_autoload.hh';
 
 use HHPack\Package;
 use HHPack\Package\Examples\Classes\{
@@ -12,13 +10,13 @@ use HHPack\Package\Examples\Classes\{
 };
 use HHPack\Package\VendorPackage;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function pipeline_main(): noreturn {
   $package = VendorPackage::fromItems(
     [
       Pair {
         'HHPack\\Package\\Examples\\Classes\\',
-        realpath(__DIR__.'/src'),
+        \realpath(__DIR__.'/src'),
       },
     ],
   );

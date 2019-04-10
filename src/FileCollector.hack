@@ -1,5 +1,3 @@
-<?hh //strict
-
 /**
  * This file is part of hhpack\package.
  *
@@ -20,9 +18,8 @@ final class FileCollector
     (function(SourceFile): bool) $matcher = any(),
   ): ResourceStream<SourceFile> {
     $factory = () ==> {
-      $pattern = \realpath($this->directory).'/*.hh';
-
-      foreach ($this->findFiles($pattern) as $collectedFile) {
+      $dir = \realpath($this->directory);
+      foreach ($this->findFiles($dir) as $collectedFile) {
         yield new SourceFile($collectedFile);
       }
     };
@@ -30,17 +27,16 @@ final class FileCollector
     return ResourceStream::fromItems($factory())->filter($matcher);
   }
 
-  private function findFiles(string $pattern): Iterator<string> {
-    foreach (\glob($pattern) as $file) {
+  private function findFiles(string $dir): Iterator<string> {
+    // GLOB_NOSORT = 4, GLOB_BRACE = 128
+    foreach (\glob($dir.'/{*.hh,*.hack}', \GLOB_NOSORT | \GLOB_BRACE) as $file) {
       yield $file;
     }
 
-    // An error may appear in the check type, do not use the constant.
-    // GLOB_NOSORT = 4, GLOB_ONLYDIR = 8192
-    $directories = \glob(\dirname($pattern).'/*', 4 | 8192);
+    $directories = \glob($dir.'/*', \GLOB_ONLYDIR);
 
     foreach ($directories as $directory) {
-      $files = $this->findFiles($directory.'/'.\basename($pattern));
+      $files = $this->findFiles($directory);
 
       foreach ($files as $file) {
         yield $file;

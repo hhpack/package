@@ -5,7 +5,7 @@ Package utility library for vendor.
 Easily and quickly, and you can find a class or interface.
 
 [![Latest Stable Version](https://poser.pugx.org/hhpack/package/v/stable)](https://packagist.org/packages/hhpack/package)
-[![Build Status](https://travis-ci.org/hhpack/package.svg?branch=master)](https://travis-ci.org/hhpack/package)
+[![CircleCI](https://circleci.com/gh/hhpack/package/tree/master.svg?style=svg)](https://circleci.com/gh/hhpack/package/tree/master)
 [![Dependency Status](https://www.versioneye.com/user/projects/5610e428a193340015000009/badge.svg?style=flat)](https://www.versioneye.com/user/projects/5610e428a193340015000009)
 [![License](https://poser.pugx.org/hhpack/package/license)](https://packagist.org/packages/hhpack/package)
 

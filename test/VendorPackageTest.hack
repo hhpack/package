@@ -1,5 +1,3 @@
-<?hh //strict
-
 namespace HHPack\Package\Test;
 
 use HHPack\Package\{VendorPackage, VendorNamespace};
@@ -15,6 +13,6 @@ final class VendorPackageTest extends HackTest {
     $package = new VendorPackage([$namespace]);
 
     $classes = $package->classes()->toImmVector();
-    expect($classes->count())->toBeSame(2);
+    expect($classes->count())->toBeSame(3);
   }
 }

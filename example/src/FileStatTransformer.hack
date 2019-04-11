@@ -1,5 +1,3 @@
-<?hh // strict
-
 namespace HHPack\Package\Examples\Classes;
 
 use HHPack\Package\{SourceFile, Stream, ResourceStream, Middleware};

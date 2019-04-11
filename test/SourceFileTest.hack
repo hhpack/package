@@ -1,5 +1,3 @@
-<?hh //strict
-
 namespace HHPack\Package\Test;
 
 use HHPack\Package\SourceFile;

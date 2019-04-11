@@ -12,13 +12,13 @@
   ],
   "require": {
     "hhvm": ">=3.21.0",
-    "facebook/definition-finder": "^2.1",
-    "hhvm/hhvm-autoload": "^1.6",
-    "hhvm/hsl": "^3.28"
+    "facebook/definition-finder": "^2.4",
+    "hhvm/hhvm-autoload": "^2.0",
+    "hhvm/hsl": "^4.1"
   },
   "require-dev": {
-    "hhvm/hacktest": "^1.1",
-    "facebook/fbexpect": "^2.1"
+    "hhvm/hacktest": "^1.5",
+    "facebook/fbexpect": "^2.5"
   },
   "autoload": {
     "psr-4": {

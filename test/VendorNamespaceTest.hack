@@ -1,5 +1,3 @@
-<?hh //strict
-
 namespace HHPack\Package\Test;
 
 use HHPack\Package\VendorNamespace;
@@ -21,6 +19,6 @@ final class VendorNamespaceTest extends HackTest {
       Pair { 'HHPack\\Package\\Test\\Fixtures\\', __DIR__.'/fixtures' },
     );
     $classes = $ns->classes()->toImmVector();
-    expect($classes->count())->toBeSame(2);
+    expect($classes->count())->toBeSame(3);
   }
 }

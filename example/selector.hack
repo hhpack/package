@@ -1,19 +1,17 @@
-<?hh // partial
-
 namespace HHPack\Package\Examples;
 
-require_once __DIR__.'/../vendor/hh_autoload.php';
+require_once __DIR__.'/../vendor/hh_autoload.hh';
 
 use HHPack\Package as package;
 use HHPack\Package\VendorPackage;
 
-<<__Entrypoint>>
+<<__EntryPoint>>
 function selector_main(): noreturn {
   $package = VendorPackage::fromItems(
     [
       Pair {
         'HHPack\\Package\\Examples\\Classes\\',
-        realpath(__DIR__.'/src'),
+        \realpath(__DIR__.'/src'),
       },
     ],
   );
@@ -21,7 +19,7 @@ function selector_main(): noreturn {
   $package->classes(package\startsWith('Exa'))
     ->forEach(
       ($class) ==> {
-        var_dump($class->name());
+        \var_dump($class->name());
       },
     );
 

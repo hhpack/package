@@ -41,7 +41,7 @@ final class SourceFile implements NamedObject {
 
   <<__Memoize>>
   public function resources(): ImmVector<ReflectionClass> {
-    $parser = FileParser::fromFile($this->name);
+    $parser = \HH\Asio\join(FileParser::fromFileAsync($this->name));
 
     $resources = Vector {};
     $resources->addAll($parser->getClassNames());
